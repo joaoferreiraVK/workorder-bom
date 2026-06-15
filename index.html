@@ -1590,7 +1590,8 @@
     // ---- RESPONSÁVEIS POR ROTINA ----
     const responsaveis = {
       "16.1-B": "thiagorenatinovk",
-      "16.5": "joaoferreiravk"
+      "16.5": "joaoferreiravk",
+      "16.10": "joaoferreiravk"
     };
     const respHTML = code => {
       const r = responsaveis[code];
@@ -1728,11 +1729,11 @@
       ["23.10", "Planned WO Approval", "Aprova OPs planejadas (P→F).", "wo_mstr (P→F)", "Parcial", "Auto-firming P→F já existe no updateRecord do WorkOrderService. FALTA: fluxo de aprovação dedicado vindo do MRP."],
       { g: "Pré-liberação & Liberação" },
       ["16.8", "Multiple WO Status Change", "Orquestra o ciclo de status F→E→A (e R).", "wo_mstr, wod_det, lad_det, wr_route", "Pendente", "FALTA: serviço de transição de status em lote + alocação (lad_det)."],
-      ["16.5", "WO Component Check", "Check de disponibilidade pré-liberação (relatório de falta).", "wod_det, lad_det, tr_hist", "Em andamento", "FALTA: consulta de saldo x demanda por componente."],
+      ["16.5", "WO Component Check", "Check de disponibilidade pré-liberação (relatório de falta).", "wod_det, lad_det, tr_hist", "Implementado", "Consulta de saldo x demanda por componente implementada (relatório de falta pré-liberação)."],
       ["16.6", "WO Release / Print", "Libera a OP ao chão de fábrica (A→R), finaliza picks, imprime docs.", "wo_mstr (A→R), lad_det, wr_route", "Pendente", "FALTA: serviço de liberação + relatório (lista de separação/roteiro) via ReportFramework/RabbitMQ."],
       ["16.13.1", "WO Bill Maintenance", "Ajustes manuais no BOM da OP após explosão.", "wod_det, lad_det", "Pendente", "Depende da entidade de componentes (16.1-B)."],
       { g: "Execução — material e mão de obra" },
-      ["16.10", "WO Component Issue", "Baixa componentes do estoque p/ WIP (débito WIP / crédito estoque).", "tr_hist (ISS-WO), wod_det, glt_det", "Pendente", "FALTA: integração com inventário (movimento) e GL; validação de saldo (espelhar erro 'qtd 0' do QAD)."],
+      ["16.10", "WO Component Issue", "Baixa componentes do estoque p/ WIP (débito WIP / crédito estoque).", "tr_hist (ISS-WO), wod_det, glt_det", "Em andamento", "FALTA: integração com inventário (movimento) e GL; validação de saldo (espelhar erro 'qtd 0' do QAD)."],
       ["17.1", "Labor Feedback by WO", "Aponta mão de obra/qtd por operação.", "op_hist, wr_route, glt_det", "Pendente", "Só existe ShopFloorControl (config). FALTA: entidade de apontamento + custeio de mão de obra."],
       ["17.5", "Operation Complete", "Encerra operação do roteiro (sai da fila).", "op_hist, wr_route (→C)", "Pendente", "Depende de 16.1-C e 17.1."],
       { g: "Recebimento & Encerramento" },
