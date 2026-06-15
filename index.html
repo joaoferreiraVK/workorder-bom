@@ -393,6 +393,24 @@
       white-space: nowrap
     }
 
+    .resp-chip {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: monospace;
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+      white-space: nowrap
+    }
+
+    .resp-empty {
+      color: #cbd2dc;
+      font-size: 12px
+    }
+
     .muted {
       color: var(--muted)
     }
@@ -1569,6 +1587,15 @@
     const badge = s => s ? `<span class="badge b-${cls(s)}">${s}</span>` : "";
     const fmtFalta = t => (t || "").replace(/FALTA:/g, "<b>FALTA:</b>");
 
+    // ---- RESPONSÁVEIS POR ROTINA ----
+    const responsaveis = {
+      "16.5": "joaoferreiravk"
+    };
+    const respHTML = code => {
+      const r = responsaveis[code];
+      return r ? `<span class="resp-chip" title="Responsável">${r}</span>` : `<span class="resp-empty">—</span>`;
+    };
+
     // ---- FASE CAPABILITIES DATA ----
     const faseCapabilities = [
       {
@@ -1700,7 +1727,7 @@
       ["23.10", "Planned WO Approval", "Aprova OPs planejadas (P→F).", "wo_mstr (P→F)", "Parcial", "Auto-firming P→F já existe no updateRecord do WorkOrderService. FALTA: fluxo de aprovação dedicado vindo do MRP."],
       { g: "Pré-liberação & Liberação" },
       ["16.8", "Multiple WO Status Change", "Orquestra o ciclo de status F→E→A (e R).", "wo_mstr, wod_det, lad_det, wr_route", "Pendente", "FALTA: serviço de transição de status em lote + alocação (lad_det)."],
-      ["16.5", "WO Component Check", "Check de disponibilidade pré-liberação (relatório de falta).", "wod_det, lad_det, tr_hist", "Pendente", "FALTA: consulta de saldo x demanda por componente."],
+      ["16.5", "WO Component Check", "Check de disponibilidade pré-liberação (relatório de falta).", "wod_det, lad_det, tr_hist", "Em andamento", "FALTA: consulta de saldo x demanda por componente."],
       ["16.6", "WO Release / Print", "Libera a OP ao chão de fábrica (A→R), finaliza picks, imprime docs.", "wo_mstr (A→R), lad_det, wr_route", "Pendente", "FALTA: serviço de liberação + relatório (lista de separação/roteiro) via ReportFramework/RabbitMQ."],
       ["16.13.1", "WO Bill Maintenance", "Ajustes manuais no BOM da OP após explosão.", "wod_det, lad_det", "Pendente", "Depende da entidade de componentes (16.1-B)."],
       { g: "Execução — material e mão de obra" },
@@ -2265,15 +2292,15 @@
       },
       {
         id: "pre", name: "Pré-requisitos 13·14·15", intro: "Dados mestres de engenharia — tudo já implementado.",
-        head: ["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Componente HERA / O que falta"], rows: prereq, sIdx: 4, type: "full"
+        head: ["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Responsável", "Componente HERA / O que falta"], rows: prereq, sIdx: 4, type: "full"
       },
       {
         id: "mvp", name: "MVP — Fase 1", intro: "Ciclo ponta a ponta da OP (16.x · 17.x), em ordem de dependência.",
-        head: ["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Componente HERA / O que falta"], rows: mvp, sIdx: 4, type: "full"
+        head: ["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Responsável", "Componente HERA / O que falta"], rows: mvp, sIdx: 4, type: "full"
       },
       {
         id: "f23", name: "Fase 2 e 3", intro: "Camadas posteriores ao core.",
-        head: ["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Componente HERA / O que falta"], rows: fase23, sIdx: 4, type: "full"
+        head: ["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Responsável", "Componente HERA / O que falta"], rows: fase23, sIdx: 4, type: "full"
       },
       { id: "bomfreeze", name: "🔍 Explosão do BOM", intro: "", rows: [], sIdx: null, type: "bomfreeze" },
       { id: "rel", name: "Entidades & Relações", intro: "", head: [], rows: [], sIdx: null, type: "rel" },
@@ -2294,7 +2321,7 @@
       if (tab.type === "ov") {
         tds = `<td><b>${r[0]}</b></td><td class="mono">${r[1]}</td><td>${badge(r[2])}</td><td class="muted">${r[3]}</td>`;
       } else if (tab.type === "full") {
-        tds = `<td class="mono">${r[0]}</td><td><b>${r[1]}</b></td><td class="muted">${r[2]}</td><td class="mono">${r[3]}</td><td>${badge(r[4])}</td><td class="falta">${fmtFalta(r[5])}</td>`;
+        tds = `<td class="mono">${r[0]}</td><td><b>${r[1]}</b></td><td class="muted">${r[2]}</td><td class="mono">${r[3]}</td><td>${badge(r[4])}</td><td>${respHTML(r[0])}</td><td class="falta">${fmtFalta(r[5])}</td>`;
       } else if (tab.type === "dm") {
         tds = `<td class="mono">${r[0]}</td><td><b>${r[1]}</b></td><td class="mono">${r[2]}</td><td class="muted">${r[3]}</td><td>${badge(r[4])}</td>`;
       } else if (tab.type === "leg") {
