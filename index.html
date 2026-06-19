@@ -4,104 +4,242 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HERA — Módulo de Manufatura · Status</title>
+  <title>HERA — Módulo de Manufatura · Progresso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
   <style>
     :root {
-      --bg: #f4f6f9;
+      --bg: #eef1f6;
       --panel: #ffffff;
-      --panel2: #f8fafc;
-      --line: #e5e9f0;
-      --txt: #1f2937;
+      --panel2: #f7f9fc;
+      --line: #e6eaf1;
+      --line-strong: #d6dce6;
+      --txt: #1e293b;
       --muted: #64748b;
-      --head: #f1f4f8;
-      --impl: #15803d;
-      --and: #b45309;
+      --faint: #94a3b8;
+      --head: #f5f7fb;
+      --impl: #047857;
       --parc: #c2410c;
-      --pend: #64748b;
-      --fut: #1d4ed8;
-      --accent: #1e3a5f;
-      --accent2: #2563eb;
-      --shadow: 0 1px 2px rgba(16, 24, 40, .06), 0 1px 3px rgba(16, 24, 40, .05);
+      --pend: #475569;
+      --fut: #4338ca;
+      --accent: #1e293b;
+      --accent2: #4338ca;
+      --accent-soft: #eef0fb;
+      --mono: 'JetBrains Mono', 'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace;
+      --radius: 14px;
+      --shadow: 0 1px 2px rgba(15, 23, 42, .04), 0 2px 10px rgba(15, 23, 42, .05);
+      --shadow-lg: 0 8px 30px rgba(15, 23, 42, .10), 0 2px 6px rgba(15, 23, 42, .05);
+      --ease: cubic-bezier(.22, .61, .36, 1);
     }
 
     * {
       box-sizing: border-box
     }
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: var(--bg);
-      color: var(--txt);
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased
+    html {
+      scroll-behavior: smooth
     }
 
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Segoe UI', system-ui, Arial, sans-serif;
+      letter-spacing: -.05px;
+      color: var(--txt);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(1100px 460px at 100% -8%, #e6ecf7 0, transparent 55%),
+        radial-gradient(900px 420px at -8% 0, #e9eff8 0, transparent 50%),
+        var(--bg);
+      background-attachment: fixed;
+    }
+
+    code,
+    .mono {
+      font-family: var(--mono)
+    }
+
+    /* ───────── Header / Hero ───────── */
     header {
-      padding: 28px 32px 22px;
-      background: var(--panel);
-      border-bottom: 1px solid var(--line)
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #1e293b 0%, #283655 55%, #312e81 100%);
+      color: #fff;
+      padding: 38px 32px 34px;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(620px 220px at 88% -30%, rgba(99, 102, 241, .45), transparent 60%),
+        radial-gradient(520px 260px at 6% 120%, rgba(56, 189, 248, .22), transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 1340px;
+      margin: 0 auto;
+      z-index: 1
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: #c7d2fe;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .14);
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    .eyebrow .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 0 0 rgba(52, 211, 153, .7);
+      animation: pulse 2.4s infinite
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, .55)
+      }
+
+      70% {
+        box-shadow: 0 0 0 9px rgba(52, 211, 153, 0)
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0)
+      }
     }
 
     header h1 {
-      margin: 0;
-      font-size: 23px;
-      font-weight: 700;
-      color: var(--accent)
+      margin: 16px 0 0;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -.6px;
+      line-height: 1.18
     }
 
     header p {
-      margin: 7px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-      max-width: 900px
+      margin: 10px 0 0;
+      color: #cbd5e1;
+      font-size: 14.5px;
+      max-width: 760px
     }
 
     .branch {
       display: inline-block;
-      margin-top: 12px;
-      padding: 4px 12px;
-      background: #eef2ff;
-      color: #3730a3;
-      border: 1px solid #e0e7ff;
-      border-radius: 6px;
+      margin-top: 16px;
+      padding: 5px 13px;
+      background: rgba(255, 255, 255, .08);
+      color: #e0e7ff;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 8px;
       font-size: 12px;
-      font-family: monospace
+      font-family: var(--mono)
     }
 
+    /* ───────── Tabs (abas) ───────── */
+    .tabs {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 8px 0 0;
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .88);
+      backdrop-filter: blur(10px);
+    }
+
+    .tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--muted);
+      background: none;
+      border: 1px solid transparent;
+      border-bottom: 2px solid transparent;
+      padding: 9px 15px;
+      border-radius: 9px 9px 0 0;
+      cursor: pointer;
+      white-space: nowrap;
+      margin-bottom: -1px;
+      transition: color .15s var(--ease), background .15s var(--ease), border-color .15s var(--ease);
+    }
+
+    .tab:hover {
+      color: var(--accent);
+      background: var(--accent-soft)
+    }
+
+    .tab.active {
+      color: var(--accent2);
+      background: var(--accent-soft);
+      border-color: #dadffa;
+      border-bottom-color: var(--accent2)
+    }
+
+    /* ───────── Layout ───────── */
     .wrap {
-      max-width: 1280px;
+      max-width: 1340px;
       margin: 0 auto;
-      padding: 24px 32px 60px
+      padding: 26px 32px 90px
     }
 
     .kpis {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 16px;
       margin-bottom: 16px
     }
 
     .kpi {
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 16px 18px;
+      border-radius: var(--radius);
+      padding: 17px 19px;
       position: relative;
       overflow: hidden;
-      box-shadow: var(--shadow)
+      box-shadow: var(--shadow);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease)
+    }
+
+    .kpi:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg)
     }
 
     .kpi .num {
       font-size: 30px;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: -.5px;
       color: var(--txt)
     }
 
     .kpi .lbl {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--muted);
-      margin-top: 2px
+      margin-top: 3px
     }
 
     .kpi .bar {
@@ -116,10 +254,6 @@
       background: var(--impl)
     }
 
-    .kpi.and .bar {
-      background: var(--and)
-    }
-
     .kpi.parc .bar {
       background: var(--parc)
     }
@@ -128,13 +262,9 @@
       background: var(--pend)
     }
 
-    .kpi.tot .bar {
-      background: var(--accent2)
-    }
-
     .kpi.tot {
-      background: var(--accent);
-      border-color: var(--accent)
+      background: linear-gradient(135deg, #1e293b, #334155);
+      border-color: #1e293b
     }
 
     .kpi.tot .num {
@@ -145,22 +275,19 @@
       color: #cbd5e1
     }
 
-    .kpi.miss .bar {
-      background: #b91c1c
-    }
-
-    .kpi.miss .num {
-      color: #b91c1c
+    .kpi.tot .bar {
+      background: var(--accent2)
     }
 
     .progress {
       display: flex;
-      height: 20px;
-      border-radius: 6px;
+      height: 22px;
+      border-radius: 8px;
       overflow: hidden;
-      margin: 6px 0 26px;
+      margin: 6px 0 8px;
       border: 1px solid var(--line);
-      box-shadow: var(--shadow)
+      box-shadow: var(--shadow);
+      background: var(--panel)
     }
 
     .progress span {
@@ -169,15 +296,14 @@
       justify-content: center;
       font-size: 11px;
       color: #fff;
-      font-weight: 600
+      font-weight: 600;
+      width: 0;
+      transition: width 1.1s var(--ease);
+      white-space: nowrap
     }
 
     .pi {
       background: var(--impl)
-    }
-
-    .pa {
-      background: var(--and)
     }
 
     .pp {
@@ -188,64 +314,149 @@
       background: var(--pend)
     }
 
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2px;
-      margin-bottom: 18px;
-      border-bottom: 1px solid var(--line)
-    }
-
-    .tab {
-      padding: 10px 16px;
-      background: none;
-      border: none;
+    .progress-cap {
+      font-size: 12px;
       color: var(--muted);
-      cursor: pointer;
-      font-size: 14px;
-      border-bottom: 2px solid transparent;
-      font-family: inherit;
-      margin-bottom: -1px
+      margin: 0 0 28px
     }
 
-    .tab:hover {
+    /* ───────── Status flow strip ───────── */
+    .flow-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px 20px 8px;
+      margin-bottom: 28px;
+      overflow-x: auto
+    }
+
+    .flow-card h4 {
+      margin: 0 0 2px;
+      font-size: 13px;
+      font-weight: 700;
       color: var(--accent)
     }
 
-    .tab.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent2);
-      font-weight: 600
+    .flow-card .sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0 0 8px
     }
 
+    .flow {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      padding: 8px 0;
+      min-width: 720px
+    }
+
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 92px
+    }
+
+    .flow-node {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 800;
+      border: 2px solid transparent;
+    }
+
+    .fn-impl {
+      background: #ecfdf5;
+      border-color: #047857;
+      color: #047857
+    }
+
+    .fn-pend {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+      color: #475569
+    }
+
+    .fn-freeze {
+      background: #fef2f2;
+      border-color: #dc2626;
+      color: #dc2626
+    }
+
+    .flow-name {
+      font-size: 10.5px;
+      color: var(--accent);
+      font-weight: 700
+    }
+
+    .flow-desc {
+      font-size: 9.5px;
+      color: var(--faint);
+      text-align: center;
+      max-width: 86px
+    }
+
+    .flow-tag {
+      font-size: 9px;
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-weight: 700
+    }
+
+    .flow-arrow {
+      font-size: 17px;
+      color: #c0c8d6;
+      padding: 0 2px;
+      margin-top: 11px
+    }
+
+    /* ───────── Filters ───────── */
     .filters {
+      position: sticky;
+      top: 47px;
+      z-index: 30;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 16px;
-      align-items: center
+      align-items: center;
+      background: rgba(238, 241, 246, .92);
+      backdrop-filter: blur(8px);
+      padding: 11px 0;
+      margin: 0 0 22px;
+      border-bottom: 1px solid var(--line)
     }
 
-    .filters .flabel {
+    .flabel {
       font-size: 12px;
       color: var(--muted);
-      margin-right: 4px
+      margin-right: 2px
     }
 
     .chip {
-      padding: 5px 12px;
-      border-radius: 6px;
+      padding: 6px 13px;
+      border-radius: 8px;
       font-size: 12px;
       cursor: pointer;
       border: 1px solid var(--line);
       background: var(--panel);
       color: var(--muted);
       font-family: inherit;
-      transition: .15s
+      transition: .15s var(--ease)
     }
 
     .chip:hover {
-      border-color: #cbd5e1
+      border-color: #c2cbdb;
+      transform: translateY(-1px)
     }
 
     .chip.on {
@@ -261,10 +472,6 @@
       background: var(--impl)
     }
 
-    .chip.Emandamento.on {
-      background: var(--and)
-    }
-
     .chip.Parcial.on {
       background: var(--parc)
     }
@@ -277,19 +484,24 @@
       background: var(--fut)
     }
 
+    /* ───────── Panels (uma aba por vez) ───────── */
+    #panels {
+      margin-top: 22px
+    }
+
     .panel {
       display: none
     }
 
     .panel.active {
       display: block;
-      animation: fade .25s
+      animation: panelIn .35s var(--ease)
     }
 
-    @keyframes fade {
+    @keyframes panelIn {
       from {
         opacity: 0;
-        transform: translateY(4px)
+        transform: translateY(10px)
       }
 
       to {
@@ -298,18 +510,38 @@
       }
     }
 
+    .sec-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 2px 0 12px;
+      letter-spacing: -.3px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .sec-title::before {
+      content: "";
+      width: 4px;
+      height: 22px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, var(--accent2), #6366f1);
+    }
+
     .intro {
       color: var(--muted);
       font-size: 13px;
-      margin: 0 0 14px
+      margin: 0 0 16px
     }
 
+    /* ───────── Tables ───────── */
     table {
       width: 100%;
       border-collapse: collapse;
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 10px;
+      border-radius: var(--radius);
       overflow: hidden;
       font-size: 13px;
       box-shadow: var(--shadow)
@@ -324,8 +556,6 @@
       text-transform: uppercase;
       letter-spacing: .5px;
       font-weight: 600;
-      position: sticky;
-      top: 0;
       border-bottom: 1px solid var(--line)
     }
 
@@ -335,14 +565,18 @@
       vertical-align: top
     }
 
+    tbody tr {
+      transition: background .12s
+    }
+
     tbody tr:hover {
       background: var(--panel2)
     }
 
     tr.group td {
-      background: #eef2f7;
+      background: #eef1f7;
       color: var(--accent);
-      font-weight: 600;
+      font-weight: 700;
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: .5px
@@ -358,56 +592,33 @@
     }
 
     .b-Implementado {
-      background: #e7f5ec;
-      color: #15803d;
-      border: 1px solid #bbe6c9
-    }
-
-    .b-Emandamento {
-      background: #fdf2e3;
-      color: #b45309;
-      border: 1px solid #f5dcae
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0
     }
 
     .b-Parcial {
-      background: #fdeee5;
+      background: #fff5ed;
       color: #c2410c;
-      border: 1px solid #f6ccb3
+      border: 1px solid #fed7aa
     }
 
     .b-Pendente {
-      background: #f1f3f6;
+      background: #f1f5f9;
       color: #475569;
-      border: 1px solid #d8dee8
+      border: 1px solid #dde3ec
     }
 
     .b-Futuro {
-      background: #e8eefc;
-      color: #1d4ed8;
-      border: 1px solid #c3d4f7
+      background: #eef0fb;
+      color: #4338ca;
+      border: 1px solid #cdd3f5
     }
 
-    .mono {
-      font-family: monospace;
-      color: #2563eb;
-      white-space: nowrap
-    }
-
-    .resp-chip {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      font-family: monospace;
-      background: #eef2ff;
-      color: #3730a3;
-      border: 1px solid #c7d2fe;
-      white-space: nowrap
-    }
-
-    .resp-empty {
-      color: #cbd2dc;
+    .cmono {
+      font-family: var(--mono);
+      color: #4338ca;
+      white-space: nowrap;
       font-size: 12px
     }
 
@@ -415,234 +626,56 @@
       color: var(--muted)
     }
 
-    td.falta {
-      color: #374151
-    }
-
     td.falta b {
       color: #b91c1c;
       font-weight: 600
     }
 
-    /* Entidades & Relacoes tab */
-    .section-sep {
-      margin: 28px 0 12px;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--accent);
-      border-bottom: 2px solid var(--line);
-      padding-bottom: 8px
+    /* ───────── O que consigo fazer — phase cards ───────── */
+    .view-toggle {
+      display: inline-flex;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 4px;
+      margin: 0 0 18px;
+      box-shadow: var(--shadow)
     }
 
-    .section-intro {
-      color: var(--muted);
+    .vt-btn {
+      border: none;
+      background: none;
+      font-family: inherit;
       font-size: 13px;
-      margin: 0 0 12px
-    }
-
-    .entity-missing {
-      color: #b91c1c;
-      font-weight: 700
-    }
-
-    .phase-badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 11px;
       font-weight: 600;
-      white-space: nowrap
-    }
-
-    .ph-criacao {
-      background: #e7f5ec;
-      color: #15803d
-    }
-
-    .ph-bom {
-      background: #fef9e7;
-      color: #92400e
-    }
-
-    .ph-routing {
-      background: #f5f0ff;
-      color: #6d28d9
-    }
-
-    .ph-custogl {
-      background: #f1f3f6;
-      color: #475569
-    }
-
-    .ph-andamento {
-      background: #fdf2e3;
-      color: #b45309
-    }
-
-    .ph-pendente {
-      background: #fce4e4;
-      color: #b91c1c
-    }
-
-    .ph-execucao {
-      background: #fdeee5;
-      color: #c2410c
-    }
-
-    .ftag-e {
-      background: #fff7e6;
-      color: #92400e;
-      font-weight: 700;
-      font-family: monospace;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      border: 1px solid #fcd34d
-    }
-
-    .ftag-c {
-      background: #fdeee5;
-      color: #c2410c;
-      font-weight: 700;
-      font-family: monospace;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      border: 1px solid #fdba74
-    }
-
-    .ftag-acct {
-      background: #fce4e4;
-      color: #b91c1c;
-      font-weight: 700;
-      font-family: monospace;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      border: 1px solid #fca5a5
-    }
-
-    .ftag-free {
-      background: #f0fdf4;
-      color: #15803d;
-      font-weight: 600;
-      font-family: monospace;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      border: 1px solid #bbf7d0
-    }
-
-    /* Status flow */
-    .flow-wrap {
-      overflow-x: auto;
-      margin: 0 0 24px
-    }
-
-    .flow {
-      display: flex;
-      align-items: flex-start;
-      gap: 0;
-      padding: 16px 0 8px;
-      min-width: 700px
-    }
-
-    .flow-step {
-      display: flex;
-      flex-direction: column;
+      color: var(--muted);
+      padding: 7px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      display: inline-flex;
       align-items: center;
-      gap: 3px;
-      min-width: 90px
+      gap: 7px;
+      transition: .18s var(--ease)
     }
 
-    .flow-node {
-      padding: 7px 10px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      text-align: center;
-      border: 2px solid transparent;
-      min-width: 44px
-    }
-
-    .fn-impl {
-      background: #e7f5ec;
-      border-color: #15803d;
-      color: #15803d
-    }
-
-    .fn-andamento {
-      background: #fdf2e3;
-      border-color: #b45309;
-      color: #b45309
-    }
-
-    .fn-pend {
-      background: #f1f3f6;
-      border-color: #94a3b8;
-      color: #475569
-    }
-
-    .fn-freeze {
-      background: #fce4e4;
-      border-color: #b91c1c;
-      color: #b91c1c
-    }
-
-    .flow-name {
-      font-size: 10px;
-      color: var(--muted);
-      text-align: center;
-      max-width: 84px;
-      font-weight: 600
-    }
-
-    .flow-desc {
-      font-size: 9px;
-      color: #94a3b8;
-      text-align: center;
-      max-width: 84px
-    }
-
-    .flow-freeze-tag {
-      font-size: 9px;
-      background: #fce4e4;
-      color: #b91c1c;
-      border: 1px solid #fca5a5;
-      border-radius: 4px;
-      padding: 1px 5px;
-      margin-top: 2px;
-      font-weight: 700
-    }
-
-    .flow-arrow {
-      font-size: 16px;
-      color: #94a3b8;
-      padding: 0 2px;
-      margin-top: 12px
-    }
-
-    footer {
-      color: var(--muted);
-      font-size: 12px;
-      text-align: center;
-      padding: 24px;
-      border-top: 1px solid var(--line)
-    }
-
-    /* ── Aba "O que consigo fazer" ─────────────────────────────────────── */
-    .phase-timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0
+    .vt-btn.on {
+      background: var(--accent2);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(67, 56, 202, .28)
     }
 
     .phase-card {
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: var(--radius);
       overflow: hidden;
       margin-bottom: 22px;
-      box-shadow: var(--shadow)
+      box-shadow: var(--shadow);
+      background: var(--panel);
+      transition: box-shadow .25s var(--ease)
+    }
+
+    .phase-card:hover {
+      box-shadow: var(--shadow-lg)
     }
 
     .phase-header {
@@ -654,35 +687,35 @@
     }
 
     .phase-num {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 800;
       flex-shrink: 0
     }
 
     .ph-n1 {
-      background: #e7f5ec;
-      color: #15803d
+      background: #ecfdf5;
+      color: #047857
     }
 
     .ph-n2 {
-      background: #fdf2e3;
-      color: #b45309
-    }
-
-    .ph-n3 {
-      background: #fdeee5;
+      background: #fff5ed;
       color: #c2410c
     }
 
+    .ph-n3 {
+      background: #eef0fb;
+      color: #4338ca
+    }
+
     .ph-n4 {
-      background: #e8eefc;
-      color: #1d4ed8
+      background: #1e293b;
+      color: #fff
     }
 
     .phase-header-text {
@@ -691,7 +724,7 @@
 
     .phase-header-text h3 {
       margin: 0 0 2px;
-      font-size: 16px;
+      font-size: 16.5px;
       font-weight: 700;
       color: var(--accent)
     }
@@ -702,7 +735,7 @@
       color: var(--muted)
     }
 
-    .phase-status-pill {
+    .phase-pill {
       padding: 5px 14px;
       border-radius: 20px;
       font-size: 12px;
@@ -710,38 +743,37 @@
       white-space: nowrap
     }
 
-    .psp-current {
-      background: #fdf2e3;
-      color: #b45309;
-      border: 1px solid #f5dcae
+    .psp-done {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0
     }
 
     .psp-next {
-      background: #fdeee5;
+      background: #fff5ed;
       color: #c2410c;
-      border: 1px solid #fdba74
+      border: 1px solid #fed7aa
     }
 
     .psp-later {
-      background: #f1f3f6;
-      color: #475569;
-      border: 1px solid #d8dee8
+      background: #eef0fb;
+      color: #4338ca;
+      border: 1px solid #cdd3f5
     }
 
     .psp-future {
-      background: #e8eefc;
-      color: #1d4ed8;
-      border: 1px solid #c3d4f7
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #dde3ec
     }
 
     .phase-body {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      background: var(--panel)
+      grid-template-columns: 1.35fr 1fr;
+      gap: 0
     }
 
-    @media(max-width:700px) {
+    @media(max-width:760px) {
       .phase-body {
         grid-template-columns: 1fr
       }
@@ -755,13 +787,37 @@
       border-left: 1px solid var(--line)
     }
 
+    @media(max-width:760px) {
+      .phase-col+.phase-col {
+        border-left: none;
+        border-top: 1px solid var(--line)
+      }
+    }
+
     .phase-col h4 {
-      margin: 0 0 12px;
+      margin: 0 0 13px;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: .6px;
-      color: var(--muted)
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap
+    }
+
+    .rotina-tag {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--accent2);
+      background: var(--accent-soft);
+      border: 1px solid #dadffa;
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-family: var(--mono)
     }
 
     .cap-list {
@@ -770,60 +826,80 @@
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 8px
+      gap: 11px
     }
 
     .cap-list li {
       display: flex;
       align-items: flex-start;
-      gap: 9px;
+      gap: 10px;
       font-size: 13px;
       color: var(--txt)
     }
 
-    .cap-list li .ico {
+    .ico {
       flex-shrink: 0;
-      width: 18px;
-      height: 18px;
+      width: 19px;
+      height: 19px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 10px;
-      margin-top: 1px
+      margin-top: 1px;
+      font-weight: 700
     }
 
-    .ico-yes {
-      background: #e7f5ec;
-      color: #15803d
+    .ico-done {
+      background: #ecfdf5;
+      color: #047857
+    }
+
+    .ico-plan {
+      background: var(--accent-soft);
+      color: #4338ca
     }
 
     .ico-no {
-      background: #fce4e4;
+      background: #fef2f2;
       color: #b91c1c
     }
 
-    .ico-dep {
-      background: #fff7e6;
-      color: #92400e
+    .cap-title {
+      font-weight: 600
     }
 
-    .cap-label {
-      line-height: 1.45
-    }
-
-    .cap-label small {
+    .cap-desc {
       display: block;
       color: var(--muted);
-      font-size: 11px;
-      margin-top: 1px
+      font-size: 11.5px;
+      margin-top: 2px;
+      line-height: 1.5
+    }
+
+    /* toggle visibility */
+    .cap-tec {
+      display: none
+    }
+
+    body.view-tec .cap-neg {
+      display: none
+    }
+
+    body.view-tec .cap-tec {
+      display: block
+    }
+
+    .cap-desc .mono {
+      color: #4338ca;
+      font-size: 11px
     }
 
     .phase-footer {
-      padding: 10px 22px;
+      padding: 13px 22px;
       background: var(--panel2);
       border-top: 1px solid var(--line);
-      font-size: 12px;
+      font-size: 12.5px;
       color: var(--muted)
     }
 
@@ -831,931 +907,153 @@
       color: var(--txt)
     }
 
-    .inh-badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      background: #f1f3f6;
-      color: #475569;
-      border: 1px solid #d8dee8;
-      margin-right: 4px;
-      margin-bottom: 3px
+    /* ───────── reveal animation ───────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .6s var(--ease), transform .6s var(--ease)
     }
 
-    .dep-note {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      background: #fff7e6;
-      border: 1px solid #fcd34d;
-      border-radius: 8px;
-      padding: 10px 14px;
-      margin-top: 12px;
-      font-size: 12px;
-      color: #92400e
+    .reveal.in {
+      opacity: 1;
+      transform: none
     }
 
-    .dep-note .dep-icon {
-      flex-shrink: 0;
-      font-size: 14px
-    }
-
-    /* ── Aba Congelamento do BOM ─────────────────────────────────────── */
-    .bom-intro-box {
-      background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
-      color: #fff;
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px
-    }
-
-    .bom-intro-icon {
-      font-size: 32px;
-      flex-shrink: 0;
-      margin-top: 2px
-    }
-
-    .bom-intro-text h2 {
-      margin: 0 0 6px;
-      font-size: 17px;
-      font-weight: 700
-    }
-
-    .bom-intro-text p {
-      margin: 0;
-      font-size: 13px;
-      opacity: .88;
-      line-height: 1.6
-    }
-
-    /* Entity map */
-    .entity-map {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: 14px;
-      margin-bottom: 32px
-    }
-
-    .entity-card {
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: var(--shadow)
-    }
-
-    .entity-card-head {
-      padding: 10px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px
-    }
-
-    .entity-card-head .qad-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      opacity: .75
-    }
-
-    .entity-card-head .table-name {
-      font-size: 13px;
-      font-weight: 700;
-      font-family: monospace
-    }
-
-    .entity-card-head .arrow-line {
-      font-size: 11px;
-      opacity: .7;
-      margin: 1px 0
-    }
-
-    .entity-card-head .hera-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      opacity: .75
-    }
-
-    .entity-card-head .entity-name {
-      font-size: 12px;
-      font-weight: 700
-    }
-
-    .entity-card-head .db-table-name {
-      font-size: 11px;
-      font-family: monospace;
-      opacity: .8
-    }
-
-    .ec-wo .entity-card-head {
-      background: #dbeafe;
-      color: #1e40af
-    }
-
-    .ec-bom .entity-card-head {
-      background: #fef9c3;
-      color: #854d0e
-    }
-
-    .ec-ps .entity-card-head {
-      background: #f3e8ff;
-      color: #6b21a8
-    }
-
-    .ec-woc .entity-card-head {
-      background: #dcfce7;
-      color: #14532d
-    }
-
-    .ec-item .entity-card-head {
-      background: #ffe4e6;
-      color: #9f1239
-    }
-
-    .ec-woc.target .entity-card-head {
-      background: #fde68a;
-      color: #92400e;
-      border: 2px solid #f59e0b
-    }
-
-    .entity-fields {
-      padding: 10px 14px
-    }
-
-    .field-row {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-      padding: 4px 0;
-      border-bottom: 1px solid var(--line);
-      font-size: 12px
-    }
-
-    .field-row:last-child {
-      border-bottom: none
-    }
-
-    .field-qad {
-      font-family: monospace;
-      color: #7c3aed;
-      font-size: 11px;
-      min-width: 105px;
-      flex-shrink: 0
-    }
-
-    .field-hera {
-      font-family: monospace;
-      color: #1d4ed8;
-      font-size: 11px;
-      min-width: 95px;
-      flex-shrink: 0
-    }
-
-    .field-desc {
+    footer {
       color: var(--muted);
-      font-size: 11px;
-      line-height: 1.4
+      font-size: 12px;
+      text-align: center;
+      padding: 26px;
+      border-top: 1px solid var(--line)
     }
 
-    .field-row.freeze-field .field-qad,
-    .field-row.freeze-field .field-hera {
-      color: #b91c1c
-    }
+    @media (prefers-reduced-motion: reduce) {
 
-    .field-row.freeze-field {
-      background: #fff5f5
-    }
-
-    .field-row.key-field {
-      background: #f0fdf4
-    }
-
-    .field-row.key-field .field-qad,
-    .field-row.key-field .field-hera {
-      color: #15803d;
-      font-weight: 700
-    }
-
-    .entity-role {
-      padding: 8px 14px;
-      background: var(--panel2);
-      border-top: 1px solid var(--line);
-      font-size: 11px;
-      color: var(--muted);
-      font-style: italic
-    }
-
-    .ec-target-badge {
-      display: inline-block;
-      background: #fde68a;
-      color: #92400e;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 1px 6px;
-      border-radius: 4px;
-      border: 1px solid #f59e0b;
-      margin-left: 6px;
-      vertical-align: middle
-    }
-
-    /* Simulation steps */
-    .sim-timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-bottom: 32px
-    }
-
-    .sim-step {
-      display: flex;
-      gap: 0;
-      position: relative
-    }
-
-    .sim-step:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      left: 27px;
-      top: 56px;
-      bottom: 0;
-      width: 2px;
-      background: var(--line)
-    }
-
-    .sim-num {
-      width: 56px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 16px
-    }
-
-    .sim-circle {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 800;
-      border: 2px solid;
-      z-index: 1;
-      background: var(--panel)
-    }
-
-    .sim-sc1 {
-      border-color: #15803d;
-      color: #15803d;
-      background: #f0fdf4
-    }
-
-    .sim-sc2 {
-      border-color: #2563eb;
-      color: #2563eb;
-      background: #eff6ff
-    }
-
-    .sim-sc3 {
-      border-color: #7c3aed;
-      color: #7c3aed;
-      background: #f5f3ff
-    }
-
-    .sim-sc4 {
-      border-color: #b91c1c;
-      color: #b91c1c;
-      background: #fff5f5
-    }
-
-    .sim-sc5 {
-      border-color: #b45309;
-      color: #b45309;
-      background: #fffbeb
-    }
-
-    .sim-body {
-      flex: 1;
-      padding: 12px 0 28px 16px
-    }
-
-    .sim-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap
-    }
-
-    .sim-menu {
-      font-size: 11px;
-      background: #eef2ff;
-      color: #3730a3;
-      border: 1px solid #e0e7ff;
-      border-radius: 5px;
-      padding: 2px 8px;
-      font-family: monospace;
-      font-weight: 600
-    }
-
-    .sim-panels {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px
-    }
-
-    @media(max-width:680px) {
-      .sim-panels {
-        grid-template-columns: 1fr
+      .reveal,
+      .progress span,
+      .kpi {
+        transition: none !important
       }
-    }
 
-    .sim-user-panel,
-    .sim-back-panel {
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 12px;
-      line-height: 1.6
-    }
+      .reveal {
+        opacity: 1;
+        transform: none
+      }
 
-    .sim-user-panel {
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0
-    }
+      .eyebrow .dot {
+        animation: none
+      }
 
-    .sim-back-panel {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe
-    }
-
-    .sim-panel-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 5px
-    }
-
-    .sim-user-panel .sim-panel-label {
-      color: #15803d
-    }
-
-    .sim-back-panel .sim-panel-label {
-      color: #1d4ed8
-    }
-
-    .sim-field-list {
-      font-family: monospace;
-      font-size: 11px;
-      background: rgba(255, 255, 255, .7);
-      border-radius: 6px;
-      padding: 8px 10px;
-      margin-top: 6px;
-      line-height: 1.9
-    }
-
-    .sim-field-key {
-      color: #7c3aed;
-      font-weight: 600
-    }
-
-    .sim-field-val {
-      color: #1d4ed8
-    }
-
-    .sim-field-note {
-      color: #94a3b8;
-      font-size: 10px
-    }
-
-    .sim-alert {
-      background: #fef9c3;
-      border: 1px solid #fcd34d;
-      border-radius: 6px;
-      padding: 8px 12px;
-      font-size: 12px;
-      color: #92400e;
-      margin-top: 8px;
-      display: flex;
-      gap: 8px;
-      align-items: flex-start
-    }
-
-    .sim-alert-warn {
-      background: #fce4e4;
-      border-color: #fca5a5;
-      color: #b91c1c
-    }
-
-    /* Before/After diagram */
-    .ba-container {
-      display: grid;
-      grid-template-columns: 1fr 60px 1fr;
-      gap: 0;
-      margin-bottom: 32px;
-      align-items: stretch
-    }
-
-    .ba-col {
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: var(--shadow)
-    }
-
-    .ba-header {
-      padding: 10px 16px;
-      font-size: 12px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px
-    }
-
-    .ba-before .ba-header {
-      background: #f3e8ff;
-      color: #6b21a8
-    }
-
-    .ba-after .ba-header {
-      background: #fde68a;
-      color: #92400e
-    }
-
-    .ba-arrow-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 0 8px
-    }
-
-    .ba-arrow-btn {
-      font-size: 26px;
-      color: #2563eb;
-      line-height: 1
-    }
-
-    .ba-arrow-label {
-      font-size: 10px;
-      color: var(--muted);
-      text-align: center;
-      font-weight: 600;
-      line-height: 1.3
-    }
-
-    .dbtable {
-      margin: 10px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      overflow: hidden;
-      font-size: 11px
-    }
-
-    .dbtable-head {
-      background: var(--head);
-      padding: 6px 10px;
-      font-weight: 700;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: .4px;
-      color: var(--muted);
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      align-items: center
-    }
-
-    .dbtable-subhead {
-      background: #f8fafc;
-      padding: 4px 10px;
-      font-size: 10px;
-      color: var(--muted);
-      border-bottom: 1px solid var(--line);
-      font-style: italic
-    }
-
-    .dbtable-row {
-      padding: 5px 10px;
-      border-bottom: 1px solid var(--line);
-      display: grid;
-      font-family: monospace
-    }
-
-    .dbtable-row:last-child {
-      border-bottom: none
-    }
-
-    .dbtable-row.row-2col {
-      grid-template-columns: 1fr 1fr
-    }
-
-    .dbtable-row.row-3col {
-      grid-template-columns: 1fr 1fr 1fr
-    }
-
-    .dbtable-row .col-qad {
-      color: #7c3aed;
-      font-size: 10px
-    }
-
-    .dbtable-row .col-val {
-      color: #1d4ed8;
-      font-size: 11px;
-      font-weight: 600
-    }
-
-    .dbtable-row .col-note {
-      color: #94a3b8;
-      font-size: 10px
-    }
-
-    .dbtable-row.highlight {
-      background: #fef9c3
-    }
-
-    .dbtable-row.freeze-row {
-      background: #fff5f5
-    }
-
-    .dbtable-row.empty-row {
-      background: #f8fafc;
-      color: #94a3b8;
-      font-style: italic;
-      justify-content: center;
-      padding: 10px
-    }
-
-    .ba-note {
-      background: var(--panel2);
-      border-top: 1px solid var(--line);
-      padding: 8px 12px;
-      font-size: 11px;
-      color: var(--muted)
-    }
-
-    /* Qty formula */
-    .formula-section {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 20px 24px;
-      margin-bottom: 28px;
-      box-shadow: var(--shadow)
-    }
-
-    .formula-section h3 {
-      margin: 0 0 14px;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--accent)
-    }
-
-    .formula-display {
-      background: #1e3a5f;
-      color: #e2e8f0;
-      border-radius: 8px;
-      padding: 16px 20px;
-      font-family: monospace;
-      font-size: 15px;
-      text-align: center;
-      margin-bottom: 16px;
-      line-height: 2
-    }
-
-    .formula-display .f-var {
-      color: #93c5fd
-    }
-
-    .formula-display .f-op {
-      color: #fcd34d
-    }
-
-    .formula-display .f-result {
-      color: #6ee7b7;
-      font-weight: 700
-    }
-
-    .formula-vars {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 10px
-    }
-
-    .fvar-card {
-      background: var(--panel2);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 12px
-    }
-
-    .fvar-name {
-      font-family: monospace;
-      font-weight: 700;
-      color: #7c3aed;
-      margin-bottom: 4px;
-      font-size: 13px
-    }
-
-    .fvar-qad {
-      font-size: 10px;
-      color: var(--muted);
-      margin-bottom: 6px;
-      font-family: monospace
-    }
-
-    .fvar-desc {
-      color: var(--txt);
-      line-height: 1.5
-    }
-
-    .fvar-example {
-      background: #fff;
-      border: 1px dashed #d1d5db;
-      border-radius: 4px;
-      padding: 5px 8px;
-      margin-top: 6px;
-      font-family: monospace;
-      font-size: 11px;
-      color: #374151
-    }
-
-    /* Freeze visual */
-    .freeze-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
-      margin-bottom: 24px
-    }
-
-    .fz-card {
-      border-radius: 10px;
-      padding: 14px 16px;
-      border: 2px solid
-    }
-
-    .fz-card.fz-frozen {
-      background: #fff5f5;
-      border-color: #fca5a5
-    }
-
-    .fz-card.fz-free {
-      background: #f0fdf4;
-      border-color: #bbf7d0
-    }
-
-    .fz-card.fz-locked {
-      background: #fce4e4;
-      border-color: #f87171
-    }
-
-    .fz-card-field {
-      font-family: monospace;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 4px
-    }
-
-    .fz-card.fz-frozen .fz-card-field {
-      color: #b91c1c
-    }
-
-    .fz-card.fz-free .fz-card-field {
-      color: #15803d
-    }
-
-    .fz-card.fz-locked .fz-card-field {
-      color: #991b1b
-    }
-
-    .fz-card-status {
-      font-size: 11px;
-      font-weight: 700;
-      margin-bottom: 6px
-    }
-
-    .fz-card-desc {
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.5
-    }
-
-    .fz-icon {
-      font-size: 18px;
-      float: right;
-      margin-top: -2px
+      html {
+        scroll-behavior: auto
+      }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>HERA — Módulo de Manufatura · Status de Implementação</h1>
-    <p>Baseado no roadmap QAD 2008 SE (Manufacturing MVP). Mapeamento das rotinas do ciclo da Ordem de Produção para o
-      estado real do código no HERA.</p>
+    <div class="hero-inner">
+      <span class="eyebrow"><span class="dot"></span> Status de Implementação · QAD 2008 SE → HERA</span>
+      <h1>Módulo de Manufatura HERA</h1>
+      <p>Progresso da reescrita do ciclo da Ordem de Produção do QAD 2008 SE no ERP HERA — do cadastro de engenharia ao
+        chão de fábrica. Cada rotina é confrontada com o código real do HERA.</p>
+    </div>
   </header>
 
   <div class="wrap">
     <div class="kpis" id="kpis"></div>
     <div class="progress" id="progress"></div>
+    <p class="progress-cap" id="progressCap"></p>
     <div class="tabs" id="tabs"></div>
     <div class="filters" id="filters"></div>
     <div id="panels"></div>
   </div>
-  <footer>Gerado a partir de HERA_Manufatura_Status.xlsx · Convenção HERA: tabelas QAD renomeadas para inglês claro.
-  </footer>
+
+  <footer>Mapeamento das rotinas do ciclo da Ordem de Produção · Convenção HERA: tabelas QAD renomeadas para inglês
+    claro · validado contra o código-fonte HERA e o QAD 2008 SE.</footer>
 
   <script>
-    const S = ["Implementado", "Em andamento", "Parcial", "Pendente", "Futuro"];
+    const S = ["Implementado", "Parcial", "Pendente", "Futuro"];
     const cls = s => s.replace(/\s/g, "");
     const badge = s => s ? `<span class="badge b-${cls(s)}">${s}</span>` : "";
     const fmtFalta = t => (t || "").replace(/FALTA:/g, "<b>FALTA:</b>");
 
-    // ---- RESPONSÁVEIS POR ROTINA ----
-    const responsaveis = {
-      "16.1-B": "thiagorenatinovk",
-      "16.5": "joaoferreiravk",
-      "16.10": "joaoferreiravk"
-    };
-    const respHTML = code => {
-      const r = responsaveis[code];
-      return r ? `<span class="resp-chip" title="Responsável">${r}</span>` : `<span class="resp-empty">—</span>`;
-    };
+    /* ════════ DADOS ════════ */
 
-    // ---- FASE CAPABILITIES DATA ----
-    const faseCapabilities = [
-      {
-        num: "1", numCls: "ph-n1",
-        name: "Fase 1 — BOM Explosion & Ciclo Básico da OP",
-        desc: "Criação, configuração e explosão do BOM. Entrega o coração do processo de firmação de uma Ordem de Produção.",
-        statusCls: "psp-current", statusLabel: "Em desenvolvimento",
-        rotinas: "16.1-A · 16.1-B · 16.24",
-        caps: [
-          { yes: true, text: "Criar Ordem de Produção completa", note: "Item, site, BOM, roteiro, conta WIP, datas, tipo e validações de negócio (26000–26011)." },
-          { yes: true, text: "Avançar status F → E (Explodir BOM)", note: "Sistema copia automaticamente a product_structure para linhas congeladas (work_order_component) com qty requerida, custo padrão e operação." },
-          { yes: true, text: "Transição direta F → A e F → R", note: "Explosion é acionada em qualquer salto que saia do status Firme." },
-          { yes: true, text: "Phantoms locais expandidos automaticamente", note: "structureType = 'X': componente phantom não gera linha, seus sub-componentes são incluídos no lugar com qty proporcional." },
-          { yes: true, text: "Tratamento por tipo de OP", note: "Rework → linha única com o próprio item pai. Expense → sem componentes. FAS → explode normalmente." },
-          { yes: true, text: "Consultar componentes congelados via API", note: "GET /api/work-orders/{id}/bom — lista linhas com qty requerida, alocada, emitida e custo." },
-          { yes: true, text: "Campos imutáveis após explosão", note: "Item, site, BOM e roteiro congelam no status E. Qty e dueDate permanecem editáveis até C." },
-        ],
-        blocks: [
-          { text: "Explosão de roteiro (16.1-C)", note: "Operações da OP (wo_routing) ainda não são criadas — só o BOM é explodido nesta fase." },
-          { text: "Baixa de componentes no estoque", note: "Movimento ISS-WO (16.10) e lançamentos GL dependem de fase 2." },
-          { text: "Apontamento de mão de obra", note: "Labor feedback (17.1) depende da explosão de roteiro." },
-          { text: "Recebimento do produto acabado", note: "RCT-WO (16.11) e backflush (16.12) dependem de fase 2." },
-          { text: "Fechamento contábil da OP", note: "Cálculo de variações e zeragem de WIP (16.21) depende de fase 2." },
-        ],
-        footer: "Após a Fase 1 o ciclo de <b>engenharia está completo</b>: o sistema já sabe o que precisa ser produzido, com quais componentes e em quais quantidades."
-      },
-      {
-        num: "2", numCls: "ph-n2",
-        name: "Fase 2 — Execução Completa (Chão de Fábrica)",
-        desc: "Roteiro explodido, liberação da OP, baixas de material, apontamento de mão de obra, recebimento e fechamento contábil.",
-        statusCls: "psp-next", statusLabel: "Próxima fase",
-        rotinas: "16.1-C · 16.5 · 16.6 · 16.8 · 16.10 · 16.11 · 16.12 · 16.13.1 · 16.21 · 17.1",
-        caps: [
-          { yes: true, text: "Explodir roteiro da OP (16.1-C)", note: "Copia as operações do standard_routing para a OP (wo_routing) com tempos, centro de trabalho e sequência congelados." },
-          { yes: true, text: "Verificar disponibilidade de componentes (16.5)", note: "Relatório de falta: compara qty requerida x saldo disponível antes de liberar." },
-          { yes: true, text: "Liberar OP ao chão de fábrica (16.6)", note: "Status A → R; finaliza picks, imprime lista de separação e roteiro via relatório." },
-          { yes: true, text: "Mudança de status em lote (16.8)", note: "Avança várias OPs de uma vez (F→E, E→A, A→R)." },
-          { yes: true, text: "Ajustar componentes da OP manualmente (16.13.1)", note: "Adicionar, remover ou alterar linhas após a explosão (antes da baixa)." },
-          { yes: true, text: "Baixar componentes do estoque para WIP (16.10)", note: "Movimento ISS-WO: débita WIP, credita estoque. Alimenta qty_issued na linha do componente e lançamentos GL." },
-          { yes: true, text: "Apontar mão de obra por operação (17.1)", note: "Registra horas e quantidade por operação; acumula custo de labor no WIP." },
-          { yes: true, text: "Receber produto acabado no estoque (16.11)", note: "RCT-WO: atualiza qty_completed, credita WIP, débita estoque de PA." },
-          { yes: true, text: "Backflush: recebimento + baixa automática (16.12)", note: "Recebimento e baixa de componentes em uma única transação." },
-          { yes: true, text: "Fechar OP contabilmente (16.21)", note: "Calcula variações (material, mão de obra, burden), zera WIP e trava acctClose." },
-        ],
-        blocks: [
-          { text: "Liberação em lote de múltiplas OPs (16.7)", note: "Fase 3." },
-          { text: "Split de OP (16.9)", note: "Fase 3." },
-          { text: "Labor por funcionário / downtime / OEE (17.2-4)", note: "Fase 3." },
-          { text: "Subcontratação integrada ao PO", note: "Fase 3." },
-          { text: "Manufatura repetitiva / MRP", note: "Fase futura." },
-        ],
-        footer: "Após a Fase 2 o <b>ciclo ponta a ponta da OP está completo</b>: da criação ao fechamento contábil, com rastreabilidade de material, mão de obra e variações."
-      },
-      {
-        num: "3", numCls: "ph-n3",
-        name: "Fase 3 — Operações Avançadas",
-        desc: "Split, liberação em lote, backflush por operação, labor detalhado, subcontratação e visão de chão de fábrica (dispatch).",
-        statusCls: "psp-later", statusLabel: "Fase futura",
-        rotinas: "16.7 · 16.9 · 16.18 · 16.19 · 17.2-4 · Subcontrato",
-        caps: [
-          { yes: true, text: "Liberar múltiplas OPs em lote (16.7)", note: "Processo em massa: seleciona OPs elegíveis e avança status em bloco." },
-          { yes: true, text: "Split de OP liberada (16.9)", note: "Divide uma OP em duas, redistribuindo qty e componentes proporcionalmente." },
-          { yes: true, text: "Dispatch report — fila de operações (16.18)", note: "Visão em tempo real de operações abertas por centro de trabalho; base para sequenciamento no chão de fábrica." },
-          { yes: true, text: "Backflush por operação (16.19)", note: "Baixa + apontamento + recebimento parcial vinculados a uma operação específica do roteiro." },
-          { yes: true, text: "Labor por funcionário, centro e downtime (17.2-4)", note: "Apontamentos alternativos e registro de tempos não produtivos (base para OEE)." },
-          { yes: true, text: "Subcontratação: operações terceirizadas (PO)", note: "Operações marcadas como subcontrato geram / consomem Pedido de Compra automaticamente. Campo vendor_code já existe na WO." },
-        ],
-        blocks: [
-          { text: "Manufatura repetitiva (18.x)", note: "Produção de alto volume por linha (schedules, backflush por linha) — fase futura." },
-          { text: "MRP e Forecast (22.x / 23.x)", note: "Geração automática de OPs a partir da demanda planejada — fase futura." },
-        ],
-        footer: "Após a Fase 3 o módulo atende <b>operações discretas complexas</b>: subcontratação, rastreabilidade por operação e gestão de capacidade por centro de trabalho."
-      },
-      {
-        num: "✓", numCls: "ph-n4",
-        name: "Módulo Completo — Manufatura HERA",
-        desc: "Ciclo discreto completo + manufatura repetitiva + planejamento integrado (MRP/Forecast). Paridade funcional com QAD 2008 SE Manufacturing.",
-        statusCls: "psp-future", statusLabel: "Visão de longo prazo",
-        rotinas: "18.x · 22.x · 23.x · integração SO/PO/GL",
-        caps: [
-          { yes: true, text: "Manufatura repetitiva por linha de produção (18.x)", note: "Schedules de produção, backflush por linha, rastreabilidade de lote/série em alto volume." },
-          { yes: true, text: "Plano-mestre de produção — MPS (22.x)", note: "Forecast de demanda e nivelamento de capacidade antes do MRP." },
-          { yes: true, text: "MRP — Planejamento de necessidades (23.x)", note: "Geração automática de OPs planejadas (status P) e sugestões de compra a partir do BOM e dos pedidos de venda. Base BomMrpPropagationService já iniciada." },
-          { yes: true, text: "Integração SO → OP → PO completa", note: "Pedido de venda gera OP; OP gera PO para componentes comprados e subcontratados; fechamento sincronizado." },
-          { yes: true, text: "Rastreabilidade completa de custo", note: "Variações de material, mão de obra, burden e subcontratação conciliadas com o Razão Geral (glt_det)." },
-          { yes: true, text: "Paridade com QAD 2008 SE Manufacturing MVP", note: "Todos os menus 13–18 · 22 · 23 mapeados e implementados no HERA." },
-        ],
-        blocks: [],
-        footer: "Com o módulo completo o HERA entrega <b>paridade total com o QAD 2008 SE</b> no ciclo de manufatura, com arquitetura moderna (REST, multi-tenant, BOM congelado por OP, rastreabilidade GL)."
-      }
-    ];
-
-    // ---- DATA ----
+    // Visão geral por camada
     const overview = [
-      ["Pré-requisitos — Engenharia (13·14·15)", "13.1·13.5·14.1·14.5·14.9·14.13.1·15.x", "Implementado", "BOM, roteiros, centros de trabalho, departamentos, operações-padrão e fórmula/processo já existem (módulos productstructure, production e formula)."],
-      ["Configuração da OP (16.24)", "16.24", "Implementado", "Work Order Control já implementado no módulo shopfloor (auto-numeração, defaults de variação)."],
-      ["Criação da OP (16.1-A)", "16.1-A", "Implementado", "WorkOrder header com CRUD, status por tipo, validações 26000–26011, auto-firming e export."],
-      ["Explosão BOM/Roteiro (16.1-B/C)", "16.1-B · 16.1-C", "Em andamento", "BOM explosion em desenvolvimento (branch atual). Routing explosion (16.1-C) ainda pendente."],
-      ["Ciclo de status e liberação (16.8·16.5·16.6)", "16.8·16.5·16.6", "Pendente", "Mudança de status em lote, check de componentes e liberação/impressão ainda não iniciados."],
-      ["Execução — material e mão de obra", "16.10·17.1·17.5·16.11·16.12", "Pendente", "Baixa de componentes, apontamento de mão de obra e recebimento/backflush a fazer."],
-      ["Encerramento contábil (16.21)", "16.21", "Pendente", "Cálculo de variações e fechamento a fazer; trava acct_close já existe na entidade (msg 26008)."],
-      ["Fase 2 — operações avançadas", "16.7·16.9·16.19·17.2-4·subcontrato", "Pendente", "Split, batch release, backflush por operação, labor por funcionário/centro, subcontratação."],
-      ["Fase 3 — repetitivo + planejamento", "18.x · 22.x · 23.x (MRP)", "Futuro", "Manufatura repetitiva e MRP/forecast fora do escopo atual; base de fórmula/MRP-propagation já iniciada."]
+      ["Pré-requisitos — Engenharia (13·14·15)", "13.x·14.x·15.x", "Implementado", "BOM, roteiros, centros de trabalho, departamentos, operações-padrão e fórmula/processo já existem (módulos productstructure, production e formula)."],
+      ["Configuração da OP (16.24)", "16.24", "Implementado", "Work Order Control implementado no módulo shopfloor (auto-numeração, defaults de variação, lead time de papelada)."],
+      ["Criação da OP (16.1-A)", "16.1-A", "Implementado", "WorkOrder header com CRUD, status inicial por tipo, validações 26000–26011, auto-firming, releaseDate por lead time e export."],
+      ["Explosão de BOM + Roteiro (16.1-B/C)", "16.1-B · 16.1-C", "Implementado", "Explosão concluída e testada: WorkOrderExplosionServiceImpl (componentes) e WorkOrderRoutingServiceImpl (operações), com phantoms, scrap, cumulative yield e custo congelado."],
+      ["Status e checagem (16.8 · 16.5)", "16.8 · 16.5", "Implementado", "FSM de status (changeStatus) com transições válidas e dispara explosão; component check compara requerido x disponível."],
+      ["Liberação ao chão de fábrica (16.6)", "16.6", "Pendente", "Liberação A→R, alocação detalhada e impressão de lista de separação/roteiro ainda não iniciados."],
+      ["Execução — material e mão de obra", "16.10 · 17.1 · 16.11 · 16.12", "Pendente", "Baixa de componentes, apontamento de mão de obra e recebimento/backflush a fazer."],
+      ["Encerramento contábil (16.21)", "16.21", "Parcial", "Trava acctClose e guardas (msg 26008) já existem; cálculo/lançamento de variações e zeragem do WIP a fazer."],
+      ["Operações avançadas", "16.7 · 16.9 · 16.18 · 16.19 · 17.2-4 · subcontrato", "Pendente", "Split, liberação em lote, dispatch, backflush por operação, labor detalhado e subcontratação."],
+      ["Repetitivo + planejamento", "18.x · 22.x · 23.x (MRP)", "Futuro", "Manufatura repetitiva e MRP/forecast fora do escopo atual; base de fórmula/MRP-propagation já iniciada."]
     ];
 
+    // Pré-requisitos 13·14·15
     const prereq = [
       { g: "13 · Estrutura de Produto (BOM)" },
       ["13.1", "Product Structure Code Maintenance", "Cria um código de BOM/Fórmula distinto do item.", "ps_mstr → bom_master", "Implementado", "BomStructureEntity (bom_master) + BomStructureService."],
       ["13.5", "Product Structure Maintenance", "Define a estrutura pai/componente (lista de materiais).", "ps_mstr → product_structure", "Implementado", "ProductStructureEntity + ProductStructureService. Fonte da explosão (16.1-B)."],
       { g: "14 · Roteiros / Centros de Trabalho" },
-      ["14.1", "Department Maintenance", "Departamentos de manufatura; contas GL de mão de obra/burden.", "dp_mstr → department", "Implementado", "DepartmentEntity + DepartmentService + DepartmentReportEngine."],
+      ["14.1", "Department Maintenance", "Departamentos de manufatura; contas GL de mão de obra/burden.", "dp_mstr → department", "Implementado", "DepartmentEntity + DepartmentService + ReportEngine."],
       ["14.5", "Work Center Maintenance", "Centros de trabalho e taxas de mão de obra/burden.", "wc_mstr → work_center", "Implementado", "WorkCenterEntity + WorkCenterService + export/filtro."],
       ["14.9", "Standard Operation Maintenance", "Operações-padrão reutilizáveis nos roteiros.", "ro_mstr → standard_operation", "Implementado", "StandardOperationEntity + StandardOperationService + controller."],
-      ["14.13.1", "Routing Maintenance", "Sequência de operações do item (roteiro).", "ro_det → standard_routing", "Implementado", "StandardRoutingEntity + StandardRoutingService."],
+      ["14.13.1", "Routing Maintenance", "Sequência de operações do item (roteiro).", "ro_det → standard_routing", "Implementado", "StandardRoutingEntity + StandardRoutingService. Fonte da explosão (16.1-C)."],
       { g: "15 · Fórmula / Processo (Process Manufacturing)" },
-      ["15.1", "Formula Code Maintenance", "Código de fórmula para manufatura de processo.", "fm_mstr → formula", "Implementado", "FormulaCodeService (módulo formula)."],
-      ["15.5", "Formula Maintenance", "Lista de ingredientes da fórmula (equiv. 13.5 p/ processo).", "fm_det → formula", "Implementado", "FormulaService + ComponentService + OperationDetailService."],
-      ["15.12.1", "Co/By-Product Maintenance", "Co-produtos e subprodutos do processo (joint orders).", "co_mstr → formula", "Implementado", "CoByProductService."],
-      ["15.18", "Process/Formula Maintenance", "Ponto único de entrada de dados de processo.", "fm_mstr/fm_det/ro_det/co_mstr", "Implementado", "ProcessFormulaService (combina fórmula, operações e co-produtos)."]
+      ["15.x", "Formula / Process Maintenance", "Fórmula, ingredientes, co/by-produtos e processo.", "fm_mstr·fm_det·co_mstr → formula", "Implementado", "FormulaService, FormulaCodeService, CoByProductService, ProcessFormulaService (módulo formula)."]
     ];
 
-    const mvp = [
+    // Fase 1 — Ciclo da OP (antes "MVP — Fase 1")
+    const fase1 = [
       { g: "Configuração & Criação" },
       ["16.24", "Work Order Control (Config)", "Registro singleton de configuração da OP (auto-numeração, defaults de variação).", "woc_ctrl → work_order_control", "Implementado", "WorkOrderControlEntity + service + controller (módulo shopfloor)."],
       ["16.1-A", "WO Maintenance — Header", "Cria/edita o cabeçalho da OP (item, site, qtd, datas, conta WIP, status).", "wo_mstr → work_order", "Implementado", "WorkOrderEntity + WorkOrderService (CRUD, status por tipo, releaseDate por lead time, validações 26000–26011, auto-firming, export)."],
-      { g: "Explosão (gatilho status F→E)" },
-      ["16.1-B", "WO Maintenance — BOM Explosion", "Explode a estrutura (ps_mstr) em linhas de componente da OP (wod_det); status → E.", "ps_mstr → work_order_detail (alvo)", "Em andamento", "Branch EV-928: criar entidade de componentes da OP + serviço de explosão lendo ProductStructure (qtyPer, scrap, efetividade). FALTA: entidade/repository, cálculo qty requerida, testes."],
-      ["16.1-C", "WO Maintenance — Routing Explosion", "Copia o roteiro (ro_det) para wr_route e agenda as operações.", "ro_det → wo_routing (alvo)", "Pendente", "FALTA: entidade de roteiro da OP (wr_route) + serviço de explosão de roteiro + agendamento por calendário."],
+      { g: "Explosão (gatilho status F→E/A/R)" },
+      ["16.1-B", "WO Maintenance — BOM Explosion", "Explode a estrutura (ps_mstr) em linhas de componente da OP; congela o snapshot.", "ps_mstr → work_order_component", "Implementado", "WorkOrderComponentEntity + WorkOrderExplosionServiceImpl: phantoms (structureType='X'), scrap, custo congelado, idempotente (delete+insert). Coberto por testes."],
+      ["16.1-C", "WO Maintenance — Routing Explosion", "Copia o roteiro (ro_det) para as operações da OP e calcula custos.", "ro_det → work_order_operation", "Implementado", "WorkOrderOperationEntity + WorkOrderRoutingServiceImpl: cumulative yield, custo de setup/labor/burden congelado (unit + total), subcontrato. Coberto por testes."],
       ["23.10", "Planned WO Approval", "Aprova OPs planejadas (P→F).", "wo_mstr (P→F)", "Parcial", "Auto-firming P→F já existe no updateRecord do WorkOrderService. FALTA: fluxo de aprovação dedicado vindo do MRP."],
-      { g: "Pré-liberação & Liberação" },
-      ["16.8", "Multiple WO Status Change", "Orquestra o ciclo de status F→E→A (e R).", "wo_mstr, wod_det, lad_det, wr_route", "Pendente", "FALTA: serviço de transição de status em lote + alocação (lad_det)."],
-      ["16.5", "WO Component Check", "Check de disponibilidade pré-liberação (relatório de falta).", "wod_det, lad_det, tr_hist", "Implementado", "Consulta de saldo x demanda por componente implementada (relatório de falta pré-liberação)."],
-      ["16.6", "WO Release / Print", "Libera a OP ao chão de fábrica (A→R), finaliza picks, imprime docs.", "wo_mstr (A→R), lad_det, wr_route", "Pendente", "FALTA: serviço de liberação + relatório (lista de separação/roteiro) via ReportFramework/RabbitMQ."],
-      ["16.13.1", "WO Bill Maintenance", "Ajustes manuais no BOM da OP após explosão.", "wod_det, lad_det", "Pendente", "Depende da entidade de componentes (16.1-B)."],
-      { g: "Execução — material e mão de obra" },
-      ["16.10", "WO Component Issue", "Baixa componentes do estoque p/ WIP (débito WIP / crédito estoque).", "tr_hist (ISS-WO), wod_det, glt_det", "Em andamento", "FALTA: integração com inventário (movimento) e GL; validação de saldo (espelhar erro 'qtd 0' do QAD)."],
-      ["17.1", "Labor Feedback by WO", "Aponta mão de obra/qtd por operação.", "op_hist, wr_route, glt_det", "Pendente", "Só existe ShopFloorControl (config). FALTA: entidade de apontamento + custeio de mão de obra."],
-      ["17.5", "Operation Complete", "Encerra operação do roteiro (sai da fila).", "op_hist, wr_route (→C)", "Pendente", "Depende de 16.1-C e 17.1."],
-      { g: "Recebimento & Encerramento" },
-      ["16.11", "WO Receipt", "Recebe o produto acabado no estoque (atualiza qtd concluída).", "tr_hist (RCT-WO), wo_mstr, lad_det", "Pendente", "FALTA: serviço de recebimento + movimento de estoque + atualização quantity_completed."],
-      ["16.12", "WO Receipt + Backflush", "Recebimento + baixa automática dos componentes.", "tr_hist (RCT+ISS), wod_det, wo_mstr", "Pendente", "Depende de 16.10 e 16.11 (backflush combinado)."],
-      ["16.21", "WO Accounting Close", "Calcula variações, zera WIP e trava a OP.", "wo_mstr (acct_close), op_hist, glt_det", "Pendente", "Trava acct_close já existe (msg 26008). FALTA: cálculo/lançamento das variações (504999/504001/611001/5070/50721) e zeragem do WIP."]
+      { g: "Status & checagem (pré-liberação)" },
+      ["16.8", "WO Status Change", "Orquestra o ciclo de status (F→E→A→R→C) com regras de transição.", "wo_mstr, work_order_component, work_order_operation", "Implementado", "changeStatus() com FSM ALLOWED_TRANSITIONS (P→F/B, F→E/A/R, E→A, A→R, R→C); dispara explosão; bloqueia se acctClose. Testado."],
+      ["16.5", "WO Component Check", "Check de disponibilidade pré-liberação (relatório de falta).", "work_order_component, inventário", "Implementado", "componentCheck() + GET /component-check: qtyOpen = qtyRequired−qtyIssued vs disponível; status 1=emitido, 2=disponível, 3=falta projetada, 4=falta."]
     ];
 
-    const fase23 = [
-      { g: "Fase 2 — Operações avançadas (pode ser adiada sem quebrar o core)" },
-      ["16.7", "Multiple WO Release (Batch)", "Liberação de várias OPs em lote.", "wo_mstr, lad_det, wr_route", "Pendente", "Depende de 16.6."],
-      ["16.9", "Work Order Split", "Divide uma OP liberada em duas.", "wo_mstr, wod_det, wr_route", "Pendente", "—"],
-      ["16.18", "Dispatch Report (API)", "Operações abertas por centro de trabalho (visão de chão de fábrica).", "wr_route, wo_mstr, wc_mstr", "Pendente", "Depende de 16.1-C."],
-      ["16.19", "WO Operation Backflush", "Baixa + apontamento + recebimento por operação em uma transação.", "tr_hist, op_hist, wod_det, glt_det", "Pendente", "Depende de 16.10/17.1/16.11."],
-      ["17.2-4", "Labor por Funcionário / Centro / Downtime", "Apontamento alternativo e tempos não produtivos (OEE).", "op_hist, wr_route, em_mstr", "Pendente", "Depende de 17.1."],
-      ["Subcont", "Subcontract Operations (PO)", "Operações terceirizadas integradas a Pedido de Compra.", "wr_route (sub), po_mstr, po_det", "Pendente", "Campo vendor_code já existe na WorkOrder; falta integração com PO."],
-      { g: "Fase 3 — Repetitivo (Menu 18) + Planejamento (22 · 23)" },
-      ["18.22.x", "Advanced Repetitive (linhas, schedules, backflush)", "Manufatura repetitiva de alto volume por linha.", "pl_mstr, rs_mstr, op_hist, wo(C)", "Futuro", "Fora do escopo atual."],
+    // Fase 2 — Execução no chão de fábrica (transações só a partir de Released, como no QAD)
+    const fase2 = [
+      { g: "Liberação & ajuste do BOM" },
+      ["16.6", "WO Release / Print", "Libera a OP ao chão de fábrica (A→R), finaliza picks, imprime docs.", "wo_mstr (A→R), lad_det, work_order_operation", "Pendente", "FALTA: serviço de liberação + alocação detalhada + relatório (lista de separação/roteiro) via ReportFramework/RabbitMQ."],
+      ["16.13.1", "WO Bill Maintenance", "Ajustes manuais no BOM da OP após explosão (permitido até a baixa).", "work_order_component", "Pendente", "Leitura do BOM da OP já existe (GET /bom). FALTA: edição manual de linhas (add/remove/alterar)."],
+      { g: "Execução — material e mão de obra" },
+      ["16.10", "WO Component Issue", "Baixa componentes do estoque p/ WIP (débito WIP / crédito estoque).", "tr_hist (ISS-WO), work_order_component, glt_det", "Pendente", "FALTA: integração com inventário (movimento) e GL; atualização de qtyIssued; validação de saldo."],
+      ["17.1", "Labor Feedback by WO", "Aponta mão de obra/qtd por operação.", "op_hist, work_order_operation, glt_det", "Pendente", "Campos setupTimeReported/runTimeReported existem na operação. FALTA: entidade/serviço de apontamento + custeio."],
+      ["17.5", "Operation Complete", "Encerra operação do roteiro (sai da fila).", "op_hist, work_order_operation (→C)", "Pendente", "Depende de 17.1."],
+      { g: "Recebimento & Encerramento" },
+      ["16.11", "WO Receipt", "Recebe o produto acabado no estoque (atualiza qtd concluída).", "tr_hist (RCT-WO), wo_mstr, lad_det", "Pendente", "Campos quantityCompleted/Rejected existem. FALTA: serviço de recebimento + movimento de estoque."],
+      ["16.12", "WO Receipt + Backflush", "Recebimento + baixa automática dos componentes.", "tr_hist (RCT+ISS), work_order_component", "Pendente", "Depende de 16.10 e 16.11 (backflush combinado)."],
+      ["16.21", "WO Accounting Close", "Calcula variações, zera WIP e trava a OP.", "wo_mstr (acct_close), op_hist, glt_det", "Parcial", "Trava acctClose e guardas (msg 26008) já existem. FALTA: cálculo/lançamento das variações (material/labor/burden) e zeragem do WIP."]
+    ];
+
+    // Fase 3 — Operações avançadas + Repetitivo/Planejamento
+    const fase3 = [
+      { g: "Operações avançadas (estendem o ciclo, sem bloquear o core)" },
+      ["16.7", "Multiple WO Release (Batch)", "Liberação de várias OPs em lote.", "wo_mstr, lad_det, work_order_operation", "Pendente", "Depende de 16.6."],
+      ["16.9", "Work Order Split", "Divide uma OP liberada em duas.", "wo_mstr, work_order_component, work_order_operation", "Pendente", "—"],
+      ["16.18", "Dispatch Report (API)", "Operações abertas por centro de trabalho (visão de chão de fábrica).", "work_order_operation, wo_mstr, wc_mstr", "Pendente", "Base pronta: operações já são explodidas (16.1-C)."],
+      ["16.19", "WO Operation Backflush", "Baixa + apontamento + recebimento por operação em uma transação.", "tr_hist, op_hist, work_order_component, glt_det", "Pendente", "Depende de 16.10/17.1/16.11."],
+      ["17.2-4", "Labor por Funcionário / Centro / Downtime", "Apontamento alternativo e tempos não produtivos (OEE).", "op_hist, work_order_operation, em_mstr", "Pendente", "Depende de 17.1."],
+      ["Subcont", "Subcontract Operations (PO)", "Operações terceirizadas integradas a Pedido de Compra.", "work_order_operation (sub), po_mstr, po_det", "Pendente", "Operação já trata subcontrato no custeio (isSubcontract, vendorCode, subcontractCost). FALTA: integração com PO."],
+      { g: "Repetitivo (Menu 18) + Planejamento (22 · 23)" },
+      ["18.x", "Advanced Repetitive (linhas, schedules, backflush)", "Manufatura repetitiva de alto volume por linha.", "pl_mstr, rs_mstr, op_hist", "Futuro", "Fora do escopo atual."],
       ["22.x", "Forecast / Master Schedule", "Previsão de demanda e plano-mestre.", "fc_mstr, mps_mstr", "Futuro", "Fora do escopo atual."],
       ["23.x", "MRP / Demand Planning", "Planejamento de necessidades de materiais.", "mrp_det, msg_det, wo_mstr(P)", "Futuro", "Base iniciada: BomMrpPropagationService no módulo formula."]
     ];
 
+    // Modelo de dados
     const datamodel = [
       ["pt_mstr", "ItemMasterEntity", "item_master", "inventory", "Implementado"],
       ["bom_mstr", "BomStructureEntity", "bom_master", "productstructure", "Implementado"],
@@ -1765,134 +1063,264 @@
       ["ro_mstr", "StandardOperationEntity", "standard_operation", "production", "Implementado"],
       ["ro_det", "StandardRoutingEntity", "standard_routing", "production", "Implementado"],
       ["fm_mstr / fm_det", "FormulaService / FormulaCodeService", "formula", "formula", "Implementado"],
-      ["co_mstr", "CoByProductService", "formula (co/by)", "formula", "Implementado"],
       ["woc_ctrl", "WorkOrderControlEntity", "work_order_control", "shopfloor", "Implementado"],
       ["wo_mstr", "WorkOrderEntity", "work_order", "production", "Implementado"],
-      ["wod_det", "WorkOrderComponent (alvo)", "work_order_detail", "production", "Em andamento"],
-      ["wr_route", "WO Routing (alvo)", "wo_routing", "production", "Pendente"],
+      ["wod_det", "WorkOrderComponentEntity", "work_order_component", "production", "Implementado"],
+      ["wr_route", "WorkOrderOperationEntity", "work_order_operation", "production", "Implementado"],
       ["lad_det", "Lot Allocation (alvo)", "lot_allocation", "inventory", "Pendente"],
       ["tr_hist", "Inventory Transaction (alvo)", "inventory_trans", "inventory", "Pendente"],
       ["op_hist", "SFC Operation (alvo)", "sfc_operation", "shopfloor", "Pendente"],
       ["glt_det", "GL Transaction", "gl_transaction", "generalledger", "Parcial"]
     ];
 
-    // ---- ENTITY RELATIONS ----
-    const relentidades = [
-      { g: "Work Order — ligações criadas no momento de criação da OP" },
-      ["WorkOrderEntity", "work_order", "item_id (FK)", "ItemMasterEntity", "Criação", "Item sendo produzido. Lê standardCost, uom e product_line. Congelado após status E."],
-      ["WorkOrderEntity", "work_order", "site_id (FK)", "SiteEntity", "Criação", "Site de produção. Congelado após status E."],
-      ["WorkOrderEntity", "work_order", "wip_account_id (FK)", "AccountEntity", "Criação", "Conta WIP para acumulação contábil. Deve ser zerada antes do acctClose."],
-      ["WorkOrderEntity", "work_order", "projectCode", "SalesOrderEntity / ProjectMasterEntity", "Criação — demanda SO", "Referência ao pedido de venda ou projeto que gerou a OP."],
-      ["WorkOrderEntity", "work_order", "bomCode", "BomStructureEntity", "Explosão BOM (16.1-B)", "Referência natural ao BOM a explodir. Congelado após status E."],
-      ["WorkOrderEntity", "work_order", "routingCode", "StandardRoutingEntity", "Explosão Routing (16.1-C)", "Referência natural ao roteiro a copiar. Congelado após status E."],
-      { g: "BOM — cadeia lida durante a explosão 16.1-B" },
-      ["BomStructureEntity", "bom_master", "bomCode = WO.bomCode", "WorkOrderEntity", "Explosão BOM", "Cabeçalho: batchSize, uom, backflushMthd, qtyCompleteMthd."],
-      ["ProductStructureEntity", "product_structure", "parentItem_id (FK)", "BomStructureEntity", "Explosão BOM", "Componentes filtrados por startEffective / endEffective <= releaseDate."],
-      ["ProductStructureEntity", "product_structure", "componentItem (código)", "ItemMasterEntity", "Explosão BOM", "Valida existência, lê uom para conversão de quantidade."],
-      ["ProductStructureEntity", "product_structure", "operationCode", "StandardRoutingEntity.operationNumber", "Backflush 16.12", "Vínculo crítico: define qual operação do roteiro consome cada componente."],
-      { g: "Roteiro — cadeia lida durante a explosão 16.1-C" },
-      ["StandardRoutingEntity", "standard_routing", "routingCode = WO.routingCode", "WorkOrderEntity", "Explosão Routing", "Operações filtradas por effectiveStartDate / EndDate."],
-      ["StandardRoutingEntity", "standard_routing", "work_center_id (FK)", "WorkCenterEntity", "Custeio de operações", "Lê laborRate, setupRate, laborBurdenRate, machineBurdenRate."],
-      ["StandardRoutingEntity", "standard_routing", "standard_operation_id (FK)", "StandardOperationEntity", "Custeio de operações", "Tempos default (setupTime/runTime) quando a linha do roteiro não sobrescreve."],
-      ["WorkCenterEntity", "work_center", "department_id (FK)", "DepartmentEntity", "Custeio e GL", "Contas GL: laborAccountCode, laborUseVarAccountCode, burdenRateVarAccountCode."],
-      { g: "Custeio e GL — usados na execução e no fechamento" },
-      ["ItemMasterEntity", "item_master", "product_line_id (FK)", "ProductLineEntity", "Custeio e fechamento", "Lê workInProcessAcct, costOfGoodsAcct, scrapAcct para os lançamentos GL."],
-      ["TransactionHistoryEntity", "transaction_history", "item_id / site_id (FK)", "ItemMasterEntity / SiteEntity", "Baixas e recebimentos (16.10 / 16.11)", "Cada movimento (ISS-WO, RCT-WO) gera uma linha de transaction_history."],
-      ["TransactionGlDetailEntity", "transaction_gldetail", "transaction_history_id (FK)", "TransactionHistoryEntity", "Baixas e recebimentos", "Débitos/créditos GL por movement code (WIP, inventário, COGS)."],
-      { g: "⚠  Entidades a criar — cada uma bloqueia as rotinas indicadas" },
-      ["WorkOrderComponent  ⚠", "work_order_detail", "work_order_id (FK)", "WorkOrderEntity", "16.1-B — em andamento", "Cópia congelada dos componentes do BOM. Campos essenciais: componentItem, qtyRequired, qtyIssued, scrapPercent, operationCode, uom."],
-      ["WorkOrderOperation  ⚠", "wo_routing", "work_order_id (FK)", "WorkOrderEntity", "16.1-C — pendente", "Cópia congelada das operações do roteiro. Campos: operationNumber, workCenter, setupTime, runTime, qtyCompleted, status."],
-      ["LotAllocation  ⚠", "lot_allocation", "work_order_id (FK)", "WorkOrderEntity", "16.8 / 16.6 — pendente", "Alocação de lote/série para componentes antes da liberação. Depende de WorkOrderComponent."],
-      ["InventoryTransaction  ⚠", "inventory_trans", "work_order_id (FK)", "WorkOrderEntity", "16.10 / 16.11 — pendente", "Movimentos (ISS-WO, RCT-WO). Alimenta TransactionHistory e TransactionGlDetail."],
-      ["SFCOperation  ⚠", "sfc_operation", "work_order_id (FK)", "WorkOrderEntity", "17.1 — pendente", "Apontamento de mão de obra por operação. Depende de WorkOrderOperation."]
-    ];
-
-    // ---- FREEZE MAP ----
-    const freezemap = [
-      { g: "Congelam no status E (Exploded) — ponto de freeze do BOM e Roteiro" },
-      ["bomCode", "E", "Permanente após E", "BOM fixo após explosão ter gerado work_order_detail. Troca exigiria re-explosão completa."],
-      ["routingCode", "E", "Permanente após E", "Roteiro fixo após cópia das operações em wo_routing. Alteração invalidaria tempos e custos planejados."],
-      ["item (item_id)", "E", "Permanente após E", "Item fixo após explosão; troca exigiria recalcular todos os componentes e operações."],
-      ["site (site_id)", "E", "Permanente após E", "Site fixo; movimentos de inventário e conta WIP já vinculados ao site original."],
-      { g: "Congelam no status C (Closed) — editáveis entre E e C" },
-      ["quantityOrdered", "C", "Livre de E até C", "Permite ajuste para recuperação de scrap até o fechamento da OP."],
-      ["dueDate", "C", "Livre de E até C", "Permite reprogramação enquanto a OP ainda está em aberto."],
-      { g: "acctClose = true — freeze contábil total (acionado pelo 16.21)" },
-      ["Todos os campos", "acctClose", "Permanente e irreversível", "Trava total. Pré-condição: status = C e wipTotal = 0. Nenhuma atualização ou deleção é permitida após isso."],
-      { g: "Sempre livres (sem freeze de status)" },
-      ["remarks", "—", "Sempre editável", "Observações; sem impacto em custo ou inventário."],
-      ["vendorCode", "Até E", "Livre até E", "Necessário para OPs de subcontrato. Congela junto com os demais campos no status E."]
-    ];
-
     const legend = [
       ["Implementado", "Código pronto, testado e versionado no repositório."],
-      ["Em andamento", "Em desenvolvimento na branch atual (EV-928-16.1-B-Work-Order-BOM)."],
       ["Parcial", "Existe parte da lógica, mas o fluxo dedicado ainda não está completo."],
       ["Pendente", "Ainda não iniciado — próximo passo do roadmap."],
       ["Futuro", "Fora do escopo desta fase do módulo."]
     ];
 
-    // ---- STATUS FLOW ----
+    // Ciclo de status da OP
     const statusFlow = [
       { code: "P", name: "Planned", desc: "Criada pelo MRP", cls: "fn-impl" },
-      { code: "F", name: "Firm", desc: "Aprovada", cls: "fn-impl" },
-      { code: "B", name: "Batch", desc: "Explosão agendada", cls: "fn-impl" },
-      { code: "E", name: "Exploded", desc: "BOM + Routing congelados", cls: "fn-freeze", freeze: true },
-      { code: "A", name: "Allocated", desc: "Componentes alocados", cls: "fn-pend" },
+      { code: "F", name: "Firm", desc: "Aprovada / firme", cls: "fn-impl" },
+      { code: "B", name: "Batch", desc: "Entrada em lote", cls: "fn-impl" },
+      { code: "E", name: "Exploded", desc: "BOM + Roteiro congelados", cls: "fn-freeze", freeze: true },
+      { code: "A", name: "Allocated", desc: "Componentes alocados", cls: "fn-impl" },
       { code: "R", name: "Released", desc: "No chão de fábrica", cls: "fn-pend" },
-      { code: "W", name: "Written Off", desc: "Baixa por perda", cls: "fn-pend" },
-      { code: "C", name: "Closed", desc: "Recebimento completo", cls: "fn-pend" },
-      { code: "★", name: "acctClose", desc: "Fechamento contábil", cls: "fn-freeze", freeze: true }
+      { code: "C", name: "Closed", desc: "Recebimento completo", cls: "fn-pend" }
     ];
 
-    // ---- KPIs ----
-    const mvpRows = mvp.filter(r => Array.isArray(r));
-    const counts = {}; S.forEach(s => counts[s] = 0);
-    mvpRows.forEach(r => { counts[r[4]] = (counts[r[4]] || 0) + 1 });
-    const total = mvpRows.length;
-    const missingEntities = relentidades.filter(r => Array.isArray(r) && r[0].includes('⚠')).length;
+    // O que consigo fazer — capacidades por fase (Negócio / Técnico)
+    const fases = [
+      {
+        num: "1", numCls: "ph-n1", icon: "ico-done",
+        name: "Fase 1 — Criação e Engenharia da OP",
+        desc: "Criação da ordem, explosão de BOM e roteiro, regras de status e checagem de componentes.",
+        pill: "psp-done", pillLabel: "Concluída",
+        rotinas: "16.24 · 16.1-A · 16.1-B · 16.1-C · 16.8 · 16.5",
+        caps: [
+          {
+            title: "Criar a Ordem de Produção",
+            neg: "Registrar uma nova ordem para fabricar um item: o que produzir, onde, quanto e para quando.",
+            tec: "WorkOrderEntity + WorkOrderService.createRecord: item, site, BOM, roteiro, conta WIP, datas e tipo; validações 26000–26011; status inicial por tipo; releaseDate calculado por lead time."
+          },
+          {
+            title: "Explodir o BOM (F→E)",
+            neg: "Gerar automaticamente a lista de materiais própria da ordem, com a quantidade exata de cada componente — já considerando perdas (scrap).",
+            tec: "WorkOrderExplosionServiceImpl.explodeBom(): copia product_structure → work_order_component, calcula qtyRequired com scrap, expande phantoms (structureType='X') e congela stdCost. Idempotente (delete+insert)."
+          },
+          {
+            title: "Explodir o Roteiro (16.1-C)",
+            neg: "Gerar a sequência de operações da ordem — em quais centros de trabalho e com quais tempos — já pronta para custeio.",
+            tec: "WorkOrderRoutingServiceImpl.copyRouting(): standard_routing → work_order_operation com cumulative yield; congela custo de setup/labor/burden (unit + total); trata operações de subcontrato."
+          },
+          {
+            title: "Comportamento por tipo de OP",
+            neg: "Cada tipo de ordem se comporta corretamente: retrabalho, despesa e montagem final.",
+            tec: "Rework (R) → linha única com o próprio item; Expense (E) → sem componentes/roteiro; FAS (F) → explode BOM. Guards por tipo no createRecord e changeStatus."
+          },
+          {
+            title: "Avançar status com regras (FSM)",
+            neg: "Mover a ordem pelas etapas (Firme → Explodida → Alocada → Liberada → Fechada) sem pular passos inválidos.",
+            tec: "changeStatus() com ALLOWED_TRANSITIONS (P→F/B, F→E/A/R, E→A, A→R, R→C); dispara explosão em F→{E,A,R}; bloqueia alterações se acctClose=true."
+          },
+          {
+            title: "Checar disponibilidade de componentes (16.5)",
+            neg: "Ver, antes de liberar, se há material suficiente em estoque para atender a ordem.",
+            tec: "componentCheck() + GET /api/work-orders/{id}/component-check: qtyOpen = qtyRequired−qtyIssued comparado ao disponível; retorna status 1=emitido, 2=disponível, 3=falta projetada, 4=falta."
+          },
+          {
+            title: "Proteger a ordem após a explosão",
+            neg: "Depois de explodida, a ordem fica protegida: item, BOM e roteiro não mudam mais por engano.",
+            tec: "isStatusExplodedOrHigher(): item/site/bomCode/routingCode ficam imutáveis a partir de E (msg 26005). quantityOrdered e dueDate permanecem livres até C (msg 26011)."
+          },
+          {
+            title: "Consultar BOM e roteiro da OP via API",
+            neg: "Listar a qualquer momento os componentes e as operações congelados da ordem.",
+            tec: "GET /api/work-orders/{id}/bom (WorkOrderBomController) e /api/work-orders/{id}/routing (WorkOrderRoutingController)."
+          }
+        ],
+        blocks: [
+          { title: "Baixa de componentes no estoque (16.10)", note: "Movimento ISS-WO e lançamentos GL — Fase 2." },
+          { title: "Apontamento de mão de obra (17.1)", note: "Labor feedback por operação — Fase 2." },
+          { title: "Recebimento do produto acabado (16.11/16.12)", note: "RCT-WO e backflush — Fase 2." },
+          { title: "Fechamento contábil da OP (16.21)", note: "Cálculo de variações e zeragem de WIP — Fase 2." }
+        ],
+        footer: "Ciclo de <b>engenharia e planejamento da OP completo</b>: o sistema sabe o que produzir, com quais componentes, em quais operações e quanto custa — com snapshot congelado e rastreável."
+      },
+      {
+        num: "2", numCls: "ph-n2", icon: "ico-plan",
+        name: "Fase 2 — Execução no Chão de Fábrica",
+        desc: "Liberação da ordem, baixa de material, apontamento de mão de obra, recebimento e fechamento contábil.",
+        pill: "psp-next", pillLabel: "Próxima fase",
+        rotinas: "16.6 · 16.10 · 16.11 · 16.12 · 16.13.1 · 17.1 · 16.21",
+        caps: [
+          {
+            title: "Liberar a OP ao chão de fábrica (16.6)",
+            neg: "Soltar a ordem para produção, gerar a lista de separação e travar o roteiro.",
+            tec: "Status A→R: alocação detalhada (lot_allocation), impressão de picklist/roteiro via ReportFramework/RabbitMQ, bloqueio quando há falta de item-chave."
+          },
+          {
+            title: "Baixar componentes para o WIP (16.10)",
+            neg: "Consumir o material do estoque, transferindo-o para a ordem em produção.",
+            tec: "Movimento ISS-WO: débita WIP, credita estoque; atualiza qtyIssued na linha; gera lançamentos no Razão (glt_det)."
+          },
+          {
+            title: "Apontar mão de obra por operação (17.1)",
+            neg: "Registrar as horas e quantidades trabalhadas em cada operação da ordem.",
+            tec: "op_hist + work_order_operation: acumula custo de mão de obra e burden no WIP; preenche setupTimeReported/runTimeReported."
+          },
+          {
+            title: "Receber o produto acabado (16.11)",
+            neg: "Dar entrada no estoque do que foi efetivamente produzido.",
+            tec: "Movimento RCT-WO: atualiza quantityCompleted, credita WIP e débita o estoque de produto acabado."
+          },
+          {
+            title: "Backflush — recebimento + baixa automática (16.12)",
+            neg: "Receber o produto e baixar os componentes de uma só vez, automaticamente.",
+            tec: "Combina RCT-WO + ISS-WO em uma transação; explode o BOM pela quantidade recebida, descontando o já emitido."
+          },
+          {
+            title: "Ajustar componentes da OP manualmente (16.13.1)",
+            neg: "Adicionar, remover ou alterar componentes da ordem após a explosão, antes da baixa.",
+            tec: "Edição das linhas de work_order_component (add/remove/update) preservando o snapshot congelado dos demais campos."
+          },
+          {
+            title: "Fechar a OP contabilmente (16.21)",
+            neg: "Apurar o custo real da ordem, calcular as diferenças e encerrá-la.",
+            tec: "Calcula variações (material, mão de obra, burden), zera o WIP e trava acctClose. Pré-condição: status=C e WIP=0."
+          }
+        ],
+        blocks: [
+          { title: "Liberação em lote (16.7) e Split de OP (16.9)", note: "Fase 3." },
+          { title: "Labor por funcionário / downtime / OEE (17.2-4)", note: "Fase 3." },
+          { title: "Subcontratação integrada ao PO", note: "Fase 3." },
+          { title: "Manufatura repetitiva / MRP", note: "Fase futura." }
+        ],
+        footer: "Ao fim da Fase 2 o <b>ciclo ponta a ponta da OP está completo</b>: da criação ao fechamento contábil, com rastreabilidade de material, mão de obra e variações."
+      },
+      {
+        num: "3", numCls: "ph-n3", icon: "ico-plan",
+        name: "Fase 3 — Operações Avançadas",
+        desc: "Split, liberação em lote, dispatch por centro, backflush por operação, labor detalhado e subcontratação.",
+        pill: "psp-later", pillLabel: "Fase futura",
+        rotinas: "16.7 · 16.9 · 16.18 · 16.19 · 17.2-4 · subcontrato",
+        caps: [
+          {
+            title: "Liberar múltiplas OPs em lote (16.7)",
+            neg: "Selecionar várias ordens elegíveis e liberá-las de uma só vez.",
+            tec: "Processo em massa que avança o status de um conjunto de OPs aplicando as mesmas regras de 16.6."
+          },
+          {
+            title: "Dividir uma OP liberada (16.9)",
+            neg: "Quebrar uma ordem em duas, redistribuindo quantidade e componentes.",
+            tec: "Split de work_order com redistribuição proporcional de work_order_component e work_order_operation."
+          },
+          {
+            title: "Dispatch — fila por centro de trabalho (16.18)",
+            neg: "Ver, em tempo real, as operações abertas em cada centro de trabalho para sequenciar a produção.",
+            tec: "Consulta sobre work_order_operation por centro; base já existe pois as operações são explodidas em 16.1-C."
+          },
+          {
+            title: "Backflush por operação (16.19)",
+            neg: "Baixar material, apontar mão de obra e receber parcial vinculados a uma operação específica.",
+            tec: "Transação combinada por operação do roteiro (op_hist + tr_hist + work_order_component)."
+          },
+          {
+            title: "Labor por funcionário, centro e downtime (17.2-4)",
+            neg: "Registrar apontamentos alternativos e tempos não produtivos (base para OEE).",
+            tec: "Apontamentos vinculados a em_mstr e a tempos de parada sobre work_order_operation."
+          },
+          {
+            title: "Subcontratação integrada ao PO",
+            neg: "Operações terceirizadas geram e consomem Pedido de Compra automaticamente.",
+            tec: "A operação já trata subcontrato no custeio (isSubcontract, vendorCode, subcontractCost); falta gerar/consumir po_mstr/po_det."
+          }
+        ],
+        blocks: [
+          { title: "Manufatura repetitiva (18.x)", note: "Alto volume por linha — fase futura." },
+          { title: "MRP e Forecast (22.x / 23.x)", note: "Geração automática de OPs a partir da demanda — fase futura." }
+        ],
+        footer: "Ao fim da Fase 3 o módulo atende <b>operações discretas complexas</b>: subcontratação, rastreabilidade por operação e gestão de capacidade por centro de trabalho."
+      },
+      {
+        num: "✓", numCls: "ph-n4", icon: "ico-plan",
+        name: "Módulo Completo — Manufatura HERA",
+        desc: "Ciclo discreto completo + manufatura repetitiva + planejamento integrado (MRP/Forecast).",
+        pill: "psp-future", pillLabel: "Visão de longo prazo",
+        rotinas: "18.x · 22.x · 23.x · integração SO/PO/GL",
+        caps: [
+          {
+            title: "Manufatura repetitiva por linha (18.x)",
+            neg: "Produzir em alto volume por linha, com schedules e backflush por linha.",
+            tec: "Schedules de produção, backflush por linha e rastreabilidade de lote/série em alto volume."
+          },
+          {
+            title: "Plano-mestre de produção — MPS (22.x)",
+            neg: "Prever a demanda e nivelar a capacidade antes do planejamento de materiais.",
+            tec: "Forecast de demanda e MPS como entrada para o MRP."
+          },
+          {
+            title: "MRP — Planejamento de necessidades (23.x)",
+            neg: "Gerar automaticamente ordens planejadas e sugestões de compra a partir da demanda.",
+            tec: "Geração de OPs planejadas (status P) e sugestões a partir do BOM e dos pedidos de venda. Base BomMrpPropagationService já iniciada."
+          },
+          {
+            title: "Integração SO → OP → PO completa",
+            neg: "O pedido de venda gera a ordem; a ordem gera as compras; tudo encerra de forma sincronizada.",
+            tec: "Encadeamento entre sales order, work order e purchase order com fechamento conciliado."
+          },
+          {
+            title: "Rastreabilidade completa de custo",
+            neg: "Acompanhar todas as diferenças de custo conciliadas com a contabilidade.",
+            tec: "Variações de material, mão de obra, burden e subcontratação conciliadas com o Razão Geral (glt_det)."
+          },
+          {
+            title: "Paridade com QAD 2008 SE",
+            neg: "Cobrir, no HERA, tudo o que o QAD fazia no ciclo de manufatura.",
+            tec: "Todos os menus 13–18 · 22 · 23 mapeados e implementados, com arquitetura moderna (REST, multi-tenant, snapshot congelado)."
+          }
+        ],
+        blocks: [],
+        footer: "Com o módulo completo o HERA entrega <b>paridade funcional com o QAD 2008 SE</b> no ciclo de manufatura, com arquitetura moderna e rastreabilidade GL ponta a ponta."
+      }
+    ];
 
-    const kpiDefs = [["impl", "Implementado"], ["and", "Em andamento"], ["parc", "Parcial"], ["pend", "Pendente"]];
+    /* ════════ KPIs / progresso (ciclo da OP = Fase 1 + Fase 2) ════════ */
+    const coreRows = [...fase1, ...fase2].filter(r => Array.isArray(r));
+    const counts = {}; S.forEach(s => counts[s] = 0);
+    coreRows.forEach(r => { counts[r[4]] = (counts[r[4]] || 0) + 1; });
+    const total = coreRows.length;
+    const doneEquiv = counts["Implementado"] + counts["Parcial"] * 0.5;
+    const pctDone = Math.round(doneEquiv / total * 100);
+
+    const kpiDefs = [["impl", "Implementado"], ["parc", "Parcial"], ["pend", "Pendente"]];
     document.getElementById("kpis").innerHTML =
-      kpiDefs.map(([c, s]) => `<div class="kpi ${c}"><div class="bar"></div><div class="num">${counts[s]}</div><div class="lbl">${s}</div></div>`).join("")
-      + `<div class="kpi tot"><div class="bar"></div><div class="num">${total}</div><div class="lbl">Rotinas MVP Fase 1</div></div>`
-      + `<div class="kpi miss"><div class="bar"></div><div class="num">${missingEntities}</div><div class="lbl">Entidades a criar</div></div>`;
+      kpiDefs.map(([c, s]) => `<div class="kpi ${c}"><div class="bar"></div><div class="num" data-count="${counts[s]}">0</div><div class="lbl">${s}</div></div>`).join("")
+      + `<div class="kpi tot"><div class="bar"></div><div class="num" data-count="${pctDone}" data-suffix="%">0</div><div class="lbl">Progresso do ciclo da OP</div></div>`;
 
     const pct = n => total ? (n / total * 100) : 0;
-    const seg = (n, c, s) => n ? `<span class="${c}" style="width:${pct(n)}%" title="${s}: ${n}">${pct(n) >= 9 ? Math.round(pct(n)) + '%' : ''}</span>` : "";
+    const seg = (n, c, s) => n ? `<span class="${c}" data-w="${pct(n)}" title="${s}: ${n}">${pct(n) >= 9 ? Math.round(pct(n)) + '%' : ''}</span>` : "";
     document.getElementById("progress").innerHTML =
-      seg(counts["Implementado"], "pi", "Implementado") + seg(counts["Em andamento"], "pa", "Em andamento") +
-      seg(counts["Parcial"], "pp", "Parcial") + seg(counts["Pendente"], "pe", "Pendente");
+      seg(counts["Implementado"], "pi", "Implementado") +
+      seg(counts["Parcial"], "pp", "Parcial") +
+      seg(counts["Pendente"], "pe", "Pendente");
+    document.getElementById("progressCap").textContent =
+      `Ciclo da Ordem de Produção (Fase 1 + Fase 2) · ${total} rotinas · ${counts["Implementado"]} implementadas, ${counts["Parcial"]} parciais, ${counts["Pendente"]} pendentes. Fase 3 (avançado) e repetitivo/MRP fora desta contagem.`;
 
-    // ---- HELPERS ----
-    function phaseBadge(p) {
-      if (!p) return "";
-      let c = "ph-criacao";
-      if (p.includes("BOM")) c = "ph-bom";
-      else if (p.includes("Routing") || p.includes("roteiro")) c = "ph-routing";
-      else if (p.includes("andamento")) c = "ph-andamento";
-      else if (p.includes("pendente") || p.includes("Backflush")) c = "ph-pendente";
-      else if (p.includes("16.10") || p.includes("16.11") || p.includes("16.12") || p.includes("17.")) c = "ph-execucao";
-      else if (p.includes("Custeio") || p.includes("GL") || p.includes("fechamento")) c = "ph-custogl";
-      return `<span class="phase-badge ${c}">${p}</span>`;
-    }
-
-    function freezeTag(s) {
-      if (s === "E") return `<span class="ftag-e">E — Exploded</span>`;
-      if (s === "C") return `<span class="ftag-c">C — Closed</span>`;
-      if (s === "acctClose") return `<span class="ftag-acct">acctClose</span>`;
-      if (s === "—") return `<span class="ftag-free">sem freeze</span>`;
-      if (s === "Até E") return `<span class="ftag-e">Até E</span>`;
-      return `<code style="font-size:11px">${s}</code>`;
-    }
-
+    /* ════════ Builders ════════ */
     function buildFlow() {
       const parts = statusFlow.map((s, i) => {
         const arr = i < statusFlow.length - 1 ? `<span class="flow-arrow">→</span>` : "";
-        const ft = s.freeze ? `<div class="flow-freeze-tag">🔒 FREEZE</div>` : `<div style="height:16px"></div>`;
-        return `<div class="flow-step"><div class="flow-node ${s.cls}">${s.code}</div><div class="flow-name">${s.name}</div><div class="flow-desc">${s.desc}</div>${ft}</div>${arr}`;
+        const tag = s.freeze ? `<div class="flow-tag">🔒 FREEZE</div>` : `<div style="height:15px"></div>`;
+        return `<div class="flow-step"><div class="flow-node ${s.cls}">${s.code}</div><div class="flow-name">${s.name}</div><div class="flow-desc">${s.desc}</div>${tag}</div>${arr}`;
       }).join("");
-      return `<div class="flow-wrap"><div class="flow">${parts}</div></div>`;
+      return `<div class="flow-card reveal">
+        <h4>Ciclo de Status da Ordem de Produção</h4>
+        <p class="sub">FSM implementado (16.8). A explosão de BOM e roteiro e o congelamento dos campos de engenharia ocorrem no status <b>E (Exploded)</b>.</p>
+        <div class="flow">${parts}</div>
+      </div>`;
     }
 
     function buildTable(heads, rows, type) {
@@ -1900,481 +1328,106 @@
       const tbody = rows.map(r => {
         if (r.g) return `<tr class="group"><td colspan="${heads.length}">${r.g}</td></tr>`;
         let tds = "";
-        if (type === "rel") {
-          const miss = r[0].includes('⚠');
-          const nm = miss ? `<span class="entity-missing">${r[0]}</span>` : `<b>${r[0]}</b>`;
-          tds = `<td>${nm}</td><td class="mono" style="font-size:11px">${r[1]}</td><td style="font-family:monospace;font-size:11px;color:#7c3aed">${r[2]}</td><td class="mono" style="font-size:11px">${r[3]}</td><td>${phaseBadge(r[4])}</td><td class="muted" style="font-size:12px">${r[5]}</td>`;
-        } else if (type === "freeze") {
-          tds = `<td style="font-family:monospace;font-size:12px;font-weight:600">${r[0]}</td><td>${freezeTag(r[1])}</td><td class="muted" style="font-size:12px">${r[2]}</td><td class="muted" style="font-size:12px">${r[3]}</td>`;
+        if (type === "ov") {
+          tds = `<td><b>${r[0]}</b></td><td class="cmono">${r[1]}</td><td>${badge(r[2])}</td><td class="muted">${r[3]}</td>`;
+        } else if (type === "full") {
+          tds = `<td class="cmono">${r[0]}</td><td><b>${r[1]}</b></td><td class="muted">${r[2]}</td><td class="cmono">${r[3]}</td><td>${badge(r[4])}</td><td class="falta muted">${fmtFalta(r[5])}</td>`;
+        } else if (type === "dm") {
+          tds = `<td class="cmono">${r[0]}</td><td><b>${r[1]}</b></td><td class="cmono">${r[2]}</td><td class="muted">${r[3]}</td><td>${badge(r[4])}</td>`;
+        } else if (type === "leg") {
+          tds = `<td>${badge(r[0])}</td><td class="muted">${r[1]}</td>`;
         }
-        return `<tr>${tds}</tr>`;
+        const st = type === "ov" ? r[2] : (type === "full" ? r[4] : (type === "dm" ? r[4] : r[0]));
+        return `<tr data-status="${st || ''}">${tds}</tr>`;
       }).join("");
       return `<table><thead><tr>${thead}</tr></thead><tbody>${tbody}</tbody></table>`;
     }
 
-    // ---- BUILD BOM FREEZE PANEL ----
-    function buildBomFreezePanel() {
-
-      // ── Simulation steps ──────────────────────────────────────────────────────
-      const steps = [
-        {
-          num: "1", cls: "sim-sc1",
-          title: "Engenheiro cadastra o BOM",
-          menu: "Menu 13.5 — Product Structure Maintenance",
-          userLines: [
-            { k: "BOM Code", v: '"BIKE-STD"', n: "identificador único do BOM" },
-            { k: "Linha 10", v: "WHEEL  qty=2  scrap=5%", n: "" },
-            { k: "Linha 20", v: "FRAME  qty=1  scrap=0%", n: "" },
-            { k: "Linha 30", v: "BOLT   qty=16 scrap=2%", n: "" },
-            { k: "Efetividade", v: "01/01/2024 → 31/12/2099", n: "vigência de todas as linhas" },
-          ],
-          backLines: [
-            { k: "tabela", v: "product_structure", n: "3 linhas inseridas" },
-            { k: "parent_item", v: "→ bom_master (BIKE-STD)", n: "FK para o cabeçalho do BOM" },
-            { k: "component_item", v: "WHEEL / FRAME / BOLT", n: "código do componente (string)" },
-            { k: "qty_per_component", v: "2 / 1 / 16", n: "qty_per_component" },
-            { k: "scrap_percent", v: "5 / 0 / 2", n: "% perda esperada" },
-            { k: "start_effective", v: "2024-01-01", n: "início da vigência" },
-            { k: "end_effective", v: "2099-12-31", n: "fim da vigência" },
-          ],
-          alert: null,
-          alertWarn: null
-        },
-        {
-          num: "2", cls: "sim-sc2",
-          title: "Planejador cria a Ordem de Produção",
-          menu: "Menu 16.1 — Work Order Maintenance",
-          userLines: [
-            { k: "Número", v: '"WO-2024-001"', n: "workOrderNumber" },
-            { k: "Item", v: '"BIKE-001"', n: "itemCode — o que será produzido" },
-            { k: "Site", v: '"SP01"', n: "siteCode — onde será produzido" },
-            { k: "Quantidade", v: "50 unidades", n: "quantityOrdered" },
-            { k: "Data entrega", v: "30/06/2024", n: "dueDate — obrigatório" },
-            { k: "BOM", v: '"BIKE-STD" (auto)', n: "preenchido do item_master.bomCode" },
-            { k: "Yield", v: "95%", n: "yieldPercent da OP" },
-          ],
-          backLines: [
-            { k: "tabela", v: "work_order", n: "1 linha inserida" },
-            { k: "status", v: '"F" (Firm)', n: "tipo Standard → status inicial F" },
-            { k: "bom_code", v: '"BIKE-STD"', n: "copiado do item_master.bomCode" },
-            { k: "release_date", v: "dueDate − lead_time", n: "calculado automaticamente" },
-            { k: "wip_account", v: "→ product_line.wip_acct", n: "fallback da linha de produto" },
-          ],
-          alert: "work_order_component está VAZIA neste momento. A OP sabe qual BOM usar, mas ainda não criou seus próprios componentes.",
-          alertWarn: null
-        },
-        {
-          num: "3", cls: "sim-sc3",
-          title: "Planejador avança status F → E (Explodir BOM)",
-          menu: "Botão 'Explodir BOM' ou transição de status",
-          userLines: [
-            { k: "Ação", v: "Avançar status para E", n: "ou diretamente para A ou R" },
-            { k: "Efeito visual", v: "Lista de componentes aparece", n: "com qtds calculadas" },
-            { k: "WHEEL", v: "110,8033 un", n: "calculado pela fórmula" },
-            { k: "FRAME", v: "52,6316 un", n: "calculado pela fórmula" },
-            { k: "BOLT", v: "859,2912 un", n: "calculado pela fórmula" },
-          ],
-          backLines: [
-            { k: "1. DELETE", v: "work_order_component WHERE work_order_id = 1001", n: "idempotência" },
-            { k: "2. SELECT", v: "product_structure WHERE bom_code='BIKE-STD' AND data_hoje BETWEEN start/end_effective", n: "efetividade" },
-            { k: "3. CALCULA", v: "qty_req = (qty_per × 1 × 50) ÷ ((1−scrap÷100) × (95÷100))", n: "fórmula" },
-            { k: "4. INSERT", v: "3 linhas em work_order_component", n: "com stdCost snapshot" },
-            { k: "5. UPDATE", v: "work_order SET status = 'E'", n: "congelamento ativado" },
-          ],
-          alert: null,
-          alertWarn: null
-        },
-        {
-          num: "4", cls: "sim-sc4",
-          title: "Engenheiro altera o BOM (depois da explosão)",
-          menu: "Menu 13.5 — Product Structure Maintenance",
-          userLines: [
-            { k: "Ação", v: "Trocar BOLT por BOLT-V2", n: "novo fornecedor" },
-            { k: "end_effective linha 30", v: "ontem", n: "obsoleta" },
-            { k: "nova linha 30", v: "BOLT-V2  qty=16 scrap=1%", n: "start_effective = hoje" },
-          ],
-          backLines: [
-            { k: "product_structure", v: "linhas atualizadas", n: "template genérico alterado" },
-            { k: "work_order_component", v: "NÃO AFETADO", n: "snapshot já congelado" },
-            { k: "WO-2024-001 linha 30", v: "ainda usa BOLT", n: "source_bom_code = 'BIKE-STD', source_bom_line = 30" },
-          ],
-          alert: null,
-          alertWarn: "WO-2024-001 continua com BOLT (versão antiga). Somente novas OPs explodidas a partir de hoje usarão BOLT-V2. Isso é o comportamento correto — rastreabilidade histórica."
-        },
-        {
-          num: "5", cls: "sim-sc5",
-          title: "Tentativa de alterar item ou BOM da OP explodida",
-          menu: "PATCH /api/work-orders/1001",
-          userLines: [
-            { k: "Tentativa", v: '{ "bomCode": "BIKE-V2" }', n: "usuário tenta trocar o BOM" },
-            { k: "Resposta", v: "HTTP 400 Bad Request", n: "erro 26005" },
-            { k: "Mensagem", v: '"Campos congelados após explosão"', n: "bomCode, routingCode, itemCode, siteCode" },
-          ],
-          backLines: [
-            { k: "validateAndRetrieve()", v: "isStatusExplodedOrHigher(E) = true", n: "guarda ativa" },
-            { k: "comparação", v: "dto.bomCode ≠ entity.bomCode", n: "mudança detectada" },
-            { k: "throw", v: 'ValidationErrorAndStatusCode("26005")', n: "HTTP 400" },
-            { k: "work_order", v: "NÃO ALTERADO", n: "transação revertida" },
-          ],
-          alert: null,
-          alertWarn: "Única exceção: quantityOrdered e dueDate ainda podem ser editados até o status C (Closed). Todos os outros campos estão bloqueados."
-        }
-      ];
-
-      const stepsHTML = steps.map(s => {
-        const userF = s.userLines.map(l => `<div><span class="sim-field-key">${l.k}:</span> <span class="sim-field-val">${l.v}</span> ${l.n ? `<span class="sim-field-note">// ${l.n}</span>` : ''}</div>`).join('');
-        const backF = s.backLines.map(l => `<div><span class="sim-field-key">${l.k}:</span> <span class="sim-field-val">${l.v}</span> ${l.n ? `<span class="sim-field-note">// ${l.n}</span>` : ''}</div>`).join('');
-        const alertHTML = s.alert ? `<div class="sim-alert"><span>💡</span><span>${s.alert}</span></div>` : '';
-        const warnHTML = s.alertWarn ? `<div class="sim-alert sim-alert-warn"><span>⚠️</span><span>${s.alertWarn}</span></div>` : '';
-        return `
-      <div class="sim-step">
-        <div class="sim-num"><div class="sim-circle ${s.cls}">${s.num}</div></div>
-        <div class="sim-body">
-          <div class="sim-title">${s.title} <span class="sim-menu">${s.menu}</span></div>
-          <div class="sim-panels">
-            <div class="sim-user-panel">
-              <div class="sim-panel-label">👤 O que o usuário vê / faz na tela</div>
-              <div class="sim-field-list">${userF}</div>
-              ${alertHTML}
-            </div>
-            <div class="sim-back-panel">
-              <div class="sim-panel-label">⚙️ O que acontece no banco de dados</div>
-              <div class="sim-field-list">${backF}</div>
-              ${warnHTML}
-            </div>
-          </div>
-        </div>
-      </div>`;
-      }).join('');
-
-      // ── Before/After diagram ──────────────────────────────────────────────────
-      const baHTML = `
-    <div class="ba-container">
-      <div class="ba-col ba-before">
-        <div class="ba-header" style="justify-content:space-between">
-          <span>🕐 ANTES da Explosão · Status: <b>F</b></span>
-          <span style="font-size:10px;opacity:.7">work_order + product_structure</span>
-        </div>
-        <div class="dbtable">
-          <div class="dbtable-head"><span>work_order</span><span style="font-family:monospace;font-size:10px;color:#7c3aed">id = 1001</span></div>
-          <div class="dbtable-subhead">ps_mstr → WorkOrderEntity</div>
-          <div class="dbtable-row row-2col"><span class="col-qad">wo_status</span><span class="col-val highlight">"F" — Firm</span></div>
-          <div class="dbtable-row row-2col"><span class="col-qad">wo_bom_code</span><span class="col-val">"BIKE-STD"</span></div>
-          <div class="dbtable-row row-2col"><span class="col-qad">wo_part</span><span class="col-val">"BIKE-001"</span></div>
-          <div class="dbtable-row row-2col"><span class="col-qad">wo_qty_ord</span><span class="col-val">50</span></div>
-          <div class="dbtable-row row-2col"><span class="col-qad">wo_yield_pct</span><span class="col-val">95</span></div>
-        </div>
-        <div class="dbtable">
-          <div class="dbtable-head"><span>work_order_component</span></div>
-          <div class="dbtable-subhead">wod_det → WorkOrderComponentEntity</div>
-          <div class="dbtable-row empty-row">( vazio — nenhuma linha ainda )</div>
-        </div>
-        <div class="dbtable">
-          <div class="dbtable-head"><span>product_structure</span><span style="font-size:10px;color:#7c3aed;font-family:monospace">template genérico</span></div>
-          <div class="dbtable-subhead">ps_mstr → ProductStructureEntity</div>
-          <div class="dbtable-row row-3col"><span class="col-qad">bom_code</span><span class="col-val">BIKE-STD</span><span class="col-note">pai</span></div>
-          <div class="dbtable-row row-3col"><span class="col-qad">component</span><span class="col-val">WHEEL</span><span class="col-note">qty=2 scrap=5%</span></div>
-          <div class="dbtable-row row-3col"><span class="col-qad">component</span><span class="col-val">FRAME</span><span class="col-note">qty=1 scrap=0%</span></div>
-          <div class="dbtable-row row-3col"><span class="col-qad">component</span><span class="col-val">BOLT</span><span class="col-note">qty=16 scrap=2%</span></div>
-        </div>
-        <div class="ba-note">O BOM é um template reutilizável. A OP apenas referencia <code>bom_code = "BIKE-STD"</code> mas não tem linhas próprias.</div>
-      </div>
-
-      <div class="ba-arrow-col">
-        <div class="ba-arrow-btn">⚡</div>
-        <div class="ba-arrow-label" style="font-weight:700;color:#7c3aed">F → E<br>EXPLOSÃO</div>
-        <div style="font-size:22px;color:#94a3b8">→</div>
-        <div class="ba-arrow-label">explodeBom()<br>é chamado</div>
-      </div>
-
-      <div class="ba-col ba-after">
-        <div class="ba-header" style="justify-content:space-between">
-          <span>✅ DEPOIS da Explosão · Status: <b>E</b></span>
-          <span style="font-size:10px;opacity:.7">work_order_component populado</span>
-        </div>
-        <div class="dbtable">
-          <div class="dbtable-head"><span>work_order</span><span style="font-family:monospace;font-size:10px;color:#7c3aed">id = 1001</span></div>
-          <div class="dbtable-subhead">ps_mstr → WorkOrderEntity</div>
-          <div class="dbtable-row row-2col freeze-row"><span class="col-qad">wo_status</span><span class="col-val highlight">"E" — Exploded 🔒</span></div>
-          <div class="dbtable-row row-2col freeze-row"><span class="col-qad">wo_bom_code</span><span class="col-val">"BIKE-STD" 🔒</span></div>
-          <div class="dbtable-row row-2col freeze-row"><span class="col-qad">wo_part</span><span class="col-val">"BIKE-001" 🔒</span></div>
-          <div class="dbtable-row row-2col"><span class="col-qad">wo_qty_ord</span><span class="col-val">50 (livre até C)</span></div>
-          <div class="dbtable-row row-2col"><span class="col-qad">wo_yield_pct</span><span class="col-val">95</span></div>
-        </div>
-        <div class="dbtable">
-          <div class="dbtable-head"><span>work_order_component</span><span style="font-size:10px;color:#92400e;font-family:monospace">snapshot desta OP</span></div>
-          <div class="dbtable-subhead">wod_det → WorkOrderComponentEntity · 3 linhas criadas</div>
-          <div class="dbtable-row" style="grid-template-columns:32px 60px 90px 1fr;font-size:10px;background:#f8fafc;color:#64748b">
-            <span>ln</span><span>item</span><span>qty_req</span><span>std_cost / total</span>
-          </div>
-          <div class="dbtable-row" style="grid-template-columns:32px 60px 90px 1fr;font-size:11px">
-            <span class="col-qad">10</span><span class="col-val">WHEEL</span><span class="col-val">110,8033</span><span class="col-note">R$45 → R$4.986</span>
-          </div>
-          <div class="dbtable-row" style="grid-template-columns:32px 60px 90px 1fr;font-size:11px">
-            <span class="col-qad">20</span><span class="col-val">FRAME</span><span class="col-val">52,6316</span><span class="col-note">R$120 → R$6.316</span>
-          </div>
-          <div class="dbtable-row" style="grid-template-columns:32px 60px 90px 1fr;font-size:11px">
-            <span class="col-qad">30</span><span class="col-val">BOLT</span><span class="col-val">859,2912</span><span class="col-note">R$0,50 → R$430</span>
-          </div>
-        </div>
-        <div class="dbtable">
-          <div class="dbtable-head"><span>product_structure</span><span style="font-size:10px;font-family:monospace;color:#15803d">inalterado</span></div>
-          <div class="dbtable-subhead">ps_mstr → ProductStructureEntity</div>
-          <div class="dbtable-row row-3col"><span class="col-qad">component</span><span class="col-val">WHEEL</span><span class="col-note">pode ser alterado</span></div>
-          <div class="dbtable-row row-3col"><span class="col-qad">component</span><span class="col-val">FRAME</span><span class="col-note">sem impacto nesta OP</span></div>
-          <div class="dbtable-row row-3col"><span class="col-qad">component</span><span class="col-val">BOLT</span><span class="col-note">sem impacto nesta OP</span></div>
-        </div>
-        <div class="ba-note">A OP agora tem sua própria cópia dos componentes. Alterações no BOM original não afetam mais esta OP.</div>
-      </div>
-    </div>`;
-
-      // ── Qty formula ───────────────────────────────────────────────────────────
-      const formulaHTML = `
-    <div class="formula-section">
-      <h3>Fórmula de Cálculo da Quantidade Requerida</h3>
-      <div class="formula-display">
-        <span class="f-result">qty_required</span>
-        <span class="f-op"> = </span>
-        <span>(</span><span class="f-var">qty_per</span>
-        <span class="f-op"> × </span>
-        <span class="f-var">qty_factor</span>
-        <span class="f-op"> × </span>
-        <span class="f-var">qty_ordered</span><span>)</span>
-        <span class="f-op"> ÷ </span>
-        <span>( (1 − </span><span class="f-var">scrap%</span><span>÷100)</span>
-        <span class="f-op"> × </span>
-        <span class="f-var">yield%</span><span>÷100 )</span>
-      </div>
-      <div class="formula-vars">
-        <div class="fvar-card">
-          <div class="fvar-name">qty_per</div>
-          <div class="fvar-qad">QAD: ps_qty_per · HERA: qtyPerComponent</div>
-          <div class="fvar-desc">Quantidade do componente por unidade do item pai. Cadastrado em cada linha do BOM.</div>
-          <div class="fvar-example">WHEEL → qty_per = 2 (2 rodas por bicicleta)</div>
-        </div>
-        <div class="fvar-card">
-          <div class="fvar-name">qty_ordered</div>
-          <div class="fvar-qad">QAD: wo_qty_ord · HERA: quantityOrdered</div>
-          <div class="fvar-desc">Quantidade que a OP pretende produzir. Definida pelo planejador na criação da OP.</div>
-          <div class="fvar-example">50 bicicletas a produzir</div>
-        </div>
-        <div class="fvar-card">
-          <div class="fvar-name">qty_factor</div>
-          <div class="fvar-qad">HERA: qtyFactor (calculado internamente)</div>
-          <div class="fvar-desc">Começa em 1.0. Somente muda ao atravessar um <b>phantom</b> (structureType='X') — acumula o produto das quantidades dos phantoms aninhados.</div>
-          <div class="fvar-example">phantom pede 3× → qty_factor dos filhos = 3.0</div>
-        </div>
-        <div class="fvar-card">
-          <div class="fvar-name">scrap%</div>
-          <div class="fvar-qad">QAD: ps_scrap · HERA: scrapPercent</div>
-          <div class="fvar-desc">Perda esperada <b>do componente</b> no processo. Cadastrado por linha do BOM. Infla a qty pois parte do material se perde antes de virar produto.</div>
-          <div class="fvar-example">5% → fator = 0,95 → pede 5,26% a mais</div>
-        </div>
-        <div class="fvar-card">
-          <div class="fvar-name">yield%</div>
-          <div class="fvar-qad">QAD: wo_yield_pct · HERA: yieldPercent</div>
-          <div class="fvar-desc">Rendimento esperado <b>do produto acabado</b>. Cadastrado na OP. 95% = 5% das unidades produzidas serão rejeitadas — todos os componentes precisam cobrir essa rejeição.</div>
-          <div class="fvar-example">95% → fator = 0,95 → pede 5,26% a mais</div>
-        </div>
-        <div class="fvar-card" style="background:#fef9c3;border-color:#fcd34d">
-          <div class="fvar-name" style="color:#92400e">Exemplo completo</div>
-          <div class="fvar-qad">OP=50un · WHEEL: qty_per=2 scrap=5% · yield=95%</div>
-          <div class="fvar-desc"><b>numerador</b> = 2 × 1 × 50 = 100<br><b>denominador</b> = 0,95 × 0,95 = 0,9025<br><b>qty_required</b> = 100 ÷ 0,9025 = <b>110,8033 rodas</b></div>
-          <div class="fvar-example">sem perdas: 100 rodas · com perdas: 110,80 rodas</div>
-        </div>
-      </div>
-    </div>`;
-
-      // ── Freeze visual grid ───────────────────────────────────────────────────
-      const freezeCards = [
-        { field: "itemCode", cls: "fz-frozen", status: "Congela em E", icon: "🔒", desc: "Item sendo produzido. Os componentes foram calculados para este item — trocar exige re-explosão completa." },
-        { field: "siteCode", cls: "fz-frozen", status: "Congela em E", icon: "🔒", desc: "Site de produção. Movimentos de estoque e a conta WIP já estão vinculados ao site original." },
-        { field: "bomCode", cls: "fz-frozen", status: "Congela em E", icon: "🔒", desc: "BOM cujas linhas geraram o work_order_component. Troca invalidaria o snapshot existente." },
-        { field: "routingCode", cls: "fz-frozen", status: "Congela em E", icon: "🔒", desc: "Roteiro que será copiado para as operações da OP (16.1-C). Congela junto com o BOM." },
-        { field: "quantityOrdered", cls: "fz-free", status: "Livre até C", icon: "✏️", desc: "Permite ajuste para recuperação de scrap ou replanejamento. ⚠ Atenção: o Hera atual NÃO recalcula as linhas de componente automaticamente ao mudar a qty." },
-        { field: "dueDate", cls: "fz-free", status: "Livre até C", icon: "✏️", desc: "Pode ser reprogramada enquanto a OP está aberta. Não afeta as quantidades de componente." },
-        { field: "remarks", cls: "fz-free", status: "Sempre livre", icon: "✏️", desc: "Campo de observações. Sem impacto em custo ou inventário." },
-        { field: "acctClose=true", cls: "fz-locked", status: "Trava total (16.21)", icon: "⛔", desc: "Pré-condição: status=C e wipTotal=0. Após isso: nenhuma atualização ou deleção permitida. Permanente e irreversível." },
-      ];
-
-      const freezeGridHTML = freezeCards.map(c => `
-    <div class="fz-card ${c.cls}">
-      <span class="fz-icon">${c.icon}</span>
-      <div class="fz-card-field">${c.field}</div>
-      <div class="fz-card-status">${c.status}</div>
-      <div class="fz-card-desc">${c.desc}</div>
-    </div>`).join('');
-
-      return `<div class="panel" id="p-bomfreeze">
-
-    <div class="bom-intro-box">
-      <div class="bom-intro-icon">🧊</div>
-      <div class="bom-intro-text">
-        <h2>Explosão e Congelamento do BOM</h2>
-        <p>A explosão transforma o BOM genérico (template reutilizável) em linhas de componente <b>exclusivas desta OP</b> — com quantidades calculadas, custos congelados e rastreabilidade de origem. A partir do status <b>E (Exploded)</b>, os campos de engenharia ficam imutáveis para preservar a integridade do snapshot.</p>
-      </div>
-    </div>
-
-    <div class="section-sep">Simulação Passo a Passo</div>
-    <p class="section-intro">O que o usuário faz na tela e o que acontece nas tabelas do banco de dados em cada momento do ciclo.</p>
-    <div class="sim-timeline">${stepsHTML}</div>
-
-    <div class="section-sep">Diagrama Antes / Depois da Explosão</div>
-    <p class="section-intro">Visualização das tabelas envolvidas antes e depois da transição F → E.</p>
-    ${baHTML}
-
-    <div class="section-sep">Fórmula de Cálculo da Quantidade Requerida</div>
-    ${formulaHTML}
-
-    <div class="section-sep">Mapa de Congelamento de Campos (WorkOrderEntity)</div>
-    <p class="section-intro">Quais campos ficam imutáveis, a partir de qual status e por quê.</p>
-    <div class="freeze-grid">${freezeGridHTML}</div>
-
-  </div>`;
-    }
-
-    // ---- BUILD FASE PANEL ----
-    function buildFasePanel() {
-      const cards = faseCapabilities.map(f => {
+    function buildFases() {
+      const cards = fases.map(f => {
         const capItems = f.caps.map(c => `
-      <li>
-        <span class="ico ico-yes">✓</span>
-        <span class="cap-label">${c.text}${c.note ? `<small>${c.note}</small>` : ''}</span>
-      </li>`).join('');
-
-        const blockItems = f.blocks.map(c => `
-      <li>
-        <span class="ico ico-no">✗</span>
-        <span class="cap-label">${c.text}${c.note ? `<small>${c.note}</small>` : ''}</span>
-      </li>`).join('');
-
-        const blocksSection = f.blocks.length ? `
-      <div class="phase-col">
-        <h4>Ainda não disponível nesta fase</h4>
-        <ul class="cap-list">${blockItems}</ul>
-      </div>` : `
-      <div class="phase-col" style="background:var(--panel2)">
-        <h4>Cobertura</h4>
-        <p style="font-size:13px;color:var(--muted);margin:0">Todas as capacidades do ciclo de manufatura discreto e planejamento estão disponíveis. Paridade com QAD 2008 SE Manufacturing.</p>
-      </div>`;
-
-        return `
-      <div class="phase-card">
-        <div class="phase-header">
-          <div class="phase-num ${f.numCls}">${f.num}</div>
-          <div class="phase-header-text">
-            <h3>${f.name}</h3>
-            <p>${f.desc}</p>
-          </div>
-          <span class="phase-status-pill ${f.statusCls}">${f.statusLabel}</span>
-        </div>
-        <div class="phase-body">
+          <li>
+            <span class="ico ${f.icon}">${f.icon === 'ico-done' ? '✓' : '→'}</span>
+            <span><span class="cap-title">${c.title}</span>
+              <span class="cap-desc cap-neg">${c.neg}</span>
+              <span class="cap-desc cap-tec">${c.tec}</span>
+            </span>
+          </li>`).join('');
+        const blockItems = f.blocks.map(b => `
+          <li>
+            <span class="ico ico-no">✗</span>
+            <span><span class="cap-title">${b.title}</span><span class="cap-desc">${b.note}</span></span>
+          </li>`).join('');
+        const rightCol = f.blocks.length ? `
           <div class="phase-col">
-            <h4>O que o usuário consegue fazer <span style="font-size:10px;color:var(--muted);font-weight:400;text-transform:none">· Rotinas: ${f.rotinas}</span></h4>
-            <ul class="cap-list">${capItems}</ul>
-          </div>
-          ${blocksSection}
-        </div>
-        <div class="phase-footer">${f.footer}</div>
-      </div>`;
+            <h4>Ainda não disponível nesta fase</h4>
+            <ul class="cap-list">${blockItems}</ul>
+          </div>` : `
+          <div class="phase-col" style="background:var(--panel2)">
+            <h4>Cobertura</h4>
+            <p style="font-size:13px;color:var(--muted);margin:0">Todas as capacidades do ciclo de manufatura discreto e do planejamento estão disponíveis — paridade com o QAD 2008 SE Manufacturing.</p>
+          </div>`;
+        return `
+          <div class="phase-card reveal">
+            <div class="phase-header">
+              <div class="phase-num ${f.numCls}">${f.num}</div>
+              <div class="phase-header-text"><h3>${f.name}</h3><p>${f.desc}</p></div>
+              <span class="phase-pill ${f.pill}">${f.pillLabel}</span>
+            </div>
+            <div class="phase-body">
+              <div class="phase-col">
+                <h4>O que o usuário consegue fazer <span class="rotina-tag">${f.rotinas}</span></h4>
+                <ul class="cap-list">${capItems}</ul>
+              </div>
+              ${rightCol}
+            </div>
+            <div class="phase-footer">${f.footer}</div>
+          </div>`;
       }).join('');
 
-      return `<div class="panel" id="p-fases">
-    <p class="intro">O que o usuário consegue realizar operacionalmente em cada fase do módulo de manufatura do HERA.</p>
-    <div class="phase-timeline">${cards}</div>
-  </div>`;
+      return `
+        <div class="view-toggle reveal" id="viewToggle">
+          <button class="vt-btn on" data-view="neg">👤 Visão de Negócio</button>
+          <button class="vt-btn" data-view="tec">⚙️ Visão Técnica</button>
+        </div>
+        <p class="intro reveal">O que é possível realizar operacionalmente em cada fase do módulo. Alterne entre a linguagem de negócio e os detalhes técnicos (entidades, rotinas e regras).</p>
+        ${buildFlow()}
+        <div>${cards}</div>`;
     }
 
-    // ---- TABS ----
-    const TABS = [
-      { id: "fases", name: "O que consigo fazer", intro: "", rows: [], sIdx: null, type: "fases" },
-      {
-        id: "ov", name: "Visão Geral", intro: "Status por camada/fase do módulo.",
-        head: ["Camada / Fase", "Rotinas QAD", "Status", "Resumo do que existe / falta"], rows: overview, sIdx: 2, type: "ov"
-      },
-      {
-        id: "pre", name: "Pré-requisitos 13·14·15", intro: "Dados mestres de engenharia — tudo já implementado.",
-        head: ["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Responsável", "Componente HERA / O que falta"], rows: prereq, sIdx: 4, type: "full"
-      },
-      {
-        id: "mvp", name: "MVP — Fase 1", intro: "Ciclo ponta a ponta da OP (16.x · 17.x), em ordem de dependência.",
-        head: ["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Responsável", "Componente HERA / O que falta"], rows: mvp, sIdx: 4, type: "full"
-      },
-      {
-        id: "f23", name: "Fase 2 e 3", intro: "Camadas posteriores ao core.",
-        head: ["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Responsável", "Componente HERA / O que falta"], rows: fase23, sIdx: 4, type: "full"
-      },
-      { id: "bomfreeze", name: "🔍 Explosão do BOM", intro: "", rows: [], sIdx: null, type: "bomfreeze" },
-      { id: "rel", name: "Entidades & Relações", intro: "", head: [], rows: [], sIdx: null, type: "rel" },
-      {
-        id: "dm", name: "Modelo de Dados", intro: "Mapeamento das tabelas QAD para entidades HERA.",
-        head: ["Tabela QAD", "Entidade / Serviço HERA", "Tabela HERA", "Módulo HERA", "Status"], rows: datamodel, sIdx: 4, type: "dm"
-      },
-      {
-        id: "leg", name: "Legenda", intro: "Significado de cada status.",
-        head: ["Status", "Significado"], rows: legend, sIdx: 0, type: "leg"
-      }
-    ];
+    /* ════════ Seções ════════ */
+    const TABS = {
+      fases: { name: "O que consigo fazer", render: buildFases },
+      ov: { name: "Visão Geral", render: () => `<p class="intro">Status por camada/fase do módulo.</p>${buildTable(["Camada / Fase", "Rotinas QAD", "Status", "Resumo do que existe / falta"], overview, "ov")}` },
+      dm: { name: "Modelo de Dados", render: () => `<p class="intro">Mapeamento das tabelas QAD para as entidades HERA.</p>${buildTable(["Tabela QAD", "Entidade / Serviço HERA", "Tabela HERA", "Módulo", "Status"], datamodel, "dm")}` },
+      pre: { name: "Pré-requisitos 13·14·15", render: () => `<p class="intro">Dados mestres de engenharia — tudo já implementado.</p>${buildTable(["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Componente HERA / O que falta"], prereq, "full")}` },
+      f1: { name: "Fase 1 — Criação & Engenharia", render: () => `<p class="intro">Criação da OP e explosão de BOM/roteiro — até o congelamento no status E. Concluída no QAD como o ciclo de planejamento, antes de qualquer transação de estoque.</p>${buildTable(["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Componente HERA / O que falta"], fase1, "full")}` },
+      f2: { name: "Fase 2 — Execução", render: () => `<p class="intro">Liberação ao chão de fábrica, baixa de material, mão de obra, recebimento e fechamento contábil. No QAD, as transações só ocorrem a partir do status Released (R).</p>${buildTable(["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Componente HERA / O que falta"], fase2, "full")}` },
+      f3: { name: "Fase 3 — Avançado", render: () => `<p class="intro">Operações que estendem o ciclo (split, lote, dispatch, subcontrato) e os módulos de manufatura repetitiva (18) e planejamento (22 · 23).</p>${buildTable(["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Componente HERA / O que falta"], fase3, "full")}` },
+      leg: { name: "Legenda", render: () => `<p class="intro">Significado de cada status.</p>${buildTable(["Status", "Significado"], legend, "leg")}` }
+    };
 
-    function rowHTML(tab, r) {
-      if (r.g) return `<tr class="group"><td colspan="${tab.head.length}">${r.g}</td></tr>`;
-      const status = r[tab.sIdx];
-      let tds = "";
-      if (tab.type === "ov") {
-        tds = `<td><b>${r[0]}</b></td><td class="mono">${r[1]}</td><td>${badge(r[2])}</td><td class="muted">${r[3]}</td>`;
-      } else if (tab.type === "full") {
-        tds = `<td class="mono">${r[0]}</td><td><b>${r[1]}</b></td><td class="muted">${r[2]}</td><td class="mono">${r[3]}</td><td>${badge(r[4])}</td><td>${respHTML(r[0])}</td><td class="falta">${fmtFalta(r[5])}</td>`;
-      } else if (tab.type === "dm") {
-        tds = `<td class="mono">${r[0]}</td><td><b>${r[1]}</b></td><td class="mono">${r[2]}</td><td class="muted">${r[3]}</td><td>${badge(r[4])}</td>`;
-      } else if (tab.type === "leg") {
-        tds = `<td>${badge(r[0])}</td><td class="muted">${r[1]}</td>`;
-      }
-      return `<tr data-status="${status || ''}">${tds}</tr>`;
-    }
+    const order = ["fases", "ov", "dm", "pre", "f1", "f2", "f3", "leg"];
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function buildPanel(tab) {
-      if (tab.type === "bomfreeze") return buildBomFreezePanel();
-      if (tab.type === "fases") return buildFasePanel();
-      if (tab.type === "rel") {
-        const relHeads = ["Entidade", "Tabela HERA", "Campo / FK", "Liga com", "Momento no Fluxo", "Papel"];
-        const frzHeads = ["Campo em work_order", "Congela no Status", "Ainda editável até", "Impacto"];
-        return `<div class="panel" id="p-rel">
-      <p class="intro">Mapeamento completo das relações entre entidades no ciclo da OP no HERA e comportamento de congelamento de campos por status da WorkOrderEntity.</p>
+    // Abas
+    document.getElementById("tabs").innerHTML =
+      order.map((id, i) => `<button class="tab${i === 0 ? ' active' : ''}" data-tab="${id}">${TABS[id].name}</button>`).join("");
 
-      <div class="section-sep">Ciclo de Status da Work Order</div>
-      <p class="section-intro">O freeze do BOM (16.1-B) e do Roteiro (16.1-C) ocorre no status <b>E (Exploded)</b>. O fechamento contábil definitivo é o <b>acctClose = true</b>, acionado pelo 16.21 quando status = C e wipTotal = 0.</p>
-      ${buildFlow()}
+    // Painéis (um por aba)
+    document.getElementById("panels").innerHTML = order.map((id, i) =>
+      `<div class="panel${i === 0 ? ' active' : ''}" id="p-${id}"><h2 class="sec-title">${TABS[id].name}</h2>${TABS[id].render()}</div>`
+    ).join("");
 
-      <div class="section-sep">Mapa de Relacionamentos entre Entidades</div>
-      <p class="section-intro">Entidades marcadas com <span class="entity-missing">⚠</span> ainda precisam ser criadas. Elas bloqueiam diretamente as rotinas indicadas na coluna "Momento no Fluxo".</p>
-      ${buildTable(relHeads, relentidades, "rel")}
+    /* ════════ Filtro de status ════════ */
+    document.getElementById("filters").innerHTML = '<span class="flabel">Filtrar tabelas por status:</span>' +
+      ["all", ...S].map(s => `<span class="chip ${s === 'all' ? 'all on' : cls(s)}" data-f="${s}">${s === 'all' ? 'Todos' : s}</span>`).join("");
 
-      <div class="section-sep" style="margin-top:32px">Mapa de Congelamento de Campos (work_order)</div>
-      <p class="section-intro">Campos que se tornam imutáveis a partir de um determinado status. Implementado via <code>isStatusExplodedOrHigher()</code> no WorkOrderServiceImpl.</p>
-      ${buildTable(frzHeads, freezemap, "freeze")}
-    </div>`;
-      }
-
-      const body = tab.rows.map(r => rowHTML(tab, r)).join("");
-      return `<div class="panel" id="p-${tab.id}">
-    <p class="intro">${tab.intro}</p>
-    <table><thead><tr>${tab.head.map(h => `<th>${h}</th>`).join("")}</tr></thead>
-    <tbody>${body}</tbody></table></div>`;
-    }
-
-    document.getElementById("tabs").innerHTML = TABS.map((t, i) => `<button class="tab${i === 0 ? ' active' : ''}" data-tab="${t.id}">${t.name}</button>`).join("");
-    document.getElementById("panels").innerHTML = TABS.map(buildPanel).join("");
-    document.getElementById("panels").querySelector("#p-" + TABS[0].id).classList.add("active");
-
-    // filters
-    const fchips = ["all", ...S];
-    document.getElementById("filters").innerHTML = '<span class="flabel">Filtrar por status:</span>' +
-      fchips.map(s => `<span class="chip ${s === 'all' ? 'all' : cls(s)} ${s === 'all' ? 'on' : ''}" data-f="${s}">${s === 'all' ? 'Todos' : s}</span>`).join("");
-
+    let activeFilter = "all";
     function applyFilter() {
-      document.querySelectorAll(".panel").forEach(p => {
+      document.querySelectorAll(".panel table").forEach(tbl => {
         let lastGroup = null, groupHasVisible = false;
-        p.querySelectorAll("tbody tr").forEach(tr => {
+        tbl.querySelectorAll("tbody tr").forEach(tr => {
           if (tr.classList.contains("group")) {
             if (lastGroup) lastGroup.style.display = groupHasVisible ? "" : "none";
             lastGroup = tr; groupHasVisible = false; tr.style.display = ""; return;
@@ -2386,22 +1439,57 @@
         if (lastGroup) lastGroup.style.display = groupHasVisible ? "" : "none";
       });
     }
-
-    document.getElementById("tabs").addEventListener("click", e => {
-      const b = e.target.closest(".tab"); if (!b) return;
-      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-      b.classList.add("active");
-      document.getElementById("p-" + b.dataset.tab).classList.add("active");
-    });
-
     document.getElementById("filters").addEventListener("click", e => {
       const c = e.target.closest(".chip"); if (!c) return;
-      document.querySelectorAll(".chip").forEach(x => x.classList.remove("on"));
+      document.querySelectorAll("#filters .chip").forEach(x => x.classList.remove("on"));
       c.classList.add("on");
       activeFilter = c.dataset.f;
       applyFilter();
     });
+
+    /* ════════ Troca de aba ════════ */
+    function revealIn(panel) {
+      const items = [...panel.querySelectorAll(".reveal:not(.in)")];
+      items.forEach((el, i) => { el.style.transitionDelay = Math.min(i, 8) * 55 + "ms"; });
+      requestAnimationFrame(() => requestAnimationFrame(() => items.forEach(el => el.classList.add("in"))));
+    }
+    function activate(id) {
+      document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === id));
+      document.querySelectorAll(".panel").forEach(p => p.classList.toggle("active", p.id === "p-" + id));
+      const panel = document.getElementById("p-" + id);
+      revealIn(panel);
+      applyFilter();
+    }
+    document.getElementById("tabs").addEventListener("click", e => {
+      const b = e.target.closest(".tab"); if (!b) return;
+      activate(b.dataset.tab);
+    });
+
+    /* ════════ Toggle Negócio / Técnico ════════ */
+    document.getElementById("viewToggle").addEventListener("click", e => {
+      const b = e.target.closest(".vt-btn"); if (!b) return;
+      document.querySelectorAll("#viewToggle .vt-btn").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      document.body.classList.toggle("view-tec", b.dataset.view === "tec");
+    });
+
+    /* ════════ Animações de topo (KPIs + progresso) ════════ */
+    function animateCount(el) {
+      const target = +el.dataset.count, suffix = el.dataset.suffix || "";
+      if (reduce) { el.textContent = target + suffix; return; }
+      const dur = 900, t0 = performance.now();
+      (function step(t) {
+        const p = Math.min(1, (t - t0) / dur);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      })(performance.now());
+    }
+    document.querySelectorAll("#kpis [data-count]").forEach(animateCount);
+    const grow = () => document.querySelectorAll("#progress [data-w]").forEach(sp => { sp.style.width = sp.dataset.w + "%"; });
+    reduce ? grow() : requestAnimationFrame(() => requestAnimationFrame(grow));
+
+    // primeira aba já ativa
+    revealIn(document.getElementById("p-" + order[0]));
   </script>
 </body>
 
