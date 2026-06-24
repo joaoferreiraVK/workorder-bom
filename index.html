@@ -22,6 +22,7 @@
       --faint: #94a3b8;
       --head: #f5f7fb;
       --impl: #047857;
+      --anda: #0369a1;
       --parc: #c2410c;
       --pend: #475569;
       --fut: #4338ca;
@@ -153,6 +154,43 @@
       font-family: var(--mono)
     }
 
+    .team {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 16px
+    }
+
+    .team-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 13px;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 9px;
+      font-size: 12px;
+      color: #e0e7ff
+    }
+
+    .team-chip b {
+      color: #fff;
+      font-weight: 700
+    }
+
+    .team-chip .tdot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #38bdf8
+    }
+
+    .team-chip .tmono {
+      font-family: var(--mono);
+      color: #bae6fd;
+      font-size: 11px
+    }
+
     /* ───────── Tabs (abas) ───────── */
     .tabs {
       position: sticky;
@@ -208,7 +246,7 @@
 
     .kpis {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 16px;
       margin-bottom: 16px
     }
@@ -252,6 +290,10 @@
 
     .kpi.impl .bar {
       background: var(--impl)
+    }
+
+    .kpi.anda .bar {
+      background: var(--anda)
     }
 
     .kpi.parc .bar {
@@ -306,6 +348,10 @@
       background: var(--impl)
     }
 
+    .pa {
+      background: var(--anda)
+    }
+
     .pp {
       background: var(--parc)
     }
@@ -318,6 +364,24 @@
       font-size: 12px;
       color: var(--muted);
       margin: 0 0 28px
+    }
+
+    /* ───────── Banner front-end ───────── */
+    .fe-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: #eff6ff;
+      border: 1px solid #bae6fd;
+      border-radius: var(--radius);
+      padding: 13px 16px;
+      margin: 0 0 24px;
+      font-size: 12.5px;
+      color: #0c4a6e
+    }
+
+    .fe-banner b {
+      color: #075985
     }
 
     /* ───────── Status flow strip ───────── */
@@ -472,6 +536,10 @@
       background: var(--impl)
     }
 
+    .chip.Emandamento.on {
+      background: var(--anda)
+    }
+
     .chip.Parcial.on {
       background: var(--parc)
     }
@@ -597,6 +665,12 @@
       border: 1px solid #a7f3d0
     }
 
+    .b-Emandamento {
+      background: #eff6ff;
+      color: #0369a1;
+      border: 1px solid #bae6fd
+    }
+
     .b-Parcial {
       background: #fff5ed;
       color: #c2410c;
@@ -629,6 +703,76 @@
     td.falta b {
       color: #b91c1c;
       font-weight: 600
+    }
+
+    /* owner / branch badge */
+    .owner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 6px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: #eff6ff;
+      border: 1px solid #bae6fd;
+      color: #075985;
+      font-size: 10.5px;
+      font-weight: 600;
+      font-family: var(--mono)
+    }
+
+    .owner-badge .b2 {
+      color: #0369a1;
+      font-weight: 700
+    }
+
+    /* front-end indicator */
+    .fe {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 600;
+      white-space: nowrap
+    }
+
+    .fe-ded {
+      background: #eef0fb;
+      color: #4338ca;
+      border: 1px solid #cdd3f5
+    }
+
+    .fe-emb {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #dde3ec
+    }
+
+    .fe-none {
+      background: #fafafa;
+      color: #94a3b8;
+      border: 1px solid #e6eaf1
+    }
+
+    .fe-todo {
+      display: block;
+      margin-top: 3px;
+      font-size: 10px;
+      color: #c2410c;
+      font-weight: 600
+    }
+
+    .fe-link {
+      display: block;
+      margin-top: 3px;
+      font-size: 10px;
+      color: #047857;
+      font-weight: 700;
+      text-decoration: none
+    }
+
+    .fe-link:hover {
+      text-decoration: underline
     }
 
     /* ───────── O que consigo fazer — phase cards ───────── */
@@ -957,7 +1101,11 @@
       <span class="eyebrow"><span class="dot"></span> Status de Implementação · QAD 2008 SE → HERA</span>
       <h1>Módulo de Manufatura HERA</h1>
       <p>Progresso da reescrita do ciclo da Ordem de Produção do QAD 2008 SE no ERP HERA — do cadastro de engenharia ao
-        chão de fábrica. Cada rotina é confrontada com o código real do HERA.</p>
+        chão de fábrica. Cada rotina é confrontada com o código real do HERA (validado contra a branch <code>main</code>).</p>
+      <div class="team">
+        <span class="team-chip"><span class="tdot"></span> Em andamento: <b>17.1 · Labor Feedback</b> <span class="tmono">thiagorenatinoVK</span></span>
+        <span class="team-chip"><span class="tdot"></span> Em andamento: <b>16.10 · Component Issue</b> <span class="tmono">joaoferreiraVK</span></span>
+      </div>
     </div>
   </header>
 
@@ -971,13 +1119,35 @@
   </div>
 
   <footer>Mapeamento das rotinas do ciclo da Ordem de Produção · Convenção HERA: tabelas QAD renomeadas para inglês
-    claro · validado contra o código-fonte HERA e o QAD 2008 SE.</footer>
+    claro · validado contra o código-fonte HERA (branch <code>main</code>) e o QAD 2008 SE.</footer>
 
   <script>
-    const S = ["Implementado", "Parcial", "Pendente", "Futuro"];
+    const S = ["Implementado", "Em andamento", "Parcial", "Pendente", "Futuro"];
     const cls = s => s.replace(/\s/g, "");
     const badge = s => s ? `<span class="badge b-${cls(s)}">${s}</span>` : "";
     const fmtFalta = t => (t || "").replace(/FALTA:/g, "<b>FALTA:</b>");
+
+    /* ════════ Front-end: URL base do projeto front-hera ════════
+       Para linkar uma tela já existente, informe o 9º elemento da linha (rota relativa). */
+    const FRONT_BASE = "https://hera.vockan.com";
+
+    // Níveis de front-end: ded = tela dedicada · emb = embutida na tela da OP · none = backend/config
+    function renderFe(code, route) {
+      const map = {
+        ded: ["fe-ded", "🖥️ Tela dedicada"],
+        emb: ["fe-emb", "↳ Faz parte da tela da OP"],
+        none: ["fe-none", "— Backend/config"]
+      };
+      if (!code) return '<span class="muted">—</span>';
+      const [c, l] = map[code] || map.none;
+      let html = `<span class="fe ${c}">${l}</span>`;
+      if (code === "ded") {
+        html += (FRONT_BASE && route)
+          ? `<a class="fe-link" href="${FRONT_BASE}${route}" target="_blank" rel="noopener">↗ abrir tela</a>`
+          : `<span class="fe-todo">a implementar</span>`;
+      }
+      return html;
+    }
 
     /* ════════ DADOS ════════ */
 
@@ -989,68 +1159,68 @@
       ["Explosão de BOM + Roteiro (16.1-B/C)", "16.1-B · 16.1-C", "Implementado", "Explosão concluída e testada: WorkOrderExplosionServiceImpl (componentes) e WorkOrderRoutingServiceImpl (operações), com phantoms, scrap, cumulative yield e custo congelado."],
       ["Status e checagem (16.8 · 16.5)", "16.8 · 16.5", "Implementado", "FSM de status (changeStatus) com transições válidas e dispara explosão; component check compara requerido x disponível."],
       ["Liberação ao chão de fábrica (16.6)", "16.6", "Pendente", "Liberação A→R, alocação detalhada e impressão de lista de separação/roteiro ainda não iniciados."],
-      ["Execução — material e mão de obra", "16.10 · 17.1 · 16.11 · 16.12", "Pendente", "Baixa de componentes, apontamento de mão de obra e recebimento/backflush a fazer."],
+      ["Execução — material e mão de obra", "16.10 · 17.1 · 16.11 · 16.12", "Em andamento", "16.10 (Component Issue) em andamento por joaoferreiraVK; 17.1 (Labor Feedback) em andamento por thiagorenatinoVK. 16.11/16.12 (recebimento e backflush) ainda pendentes."],
       ["Encerramento contábil (16.21)", "16.21", "Parcial", "Trava acctClose e guardas (msg 26008) já existem; cálculo/lançamento de variações e zeragem do WIP a fazer."],
       ["Operações avançadas", "16.7 · 16.9 · 16.18 · 16.19 · 17.2-4 · subcontrato", "Pendente", "Split, liberação em lote, dispatch, backflush por operação, labor detalhado e subcontratação."],
       ["Repetitivo + planejamento", "18.x · 22.x · 23.x (MRP)", "Futuro", "Manufatura repetitiva e MRP/forecast fora do escopo atual; base de fórmula/MRP-propagation já iniciada."]
     ];
 
-    // Pré-requisitos 13·14·15
+    // Pré-requisitos 13·14·15  ·  [rotina, nome, oQueFaz, tabelaQAD→HERA, status, componente/falta, fe, owner?, route?]
     const prereq = [
       { g: "13 · Estrutura de Produto (BOM)" },
-      ["13.1", "Product Structure Code Maintenance", "Cria um código de BOM/Fórmula distinto do item.", "ps_mstr → bom_master", "Implementado", "BomStructureEntity (bom_master) + BomStructureService."],
-      ["13.5", "Product Structure Maintenance", "Define a estrutura pai/componente (lista de materiais).", "ps_mstr → product_structure", "Implementado", "ProductStructureEntity + ProductStructureService. Fonte da explosão (16.1-B)."],
+      ["13.1", "Product Structure Code Maintenance", "Cria um código de BOM/Fórmula distinto do item.", "ps_mstr → bom_master", "Implementado", "BomStructureEntity (bom_master) + BomStructureService.", "ded"],
+      ["13.5", "Product Structure Maintenance", "Define a estrutura pai/componente (lista de materiais).", "ps_mstr → product_structure", "Implementado", "ProductStructureEntity + ProductStructureService. Fonte da explosão (16.1-B).", "ded"],
       { g: "14 · Roteiros / Centros de Trabalho" },
-      ["14.1", "Department Maintenance", "Departamentos de manufatura; contas GL de mão de obra/burden.", "dp_mstr → department", "Implementado", "DepartmentEntity + DepartmentService + ReportEngine."],
-      ["14.5", "Work Center Maintenance", "Centros de trabalho e taxas de mão de obra/burden.", "wc_mstr → work_center", "Implementado", "WorkCenterEntity + WorkCenterService + export/filtro."],
-      ["14.9", "Standard Operation Maintenance", "Operações-padrão reutilizáveis nos roteiros.", "ro_mstr → standard_operation", "Implementado", "StandardOperationEntity + StandardOperationService + controller."],
-      ["14.13.1", "Routing Maintenance", "Sequência de operações do item (roteiro).", "ro_det → standard_routing", "Implementado", "StandardRoutingEntity + StandardRoutingService. Fonte da explosão (16.1-C)."],
+      ["14.1", "Department Maintenance", "Departamentos de manufatura; contas GL de mão de obra/burden.", "dp_mstr → department", "Implementado", "DepartmentEntity + DepartmentService + ReportEngine.", "ded", "", "/production/department"],
+      ["14.5", "Work Center Maintenance", "Centros de trabalho e taxas de mão de obra/burden.", "wc_mstr → work_center", "Implementado", "WorkCenterEntity + WorkCenterService + export/filtro.", "ded", "", "/production/work-center"],
+      ["14.9", "Standard Operation Maintenance", "Operações-padrão reutilizáveis nos roteiros.", "ro_mstr → standard_operation", "Implementado", "StandardOperationEntity + StandardOperationService + controller.", "ded"],
+      ["14.13.1", "Routing Maintenance", "Sequência de operações do item (roteiro).", "ro_det → standard_routing", "Implementado", "StandardRoutingEntity + StandardRoutingService. Fonte da explosão (16.1-C). Obs.: 'Routing Slip' no front é outra entidade (/api/routing-slip).", "ded"],
       { g: "15 · Fórmula / Processo (Process Manufacturing)" },
-      ["15.x", "Formula / Process Maintenance", "Fórmula, ingredientes, co/by-produtos e processo.", "fm_mstr·fm_det·co_mstr → formula", "Implementado", "FormulaService, FormulaCodeService, CoByProductService, ProcessFormulaService (módulo formula)."]
+      ["15.x", "Formula / Process Maintenance", "Fórmula, ingredientes, co/by-produtos e processo.", "fm_mstr·fm_det·co_mstr → formula", "Implementado", "FormulaService, FormulaCodeService, CoByProductService, ProcessFormulaService (módulo formula). Tela: existe Formula Code (/api/formula-code); fórmula/processo completos ainda a implementar.", "ded", "", "/system-setup/unitsOfMeasure/formula-code"]
     ];
 
-    // Fase 1 — Ciclo da OP (antes "MVP — Fase 1")
+    // Fase 1 — Ciclo da OP
     const fase1 = [
       { g: "Configuração & Criação" },
-      ["16.24", "Work Order Control (Config)", "Registro singleton de configuração da OP (auto-numeração, defaults de variação).", "woc_ctrl → work_order_control", "Implementado", "WorkOrderControlEntity + service + controller (módulo shopfloor)."],
-      ["16.1-A", "WO Maintenance — Header", "Cria/edita o cabeçalho da OP (item, site, qtd, datas, conta WIP, status).", "wo_mstr → work_order", "Implementado", "WorkOrderEntity + WorkOrderService (CRUD, status por tipo, releaseDate por lead time, validações 26000–26011, auto-firming, export)."],
+      ["16.24", "Work Order Control (Config)", "Registro singleton de configuração da OP (auto-numeração, defaults de variação).", "woc_ctrl → work_order_control", "Implementado", "WorkOrderControlEntity + service + controller (módulo shopfloor).", "ded"],
+      ["16.1-A", "WO Maintenance — Header", "Cria/edita o cabeçalho da OP (item, site, qtd, datas, conta WIP, status).", "wo_mstr → work_order", "Implementado", "WorkOrderEntity + WorkOrderService (CRUD, status por tipo, releaseDate por lead time, validações 26000–26011, auto-firming, export). Tela: /production/work-orders.", "ded", "", "/production/work-orders"],
       { g: "Explosão (gatilho status F→E/A/R)" },
-      ["16.1-B", "WO Maintenance — BOM Explosion", "Explode a estrutura (ps_mstr) em linhas de componente da OP; congela o snapshot.", "ps_mstr → work_order_component", "Implementado", "WorkOrderComponentEntity + WorkOrderExplosionServiceImpl: phantoms (structureType='X'), scrap, custo congelado, idempotente (delete+insert). Coberto por testes."],
-      ["16.1-C", "WO Maintenance — Routing Explosion", "Copia o roteiro (ro_det) para as operações da OP e calcula custos.", "ro_det → work_order_operation", "Implementado", "WorkOrderOperationEntity + WorkOrderRoutingServiceImpl: cumulative yield, custo de setup/labor/burden congelado (unit + total), subcontrato. Coberto por testes."],
-      ["23.10", "Planned WO Approval", "Aprova OPs planejadas (P→F).", "wo_mstr (P→F)", "Parcial", "Auto-firming P→F já existe no updateRecord do WorkOrderService. FALTA: fluxo de aprovação dedicado vindo do MRP."],
+      ["16.1-B", "WO Maintenance — BOM Explosion", "Explode a estrutura (ps_mstr) em linhas de componente da OP; congela o snapshot.", "ps_mstr → work_order_component", "Implementado", "WorkOrderComponentEntity + WorkOrderExplosionServiceImpl: phantoms (structureType='X'), scrap, custo congelado, idempotente (delete+insert). Coberto por testes.", "emb"],
+      ["16.1-C", "WO Maintenance — Routing Explosion", "Copia o roteiro (ro_det) para as operações da OP e calcula custos.", "ro_det → work_order_operation", "Implementado", "WorkOrderOperationEntity + WorkOrderRoutingServiceImpl: cumulative yield, custo de setup/labor/burden congelado (unit + total), subcontrato. Coberto por testes.", "emb"],
+      ["23.10", "Planned WO Approval", "Aprova OPs planejadas (P→F).", "wo_mstr (P→F)", "Parcial", "Auto-firming P→F já existe no updateRecord do WorkOrderService. FALTA: fluxo de aprovação dedicado vindo do MRP.", "ded"],
       { g: "Status & checagem (pré-liberação)" },
-      ["16.8", "WO Status Change", "Orquestra o ciclo de status (F→E→A→R→C) com regras de transição.", "wo_mstr, work_order_component, work_order_operation", "Implementado", "changeStatus() com FSM ALLOWED_TRANSITIONS (P→F/B, F→E/A/R, E→A, A→R, R→C); dispara explosão; bloqueia se acctClose. Testado."],
-      ["16.5", "WO Component Check", "Check de disponibilidade pré-liberação (relatório de falta).", "work_order_component, inventário", "Implementado", "componentCheck() + GET /component-check: qtyOpen = qtyRequired−qtyIssued vs disponível; status 1=emitido, 2=disponível, 3=falta projetada, 4=falta."]
+      ["16.8", "WO Status Change", "Orquestra o ciclo de status (F→E→A→R→C) com regras de transição.", "wo_mstr, work_order_component, work_order_operation", "Implementado", "changeStatus() com FSM ALLOWED_TRANSITIONS (P→F/B, F→E/A/R, E→A, A→R, R→C); dispara explosão; bloqueia se acctClose. Testado.", "emb"],
+      ["16.5", "WO Component Check", "Check de disponibilidade pré-liberação (relatório de falta).", "work_order_component, inventário", "Implementado", "componentCheck() + GET /component-check: qtyOpen = qtyRequired−qtyIssued vs disponível; status 1=emitido, 2=disponível, 3=falta projetada, 4=falta.", "emb"]
     ];
 
-    // Fase 2 — Execução no chão de fábrica (transações só a partir de Released, como no QAD)
+    // Fase 2 — Execução no chão de fábrica
     const fase2 = [
       { g: "Liberação & ajuste do BOM" },
-      ["16.6", "WO Release / Print", "Libera a OP ao chão de fábrica (A→R), finaliza picks, imprime docs.", "wo_mstr (A→R), lad_det, work_order_operation", "Pendente", "FALTA: serviço de liberação + alocação detalhada + relatório (lista de separação/roteiro) via ReportFramework/RabbitMQ."],
-      ["16.13.1", "WO Bill Maintenance", "Ajustes manuais no BOM da OP após explosão (permitido até a baixa).", "work_order_component", "Pendente", "Leitura do BOM da OP já existe (GET /bom). FALTA: edição manual de linhas (add/remove/alterar)."],
+      ["16.6", "WO Release / Print", "Libera a OP ao chão de fábrica (A→R), finaliza picks, imprime docs.", "wo_mstr (A→R), lad_det, work_order_operation", "Pendente", "FALTA: serviço de liberação + alocação detalhada + relatório (lista de separação/roteiro) via ReportFramework/RabbitMQ.", "ded"],
+      ["16.13.1", "WO Bill Maintenance", "Ajustes manuais no BOM da OP após explosão (permitido até a baixa).", "work_order_component", "Pendente", "Leitura do BOM da OP já existe (GET /bom). FALTA: edição manual de linhas (add/remove/alterar).", "emb"],
       { g: "Execução — material e mão de obra" },
-      ["16.10", "WO Component Issue", "Baixa componentes do estoque p/ WIP (débito WIP / crédito estoque).", "tr_hist (ISS-WO), work_order_component, glt_det", "Pendente", "FALTA: integração com inventário (movimento) e GL; atualização de qtyIssued; validação de saldo."],
-      ["17.1", "Labor Feedback by WO", "Aponta mão de obra/qtd por operação.", "op_hist, work_order_operation, glt_det", "Pendente", "Campos setupTimeReported/runTimeReported existem na operação. FALTA: entidade/serviço de apontamento + custeio."],
-      ["17.5", "Operation Complete", "Encerra operação do roteiro (sai da fila).", "op_hist, work_order_operation (→C)", "Pendente", "Depende de 17.1."],
+      ["16.10", "WO Component Issue", "Baixa componentes do estoque p/ WIP (débito WIP / crédito estoque).", "tr_hist (ISS-WO), work_order_component, glt_det", "Em andamento", "Em desenvolvimento (ainda não mergeado na main). FALTA concluir: integração com inventário (movimento) e GL; atualização de qtyIssued; validação de saldo.", "ded", "joaoferreiraVK"],
+      ["17.1", "Labor Feedback by WO", "Aponta mão de obra/qtd por operação.", "op_hist, work_order_operation, glt_det", "Em andamento", "Campos setupTimeReported/runTimeReported já existem na operação. Em desenvolvimento (branch a criar). FALTA: entidade/serviço de apontamento + custeio.", "ded", "thiagorenatinoVK"],
+      ["17.5", "Operation Complete", "Encerra operação do roteiro (sai da fila).", "op_hist, work_order_operation (→C)", "Pendente", "Depende de 17.1.", "emb"],
       { g: "Recebimento & Encerramento" },
-      ["16.11", "WO Receipt", "Recebe o produto acabado no estoque (atualiza qtd concluída).", "tr_hist (RCT-WO), wo_mstr, lad_det", "Pendente", "Campos quantityCompleted/Rejected existem. FALTA: serviço de recebimento + movimento de estoque."],
-      ["16.12", "WO Receipt + Backflush", "Recebimento + baixa automática dos componentes.", "tr_hist (RCT+ISS), work_order_component", "Pendente", "Depende de 16.10 e 16.11 (backflush combinado)."],
-      ["16.21", "WO Accounting Close", "Calcula variações, zera WIP e trava a OP.", "wo_mstr (acct_close), op_hist, glt_det", "Parcial", "Trava acctClose e guardas (msg 26008) já existem. FALTA: cálculo/lançamento das variações (material/labor/burden) e zeragem do WIP."]
+      ["16.11", "WO Receipt", "Recebe o produto acabado no estoque (atualiza qtd concluída).", "tr_hist (RCT-WO), wo_mstr, lad_det", "Pendente", "Campos quantityCompleted/Rejected existem. FALTA: serviço de recebimento + movimento de estoque.", "ded"],
+      ["16.12", "WO Receipt + Backflush", "Recebimento + baixa automática dos componentes.", "tr_hist (RCT+ISS), work_order_component", "Pendente", "Depende de 16.10 e 16.11 (backflush combinado).", "ded"],
+      ["16.21", "WO Accounting Close", "Calcula variações, zera WIP e trava a OP.", "wo_mstr (acct_close), op_hist, glt_det", "Parcial", "Trava acctClose e guardas (msg 26008) já existem. FALTA: cálculo/lançamento das variações (material/labor/burden) e zeragem do WIP.", "ded"]
     ];
 
     // Fase 3 — Operações avançadas + Repetitivo/Planejamento
     const fase3 = [
       { g: "Operações avançadas (estendem o ciclo, sem bloquear o core)" },
-      ["16.7", "Multiple WO Release (Batch)", "Liberação de várias OPs em lote.", "wo_mstr, lad_det, work_order_operation", "Pendente", "Depende de 16.6."],
-      ["16.9", "Work Order Split", "Divide uma OP liberada em duas.", "wo_mstr, work_order_component, work_order_operation", "Pendente", "—"],
-      ["16.18", "Dispatch Report (API)", "Operações abertas por centro de trabalho (visão de chão de fábrica).", "work_order_operation, wo_mstr, wc_mstr", "Pendente", "Base pronta: operações já são explodidas (16.1-C)."],
-      ["16.19", "WO Operation Backflush", "Baixa + apontamento + recebimento por operação em uma transação.", "tr_hist, op_hist, work_order_component, glt_det", "Pendente", "Depende de 16.10/17.1/16.11."],
-      ["17.2-4", "Labor por Funcionário / Centro / Downtime", "Apontamento alternativo e tempos não produtivos (OEE).", "op_hist, work_order_operation, em_mstr", "Pendente", "Depende de 17.1."],
-      ["Subcont", "Subcontract Operations (PO)", "Operações terceirizadas integradas a Pedido de Compra.", "work_order_operation (sub), po_mstr, po_det", "Pendente", "Operação já trata subcontrato no custeio (isSubcontract, vendorCode, subcontractCost). FALTA: integração com PO."],
+      ["16.7", "Multiple WO Release (Batch)", "Liberação de várias OPs em lote.", "wo_mstr, lad_det, work_order_operation", "Pendente", "Depende de 16.6.", "ded"],
+      ["16.9", "Work Order Split", "Divide uma OP liberada em duas.", "wo_mstr, work_order_component, work_order_operation", "Pendente", "—", "ded"],
+      ["16.18", "Dispatch Report (API)", "Operações abertas por centro de trabalho (visão de chão de fábrica).", "work_order_operation, wo_mstr, wc_mstr", "Pendente", "Base pronta: operações já são explodidas (16.1-C).", "ded"],
+      ["16.19", "WO Operation Backflush", "Baixa + apontamento + recebimento por operação em uma transação.", "tr_hist, op_hist, work_order_component, glt_det", "Pendente", "Depende de 16.10/17.1/16.11.", "ded"],
+      ["17.2-4", "Labor por Funcionário / Centro / Downtime", "Apontamento alternativo e tempos não produtivos (OEE).", "op_hist, work_order_operation, em_mstr", "Pendente", "Depende de 17.1.", "ded"],
+      ["Subcont", "Subcontract Operations (PO)", "Operações terceirizadas integradas a Pedido de Compra.", "work_order_operation (sub), po_mstr, po_det", "Pendente", "Operação já trata subcontrato no custeio (isSubcontract, vendorCode, subcontractCost). FALTA: integração com PO.", "emb"],
       { g: "Repetitivo (Menu 18) + Planejamento (22 · 23)" },
-      ["18.x", "Advanced Repetitive (linhas, schedules, backflush)", "Manufatura repetitiva de alto volume por linha.", "pl_mstr, rs_mstr, op_hist", "Futuro", "Fora do escopo atual."],
-      ["22.x", "Forecast / Master Schedule", "Previsão de demanda e plano-mestre.", "fc_mstr, mps_mstr", "Futuro", "Fora do escopo atual."],
-      ["23.x", "MRP / Demand Planning", "Planejamento de necessidades de materiais.", "mrp_det, msg_det, wo_mstr(P)", "Futuro", "Base iniciada: BomMrpPropagationService no módulo formula."]
+      ["18.x", "Advanced Repetitive (linhas, schedules, backflush)", "Manufatura repetitiva de alto volume por linha.", "pl_mstr, rs_mstr, op_hist", "Futuro", "Fora do escopo atual.", "ded"],
+      ["22.x", "Forecast / Master Schedule", "Previsão de demanda e plano-mestre.", "fc_mstr, mps_mstr", "Futuro", "Fora do escopo atual.", "ded"],
+      ["23.x", "MRP / Demand Planning", "Planejamento de necessidades de materiais.", "mrp_det, msg_det, wo_mstr(P)", "Futuro", "Base iniciada: BomMrpPropagationService no módulo formula.", "ded"]
     ];
 
     // Modelo de dados
@@ -1068,16 +1238,23 @@
       ["wod_det", "WorkOrderComponentEntity", "work_order_component", "production", "Implementado"],
       ["wr_route", "WorkOrderOperationEntity", "work_order_operation", "production", "Implementado"],
       ["lad_det", "Lot Allocation (alvo)", "lot_allocation", "inventory", "Pendente"],
-      ["tr_hist", "Inventory Transaction (alvo)", "inventory_trans", "inventory", "Pendente"],
-      ["op_hist", "SFC Operation (alvo)", "sfc_operation", "shopfloor", "Pendente"],
+      ["tr_hist", "Inventory Transaction (alvo)", "inventory_trans", "inventory", "Em andamento"],
+      ["op_hist", "SFC Operation (alvo)", "sfc_operation", "shopfloor", "Em andamento"],
       ["glt_det", "GL Transaction", "gl_transaction", "generalledger", "Parcial"]
     ];
 
     const legend = [
-      ["Implementado", "Código pronto, testado e versionado no repositório."],
+      ["Implementado", "Código pronto, testado e versionado na main."],
+      ["Em andamento", "Desenvolvimento ativo numa branch (ainda não mergeado na main). Mostra quem está tocando a rotina."],
       ["Parcial", "Existe parte da lógica, mas o fluxo dedicado ainda não está completo."],
       ["Pendente", "Ainda não iniciado — próximo passo do roadmap."],
       ["Futuro", "Fora do escopo desta fase do módulo."]
+    ];
+
+    const feLegend = [
+      ["🖥️ Tela dedicada", "A rotina exige uma tela própria no front-end (cadastro, transação ou relatório)."],
+      ["↳ Faz parte da tela da OP", "Não exige tela própria: vive dentro da tela de Manutenção da OP (aba/ação/painel)."],
+      ["— Backend/config", "Sem tela de usuário — é regra interna, configuração ou ação automática."]
     ];
 
     // Ciclo de status da OP
@@ -1142,8 +1319,8 @@
           }
         ],
         blocks: [
-          { title: "Baixa de componentes no estoque (16.10)", note: "Movimento ISS-WO e lançamentos GL — Fase 2." },
-          { title: "Apontamento de mão de obra (17.1)", note: "Labor feedback por operação — Fase 2." },
+          { title: "Baixa de componentes no estoque (16.10)", note: "Movimento ISS-WO e lançamentos GL — em andamento (joaoferreiraVK)." },
+          { title: "Apontamento de mão de obra (17.1)", note: "Labor feedback por operação — em andamento (thiagorenatinoVK)." },
           { title: "Recebimento do produto acabado (16.11/16.12)", note: "RCT-WO e backflush — Fase 2." },
           { title: "Fechamento contábil da OP (16.21)", note: "Cálculo de variações e zeragem de WIP — Fase 2." }
         ],
@@ -1153,7 +1330,7 @@
         num: "2", numCls: "ph-n2", icon: "ico-plan",
         name: "Fase 2 — Execução no Chão de Fábrica",
         desc: "Liberação da ordem, baixa de material, apontamento de mão de obra, recebimento e fechamento contábil.",
-        pill: "psp-next", pillLabel: "Próxima fase",
+        pill: "psp-next", pillLabel: "Em andamento",
         rotinas: "16.6 · 16.10 · 16.11 · 16.12 · 16.13.1 · 17.1 · 16.21",
         caps: [
           {
@@ -1162,14 +1339,14 @@
             tec: "Status A→R: alocação detalhada (lot_allocation), impressão de picklist/roteiro via ReportFramework/RabbitMQ, bloqueio quando há falta de item-chave."
           },
           {
-            title: "Baixar componentes para o WIP (16.10)",
-            neg: "Consumir o material do estoque, transferindo-o para a ordem em produção.",
-            tec: "Movimento ISS-WO: débita WIP, credita estoque; atualiza qtyIssued na linha; gera lançamentos no Razão (glt_det)."
+            title: "Baixar componentes para o WIP (16.10) — em andamento",
+            neg: "Consumir o material do estoque, transferindo-o para a ordem em produção. (joaoferreiraVK)",
+            tec: "Movimento ISS-WO: débita WIP, credita estoque; atualiza qtyIssued na linha; gera lançamentos no Razão (glt_det). Em desenvolvimento."
           },
           {
-            title: "Apontar mão de obra por operação (17.1)",
-            neg: "Registrar as horas e quantidades trabalhadas em cada operação da ordem.",
-            tec: "op_hist + work_order_operation: acumula custo de mão de obra e burden no WIP; preenche setupTimeReported/runTimeReported."
+            title: "Apontar mão de obra por operação (17.1) — em andamento",
+            neg: "Registrar as horas e quantidades trabalhadas em cada operação da ordem. (thiagorenatinoVK)",
+            tec: "op_hist + work_order_operation: acumula custo de mão de obra e burden no WIP; preenche setupTimeReported/runTimeReported. Em desenvolvimento."
           },
           {
             title: "Receber o produto acabado (16.11)",
@@ -1198,7 +1375,7 @@
           { title: "Subcontratação integrada ao PO", note: "Fase 3." },
           { title: "Manufatura repetitiva / MRP", note: "Fase futura." }
         ],
-        footer: "Ao fim da Fase 2 o <b>ciclo ponta a ponta da OP está completo</b>: da criação ao fechamento contábil, com rastreabilidade de material, mão de obra e variações."
+        footer: "Ao fim da Fase 2 o <b>ciclo ponta a ponta da OP está completo</b>: da criação ao fechamento contábil, com rastreabilidade de material, mão de obra e variações. <b>Em curso agora:</b> 16.10 (joaoferreiraVK) e 17.1 (thiagorenatinoVK)."
       },
       {
         num: "3", numCls: "ph-n3", icon: "ico-plan",
@@ -1292,10 +1469,10 @@
     const counts = {}; S.forEach(s => counts[s] = 0);
     coreRows.forEach(r => { counts[r[4]] = (counts[r[4]] || 0) + 1; });
     const total = coreRows.length;
-    const doneEquiv = counts["Implementado"] + counts["Parcial"] * 0.5;
+    const doneEquiv = counts["Implementado"] + counts["Parcial"] * 0.5 + counts["Em andamento"] * 0.5;
     const pctDone = Math.round(doneEquiv / total * 100);
 
-    const kpiDefs = [["impl", "Implementado"], ["parc", "Parcial"], ["pend", "Pendente"]];
+    const kpiDefs = [["impl", "Implementado"], ["anda", "Em andamento"], ["parc", "Parcial"], ["pend", "Pendente"]];
     document.getElementById("kpis").innerHTML =
       kpiDefs.map(([c, s]) => `<div class="kpi ${c}"><div class="bar"></div><div class="num" data-count="${counts[s]}">0</div><div class="lbl">${s}</div></div>`).join("")
       + `<div class="kpi tot"><div class="bar"></div><div class="num" data-count="${pctDone}" data-suffix="%">0</div><div class="lbl">Progresso do ciclo da OP</div></div>`;
@@ -1304,10 +1481,11 @@
     const seg = (n, c, s) => n ? `<span class="${c}" data-w="${pct(n)}" title="${s}: ${n}">${pct(n) >= 9 ? Math.round(pct(n)) + '%' : ''}</span>` : "";
     document.getElementById("progress").innerHTML =
       seg(counts["Implementado"], "pi", "Implementado") +
+      seg(counts["Em andamento"], "pa", "Em andamento") +
       seg(counts["Parcial"], "pp", "Parcial") +
       seg(counts["Pendente"], "pe", "Pendente");
     document.getElementById("progressCap").textContent =
-      `Ciclo da Ordem de Produção (Fase 1 + Fase 2) · ${total} rotinas · ${counts["Implementado"]} implementadas, ${counts["Parcial"]} parciais, ${counts["Pendente"]} pendentes. Fase 3 (avançado) e repetitivo/MRP fora desta contagem.`;
+      `Ciclo da Ordem de Produção (Fase 1 + Fase 2) · ${total} rotinas · ${counts["Implementado"]} implementadas, ${counts["Em andamento"]} em andamento, ${counts["Parcial"]} parciais, ${counts["Pendente"]} pendentes. Fase 3 (avançado) e repetitivo/MRP fora desta contagem.`;
 
     /* ════════ Builders ════════ */
     function buildFlow() {
@@ -1331,11 +1509,12 @@
         if (type === "ov") {
           tds = `<td><b>${r[0]}</b></td><td class="cmono">${r[1]}</td><td>${badge(r[2])}</td><td class="muted">${r[3]}</td>`;
         } else if (type === "full") {
-          tds = `<td class="cmono">${r[0]}</td><td><b>${r[1]}</b></td><td class="muted">${r[2]}</td><td class="cmono">${r[3]}</td><td>${badge(r[4])}</td><td class="falta muted">${fmtFalta(r[5])}</td>`;
+          const ownerCell = r[7] ? `<div class="owner-badge">🔧 <span class="b2">${r[7]}</span></div>` : "";
+          tds = `<td class="cmono">${r[0]}</td><td><b>${r[1]}</b>${ownerCell}</td><td class="muted">${r[2]}</td><td class="cmono">${r[3]}</td><td>${badge(r[4])}</td><td>${renderFe(r[6], r[8])}</td><td class="falta muted">${fmtFalta(r[5])}</td>`;
         } else if (type === "dm") {
           tds = `<td class="cmono">${r[0]}</td><td><b>${r[1]}</b></td><td class="cmono">${r[2]}</td><td class="muted">${r[3]}</td><td>${badge(r[4])}</td>`;
         } else if (type === "leg") {
-          tds = `<td>${badge(r[0])}</td><td class="muted">${r[1]}</td>`;
+          tds = `<td>${r[0].startsWith('🖥') || r[0].startsWith('↳') || r[0].startsWith('—') ? `<span class="fe ${r[0].startsWith('🖥') ? 'fe-ded' : r[0].startsWith('↳') ? 'fe-emb' : 'fe-none'}">${r[0]}</span>` : badge(r[0])}</td><td class="muted">${r[1]}</td>`;
         }
         const st = type === "ov" ? r[2] : (type === "full" ? r[4] : (type === "dm" ? r[4] : r[0]));
         return `<tr data-status="${st || ''}">${tds}</tr>`;
@@ -1396,18 +1575,19 @@
     }
 
     /* ════════ Seções ════════ */
+    const FULL_HEADS = ["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Front-end", "Componente HERA / O que falta"];
     const TABS = {
       fases: { name: "O que consigo fazer", render: buildFases },
       ov: { name: "Visão Geral", render: () => `<p class="intro">Status por camada/fase do módulo.</p>${buildTable(["Camada / Fase", "Rotinas QAD", "Status", "Resumo do que existe / falta"], overview, "ov")}` },
       dm: { name: "Modelo de Dados", render: () => `<p class="intro">Mapeamento das tabelas QAD para as entidades HERA.</p>${buildTable(["Tabela QAD", "Entidade / Serviço HERA", "Tabela HERA", "Módulo", "Status"], datamodel, "dm")}` },
-      pre: { name: "Pré-requisitos 13·14·15", render: () => `<p class="intro">Dados mestres de engenharia — tudo já implementado.</p>${buildTable(["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Componente HERA / O que falta"], prereq, "full")}` },
-      f1: { name: "Fase 1 — Criação & Engenharia", render: () => `<p class="intro">Criação da OP e explosão de BOM/roteiro — até o congelamento no status E. Concluída no QAD como o ciclo de planejamento, antes de qualquer transação de estoque.</p>${buildTable(["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Componente HERA / O que falta"], fase1, "full")}` },
-      f2: { name: "Fase 2 — Execução", render: () => `<p class="intro">Liberação ao chão de fábrica, baixa de material, mão de obra, recebimento e fechamento contábil. No QAD, as transações só ocorrem a partir do status Released (R).</p>${buildTable(["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Componente HERA / O que falta"], fase2, "full")}` },
-      f3: { name: "Fase 3 — Avançado", render: () => `<p class="intro">Operações que estendem o ciclo (split, lote, dispatch, subcontrato) e os módulos de manufatura repetitiva (18) e planejamento (22 · 23).</p>${buildTable(["Rotina", "Nome", "O que faz (negócio)", "Tabela QAD → HERA", "Status", "Componente HERA / O que falta"], fase3, "full")}` },
-      leg: { name: "Legenda", render: () => `<p class="intro">Significado de cada status.</p>${buildTable(["Status", "Significado"], legend, "leg")}` }
+      pre: { name: "Pré-requisitos 13·14·15", render: () => `<p class="intro">Dados mestres de engenharia — tudo já implementado no backend. Telas existentes: Department, Work Center e Formula Code.</p>${buildTable(FULL_HEADS, prereq, "full")}` },
+      f1: { name: "Fase 1 — Criação & Engenharia", render: () => `<p class="intro">Criação da OP e explosão de BOM/roteiro — até o congelamento no status E. Concluída no QAD como o ciclo de planejamento, antes de qualquer transação de estoque.</p>${buildTable(FULL_HEADS, fase1, "full")}` },
+      f2: { name: "Fase 2 — Execução", render: () => `<p class="intro">Liberação ao chão de fábrica, baixa de material, mão de obra, recebimento e fechamento contábil. No QAD, as transações só ocorrem a partir do status Released (R). <b>Em andamento:</b> 16.10 (joaoferreiraVK) e 17.1 (thiagorenatinoVK).</p>${buildTable(FULL_HEADS, fase2, "full")}` },
+      f3: { name: "Fase 3 — Avançado", render: () => `<p class="intro">Operações que estendem o ciclo (split, lote, dispatch, subcontrato) e os módulos de manufatura repetitiva (18) e planejamento (22 · 23).</p>${buildTable(FULL_HEADS, fase3, "full")}` },
+      leg: { name: "Legenda", render: () => `<p class="intro">Significado de cada status.</p>${buildTable(["Status", "Significado"], legend, "leg")}<p class="intro" style="margin-top:22px">Indicador de front-end por rotina.</p>${buildTable(["Front-end", "Significado"], feLegend, "leg")}` }
     };
 
-    const order = ["fases", "ov", "dm", "pre", "f1", "f2", "f3", "leg"];
+    const order = ["fases", "ov", "pre", "f1", "f2", "f3", "dm", "leg"];
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     // Abas
