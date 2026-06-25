@@ -1168,7 +1168,7 @@
     // Pré-requisitos 13·14·15  ·  [rotina, nome, oQueFaz, tabelaQAD→HERA, status, componente/falta, fe, owner?, route?]
     const prereq = [
       { g: "13 · Estrutura de Produto (BOM)" },
-      ["13.1", "Product Structure Code Maintenance", "Cria um código de BOM/Fórmula distinto do item.", "ps_mstr → bom_master", "Implementado", "BomStructureEntity (bom_master) + BomStructureService.", "ded"],
+      ["13.1", "Product Structure Code Maintenance", "Cria um código de BOM/Fórmula (parent BOM code) independente do número do item; o flag <code>formula</code> distingue BOM de Fórmula.", "bom_mstr → bom_master", "Implementado", "BomStructureEntity (bom_master, único por company+domain+bom_code) + BomStructureService → BomStructureImpl, BomStructureController (/api/bom-structure), Export/Import Engine.", "ded", "", "/production/bom-structure"],
       ["13.5", "Product Structure Maintenance", "Define a estrutura pai/componente (lista de materiais).", "ps_mstr → product_structure", "Implementado", "ProductStructureEntity + ProductStructureService. Fonte da explosão (16.1-B).", "ded"],
       { g: "14 · Roteiros / Centros de Trabalho" },
       ["14.1", "Department Maintenance", "Departamentos de manufatura; contas GL de mão de obra/burden.", "dp_mstr → department", "Implementado", "DepartmentEntity + DepartmentService + ReportEngine.", "ded", "", "/production/department"],
