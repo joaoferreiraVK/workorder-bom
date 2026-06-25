@@ -1096,6 +1096,48 @@
 </head>
 
 <body>
+  <div id="pw-gate" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#1e293b 0%,#4338ca 100%);display:flex;align-items:center;justify-content:center;font-family:'Inter','Segoe UI',system-ui,Arial,sans-serif;">
+    <form id="pw-form" style="background:#fff;padding:36px 32px;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.35);width:min(360px,92vw);text-align:center;">
+      <div style="font-size:13px;font-weight:600;color:#4338ca;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;">Acesso restrito</div>
+      <h2 style="margin:0 0 6px;font-size:22px;color:#1e293b;font-weight:700;">HERA — Manufatura</h2>
+      <p style="margin:0 0 22px;color:#64748b;font-size:14px;">Digite a senha para acessar a página.</p>
+      <input id="pw-input" type="password" autocomplete="current-password" placeholder="Senha" autofocus
+        style="width:100%;padding:12px 14px;border:1px solid #d6dce6;border-radius:10px;font-size:15px;outline:none;font-family:inherit;box-sizing:border-box;" />
+      <div id="pw-error" style="display:none;color:#c2410c;font-size:13px;margin-top:10px;">Senha incorreta.</div>
+      <button type="submit"
+        style="margin-top:16px;width:100%;padding:12px;background:#1e293b;color:#fff;border:0;border-radius:10px;font-weight:600;font-size:15px;cursor:pointer;font-family:inherit;">Entrar</button>
+    </form>
+  </div>
+  <script>
+    (function () {
+      var gate = document.getElementById('pw-gate');
+      var form = document.getElementById('pw-form');
+      var input = document.getElementById('pw-input');
+      var err = document.getElementById('pw-error');
+      var PW = 'vockan123';
+      document.documentElement.style.overflow = 'hidden';
+      try {
+        if (sessionStorage.getItem('hera_pw_ok') === '1') {
+          gate.remove();
+          document.documentElement.style.overflow = '';
+          return;
+        }
+      } catch (e) { }
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        if (input.value === PW) {
+          try { sessionStorage.setItem('hera_pw_ok', '1'); } catch (e) { }
+          gate.remove();
+          document.documentElement.style.overflow = '';
+        } else {
+          err.style.display = 'block';
+          input.value = '';
+          input.focus();
+        }
+      });
+    })();
+  </script>
+
   <header>
     <div class="hero-inner">
       <span class="eyebrow"><span class="dot"></span> Status de Implementação · QAD 2008 SE → HERA</span>
