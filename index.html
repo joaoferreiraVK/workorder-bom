@@ -1145,8 +1145,7 @@
       <p>Progresso da reescrita do ciclo da Ordem de Produção do QAD 2008 SE no ERP HERA — do cadastro de engenharia ao
         chão de fábrica. Cada rotina é confrontada com o código real do HERA (validado contra a branch <code>main</code>).</p>
       <div class="team">
-        <span class="team-chip"><span class="tdot"></span> Em andamento: <b>17.1 · Labor Feedback</b> <span class="tmono">thiagorenatinoVK</span></span>
-        <span class="team-chip"><span class="tdot"></span> Em andamento: <b>16.10 · Component Issue</b> <span class="tmono">joaoferreiraVK</span></span>
+        <span class="team-chip"><span class="tdot"></span> Em andamento: <b>16.6 · WO Release / Print</b> <span class="tmono">joaoferreiraVK</span></span>
       </div>
     </div>
   </header>
@@ -1200,8 +1199,8 @@
       ["Criação da OP (16.1-A)", "16.1-A", "Implementado", "WorkOrder header com CRUD, status inicial por tipo, validações 26000–26011, auto-firming, releaseDate por lead time e export."],
       ["Explosão de BOM + Roteiro (16.1-B/C)", "16.1-B · 16.1-C", "Implementado", "Explosão concluída e testada: WorkOrderExplosionServiceImpl (componentes) e WorkOrderRoutingServiceImpl (operações), com phantoms, scrap, cumulative yield e custo congelado."],
       ["Status e checagem (16.8 · 16.5)", "16.8 · 16.5", "Implementado", "FSM de status (changeStatus) com transições válidas e dispara explosão; component check compara requerido x disponível."],
-      ["Liberação ao chão de fábrica (16.6)", "16.6", "Pendente", "Liberação A→R, alocação detalhada e impressão de lista de separação/roteiro ainda não iniciados."],
-      ["Execução — material e mão de obra", "16.10 · 17.1 · 16.11 · 16.12", "Em andamento", "16.10 (Component Issue) em andamento por joaoferreiraVK; 17.1 (Labor Feedback) em andamento por thiagorenatinoVK. 16.11/16.12 (recebimento e backflush) ainda pendentes."],
+      ["Liberação ao chão de fábrica (16.6)", "16.6", "Em andamento", "Liberação A→R, alocação detalhada e impressão de lista de separação/roteiro em desenvolvimento por joaoferreiraVK."],
+      ["Execução — material e mão de obra", "16.10 · 17.1 · 16.11 · 16.12", "Em andamento", "16.10 (Component Issue) e 17.1 (Labor Feedback) implementadas. 16.11/16.12 (recebimento e backflush) ainda pendentes."],
       ["Encerramento contábil (16.21)", "16.21", "Parcial", "Trava acctClose e guardas (msg 26008) já existem; cálculo/lançamento de variações e zeragem do WIP a fazer."],
       ["Operações avançadas", "16.7 · 16.9 · 16.18 · 16.19 · 17.2-4 · subcontrato", "Pendente", "Split, liberação em lote, dispatch, backflush por operação, labor detalhado e subcontratação."],
       ["Repetitivo + planejamento", "18.x · 22.x · 23.x (MRP)", "Futuro", "Manufatura repetitiva e MRP/forecast fora do escopo atual; base de fórmula/MRP-propagation já iniciada."]
@@ -1238,11 +1237,11 @@
     // Fase 2 — Execução no chão de fábrica
     const fase2 = [
       { g: "Liberação & ajuste do BOM" },
-      ["16.6", "WO Release / Print", "Libera a OP ao chão de fábrica (A→R), finaliza picks, imprime docs.", "wo_mstr (A→R), lad_det, work_order_operation", "Pendente", "FALTA: serviço de liberação + alocação detalhada + relatório (lista de separação/roteiro) via ReportFramework/RabbitMQ.", "ded"],
+      ["16.6", "WO Release / Print", "Libera a OP ao chão de fábrica (A→R), finaliza picks, imprime docs.", "wo_mstr (A→R), lad_det, work_order_operation", "Em andamento", "Em desenvolvimento (joaoferreiraVK). FALTA concluir: serviço de liberação + alocação detalhada + relatório (lista de separação/roteiro) via ReportFramework/RabbitMQ.", "ded", "joaoferreiraVK"],
       ["16.13.1", "WO Bill Maintenance", "Ajustes manuais no BOM da OP após explosão (permitido até a baixa).", "work_order_component", "Pendente", "Leitura do BOM da OP já existe (GET /bom). FALTA: edição manual de linhas (add/remove/alterar).", "emb"],
       { g: "Execução — material e mão de obra" },
-      ["16.10", "WO Component Issue", "Baixa componentes do estoque p/ WIP (débito WIP / crédito estoque).", "tr_hist (ISS-WO), work_order_component, glt_det", "Em andamento", "Em desenvolvimento (ainda não mergeado na main). FALTA concluir: integração com inventário (movimento) e GL; atualização de qtyIssued; validação de saldo.", "ded", "joaoferreiraVK"],
-      ["17.1", "Labor Feedback by WO", "Aponta mão de obra/qtd por operação.", "op_hist, work_order_operation, glt_det", "Em andamento", "Campos setupTimeReported/runTimeReported já existem na operação. Em desenvolvimento (branch a criar). FALTA: entidade/serviço de apontamento + custeio.", "ded", "thiagorenatinoVK"],
+      ["16.10", "WO Component Issue", "Baixa componentes do estoque p/ WIP (débito WIP / crédito estoque).", "tr_hist (ISS-WO), work_order_component, glt_det", "Implementado", "Movimento ISS-WO com integração de inventário e GL; atualiza qtyIssued e valida saldo. Concluído (joaoferreiraVK).", "ded", "joaoferreiraVK"],
+      ["17.1", "Labor Feedback by WO", "Aponta mão de obra/qtd por operação.", "op_hist, work_order_operation, glt_det", "Implementado", "Entidade/serviço de apontamento + custeio implementados; setupTimeReported/runTimeReported acumulam no WIP. Concluído (thiagorenatinoVK).", "ded", "thiagorenatinoVK"],
       ["17.5", "Operation Complete", "Encerra operação do roteiro (sai da fila).", "op_hist, work_order_operation (→C)", "Pendente", "Depende de 17.1.", "emb"],
       { g: "Recebimento & Encerramento" },
       ["16.11", "WO Receipt", "Recebe o produto acabado no estoque (atualiza qtd concluída).", "tr_hist (RCT-WO), wo_mstr, lad_det", "Pendente", "Campos quantityCompleted/Rejected existem. FALTA: serviço de recebimento + movimento de estoque.", "ded"],
@@ -1361,8 +1360,8 @@
           }
         ],
         blocks: [
-          { title: "Baixa de componentes no estoque (16.10)", note: "Movimento ISS-WO e lançamentos GL — em andamento (joaoferreiraVK)." },
-          { title: "Apontamento de mão de obra (17.1)", note: "Labor feedback por operação — em andamento (thiagorenatinoVK)." },
+          { title: "Baixa de componentes no estoque (16.10)", note: "Movimento ISS-WO e lançamentos GL — concluído (joaoferreiraVK)." },
+          { title: "Apontamento de mão de obra (17.1)", note: "Labor feedback por operação — concluído (thiagorenatinoVK)." },
           { title: "Recebimento do produto acabado (16.11/16.12)", note: "RCT-WO e backflush — Fase 2." },
           { title: "Fechamento contábil da OP (16.21)", note: "Cálculo de variações e zeragem de WIP — Fase 2." }
         ],
@@ -1376,19 +1375,19 @@
         rotinas: "16.6 · 16.10 · 16.11 · 16.12 · 16.13.1 · 17.1 · 16.21",
         caps: [
           {
-            title: "Liberar a OP ao chão de fábrica (16.6)",
-            neg: "Soltar a ordem para produção, gerar a lista de separação e travar o roteiro.",
-            tec: "Status A→R: alocação detalhada (lot_allocation), impressão de picklist/roteiro via ReportFramework/RabbitMQ, bloqueio quando há falta de item-chave."
+            title: "Liberar a OP ao chão de fábrica (16.6) — em andamento",
+            neg: "Soltar a ordem para produção, gerar a lista de separação e travar o roteiro. (joaoferreiraVK)",
+            tec: "Status A→R: alocação detalhada (lot_allocation), impressão de picklist/roteiro via ReportFramework/RabbitMQ, bloqueio quando há falta de item-chave. Em desenvolvimento."
           },
           {
-            title: "Baixar componentes para o WIP (16.10) — em andamento",
+            title: "Baixar componentes para o WIP (16.10) — concluído",
             neg: "Consumir o material do estoque, transferindo-o para a ordem em produção. (joaoferreiraVK)",
-            tec: "Movimento ISS-WO: débita WIP, credita estoque; atualiza qtyIssued na linha; gera lançamentos no Razão (glt_det). Em desenvolvimento."
+            tec: "Movimento ISS-WO: débita WIP, credita estoque; atualiza qtyIssued na linha; gera lançamentos no Razão (glt_det). Implementado."
           },
           {
-            title: "Apontar mão de obra por operação (17.1) — em andamento",
+            title: "Apontar mão de obra por operação (17.1) — concluído",
             neg: "Registrar as horas e quantidades trabalhadas em cada operação da ordem. (thiagorenatinoVK)",
-            tec: "op_hist + work_order_operation: acumula custo de mão de obra e burden no WIP; preenche setupTimeReported/runTimeReported. Em desenvolvimento."
+            tec: "op_hist + work_order_operation: acumula custo de mão de obra e burden no WIP; preenche setupTimeReported/runTimeReported. Implementado."
           },
           {
             title: "Receber o produto acabado (16.11)",
@@ -1417,7 +1416,7 @@
           { title: "Subcontratação integrada ao PO", note: "Fase 3." },
           { title: "Manufatura repetitiva / MRP", note: "Fase futura." }
         ],
-        footer: "Ao fim da Fase 2 o <b>ciclo ponta a ponta da OP está completo</b>: da criação ao fechamento contábil, com rastreabilidade de material, mão de obra e variações. <b>Em curso agora:</b> 16.10 (joaoferreiraVK) e 17.1 (thiagorenatinoVK)."
+        footer: "Ao fim da Fase 2 o <b>ciclo ponta a ponta da OP está completo</b>: da criação ao fechamento contábil, com rastreabilidade de material, mão de obra e variações. <b>Já concluídos:</b> 16.10 (joaoferreiraVK) e 17.1 (thiagorenatinoVK). <b>Em curso agora:</b> 16.6 (joaoferreiraVK)."
       },
       {
         num: "3", numCls: "ph-n3", icon: "ico-plan",
@@ -1624,7 +1623,7 @@
       dm: { name: "Modelo de Dados", render: () => `<p class="intro">Mapeamento das tabelas QAD para as entidades HERA.</p>${buildTable(["Tabela QAD", "Entidade / Serviço HERA", "Tabela HERA", "Módulo", "Status"], datamodel, "dm")}` },
       pre: { name: "Pré-requisitos 13·14·15", render: () => `<p class="intro">Dados mestres de engenharia — tudo já implementado no backend. Telas existentes: Department, Work Center e Formula Code.</p>${buildTable(FULL_HEADS, prereq, "full")}` },
       f1: { name: "Fase 1 — Criação & Engenharia", render: () => `<p class="intro">Criação da OP e explosão de BOM/roteiro — até o congelamento no status E. Concluída no QAD como o ciclo de planejamento, antes de qualquer transação de estoque.</p>${buildTable(FULL_HEADS, fase1, "full")}` },
-      f2: { name: "Fase 2 — Execução", render: () => `<p class="intro">Liberação ao chão de fábrica, baixa de material, mão de obra, recebimento e fechamento contábil. No QAD, as transações só ocorrem a partir do status Released (R). <b>Em andamento:</b> 16.10 (joaoferreiraVK) e 17.1 (thiagorenatinoVK).</p>${buildTable(FULL_HEADS, fase2, "full")}` },
+      f2: { name: "Fase 2 — Execução", render: () => `<p class="intro">Liberação ao chão de fábrica, baixa de material, mão de obra, recebimento e fechamento contábil. No QAD, as transações só ocorrem a partir do status Released (R). <b>Concluídos:</b> 16.10 (joaoferreiraVK) e 17.1 (thiagorenatinoVK). <b>Em andamento:</b> 16.6 (joaoferreiraVK).</p>${buildTable(FULL_HEADS, fase2, "full")}` },
       f3: { name: "Fase 3 — Avançado", render: () => `<p class="intro">Operações que estendem o ciclo (split, lote, dispatch, subcontrato) e os módulos de manufatura repetitiva (18) e planejamento (22 · 23).</p>${buildTable(FULL_HEADS, fase3, "full")}` },
       leg: { name: "Legenda", render: () => `<p class="intro">Significado de cada status.</p>${buildTable(["Status", "Significado"], legend, "leg")}<p class="intro" style="margin-top:22px">Indicador de front-end por rotina.</p>${buildTable(["Front-end", "Significado"], feLegend, "leg")}` }
     };
